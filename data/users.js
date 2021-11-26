@@ -46,7 +46,7 @@ function validateDate(date) {
 }
   
 
-async function create(profilePicture, firstName, lastName, username, emailAddress, password, phoneNumber, country, biography, gender, userType, dateOfBirth){
+async function createUser(profilePicture, firstName, lastName, username, emailAddress, password, phoneNumber, country, biography, gender, userType, dateOfBirth){
     if(!profilePicture || !firstName || !lastName || !userName || !emailAddress || !password || !phoneNumber || !country || !biography || !gender || !userType || !dateOfBirth){
         throw `All fields must be supplied`
     }
@@ -747,6 +747,9 @@ async function updateUser(id, profilePicture, firstName, lastName, emailAddress,
     return {userUpdated: true}
 }
 
-
+module.exports = {
+    createUser,
+    updateUser
+}
 
 
