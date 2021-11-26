@@ -46,8 +46,8 @@ function validateDate(date) {
 }
   
 
-async function create(profilePicture, firstName, lastName, emailAddress, password, phoneNumber, country, biography, gender, userType, dateOfBirth){
-    if(!profilePicture || !firstName || !lastName || !emailAddress || !password || !phoneNumber || !country || !biography || !gender || !userType || !dateOfBirth){
+async function create(profilePicture, firstName, lastName, username, emailAddress, password, phoneNumber, country, biography, gender, userType, dateOfBirth){
+    if(!profilePicture || !firstName || !lastName || !userName || !emailAddress || !password || !phoneNumber || !country || !biography || !gender || !userType || !dateOfBirth){
         throw `All fields must be supplied`
     }
 
@@ -61,6 +61,7 @@ async function create(profilePicture, firstName, lastName, emailAddress, passwor
     if(typeof userType !== "string") throw 'userType must be string'
     if(typeof phoneNumber !== "string") throw 'phoneNumber must be string'
     if(typeof dateOfBirth !== "date") throw 'dateOfBirth must be date'
+    if(typeof username !== "string") throw `userName must be string`
 
     if (/^ *$/.test(firstName)) throw `firstName cannot be empty`
     if (/^ *$/.test(lastName)) throw `lastName cannot be empty`
@@ -72,6 +73,15 @@ async function create(profilePicture, firstName, lastName, emailAddress, passwor
     if (/^ *$/.test(userType)) throw `userType cannot be empty`
     if (/^ *$/.test(phoneNumber)) throw `phoneNumber cannot be empty`
     if (/^ *$/.test(dateOfBirth)) throw `dateOfBirth cannot be empty`
+    if (/^ *$/.test(username)) throw `Username cannot be empty`
+
+    if(/[^A-Za-z0-9]/g.test(username)){
+        throw `Username should only have numbers and alphabets`
+    }
+
+    if(username.length < 4){
+        throw `Username should have atleast 4 characters`
+    }
 
     if(!validateEmail(emailAddress)) throw `Please Enter valid Email Address`
 
@@ -352,11 +362,18 @@ async function create(profilePicture, firstName, lastName, emailAddress, passwor
 
     if(userexists) throw `User with that email address already exists`
 
+    const lowerUsername = username.toLocaleLowerCase()
+
+    const usertaken = await userCollection.findOne({ username: lowerUsername})
+
+    if(usertaken) throw `Username already taken`
+
 
     let newUser = {
         profilePicture: profilePicture,
         firstName: firstName,
         lastName: lastName,
+        username: username.toLowerCase(),
         emailAddress: emailAddress.toLowerCase(),
         password: hashedPwd,
         phoneNumber: phoneNumber,
@@ -377,6 +394,10 @@ async function create(profilePicture, firstName, lastName, emailAddress, passwor
 
 }
 
+async function updateUser(id, profilePicture, firstName, lastName, emailAddress, password, phoneNumber, country, biography, gender, userType, dateOfBirth){
+    
+
+}
 
 
 
