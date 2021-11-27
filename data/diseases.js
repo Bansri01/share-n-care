@@ -56,11 +56,28 @@ const createDisease = async function createDisease(diseaseName, description, sug
         throw `description field cannot be just empty spaces`
     }
 
-    if (typeof suggestions !== 'object'){
-
-        throw 'serviceOptions field should be an object'
+    if (!Array.isArray(suggestions))
+    {
+        throw `suggestions is not an array. It should be an array`
     }
 
+    for(i=0;i<suggestions.length;i++)
+    {
+        if (suggestions[i]==null || suggestions[i]==undefined){
+            throw `items in suggestions cannot be null or undefined`;
+        }
+
+    
+    if (typeof(suggestions[i])!=='string'){
+        throw 'The suggestions should be string! No Other Datatype is allowed!'
+    }
+
+    if(checkSpace(suggestions[i]))
+    {
+        throw `Suggestion cannot be just empty spaces`
+    }
+
+}
 
     if (!Array.isArray(medicines))
     {
@@ -112,15 +129,30 @@ const createDisease = async function createDisease(diseaseName, description, sug
 
     
     if (typeof(element)!=='string'){
-        throw 'The cuisine Names should be string! No Other Datatype is allowed!'
+        throw 'The filter Names should be string! No Other Datatype is allowed!'
     }
 
     if(checkSpace(element))
     {
-        throw `cuisine Names cannot be just empty spaces`
+        throw `filter Names cannot be just empty spaces`
     }
 
     });
+
+    const diseasesCollection = await diseases();
+
+    let newdiseases = {
+        diseaseName: diseaseName,
+        introduction: description,
+        suggestions:suggestions,
+        medicines:medicines,
+        filters:filters
+
+      };
+
+      const insertInfo = await diseasesCollection.insertOne(newdiseases);
+      if (insertInfo.insertedCount === 0) throw 'Could not add restaurant';
+        return newdiseases;
 
 
 }
@@ -132,7 +164,7 @@ const searchDisease = async function searchDisease()
 }   
 
 
-module.export={
+module.exports={
     createDisease,
     searchDisease
 
