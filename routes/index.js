@@ -1,10 +1,8 @@
 const userRoutes = require('./users');
 const path = require("path")
-// const privateRoutes = require('./private');
 
 const constructorMethod = (app) => {
   app.use('/', userRoutes);
-  // app.use('/private', privateRoutes);
 
   app.use('/profile',profileRoutes)
 
