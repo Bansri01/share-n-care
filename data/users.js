@@ -1,7 +1,7 @@
 const ObjectID  = require('mongodb').ObjectId;
 const mongoCollections = require('../config/mongoCollections')
 const users = mongoCollections.users
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const saltRounds = 10;
 const countries = require("countries-list");
 
