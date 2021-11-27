@@ -61,7 +61,66 @@ const createDisease = async function createDisease(diseaseName, description, sug
         throw 'serviceOptions field should be an object'
     }
 
+
+    if (!Array.isArray(medicines))
+    {
+        throw `medicines is not an array. It should be an array`
+    }
+
+
+    let medicines_len = medicines.length;
+    if (medicines_len === 0 ){
+        throw 'The medicines array is null. It cannot be null'
+    }
+
+
+    Array.from(medicines).forEach(element=> {
+
+        if (element==null || element==undefined){
+            throw `items in Medicines cannot be null or undefined`;
+        }
+
     
+    if (typeof(element)!=='string'){
+        throw 'The Medicine Names should be string! No Other Datatype is allowed!'
+    }
+
+    if(checkSpace(element))
+    {
+        throw `Medicine Names cannot be just empty spaces`
+    }
+
+    });
+
+
+    if (!Array.isArray(filters))
+    {
+        throw `filters is not an array. It should be an array`
+    }
+
+    let filters_len = filters.length;
+    if (filters_len === 0 ){
+        throw 'The medicines array is null. It cannot be null'
+    }
+
+
+    Array.from(filters).forEach(element=> {
+
+        if (element==null || element==undefined){
+            throw `Items in filter cannot be null`;
+        }
+
+    
+    if (typeof(element)!=='string'){
+        throw 'The cuisine Names should be string! No Other Datatype is allowed!'
+    }
+
+    if(checkSpace(element))
+    {
+        throw `cuisine Names cannot be just empty spaces`
+    }
+
+    });
 
 
 }
