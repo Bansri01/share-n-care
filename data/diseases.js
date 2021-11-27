@@ -132,7 +132,7 @@ const searchDisease = async function searchDisease()
 }   
 
 
-modules.export={
+module.export={
     createDisease,
     searchDisease
 
