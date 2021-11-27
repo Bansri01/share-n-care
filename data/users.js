@@ -2,7 +2,7 @@ const ObjectID  = require('mongodb').ObjectId;
 const mongoCollections = require('../config/mongoCollections')
 const users = mongoCollections.users
 const bcrypt = require("bcrypt");
-const saltRounds = 16;
+const saltRounds = 10;
 
 function validateEmail(email) {
     const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -389,10 +389,32 @@ async function createUser(profilePicture, firstName, lastName, username, emailAd
     const insertInfo = await userCollection.insertOne(newUser)
     if (insertInfo.insertCount == 0) throw `Could not add user`
 
-    // const newId = insertInfo.insertedId.toString();
-    // const user = await this.get(newId);
+    const newId = insertInfo.insertedId.toString();
+    const user = await get(newId);
 
-    return {userInserted: true}; 
+    return JSON.parse(JSON.stringify(user));
+}
+
+async function get(id){
+    if(!id) throw `You must provide a proper id`
+    if(typeof id != 'string') throw `${id} is not string`
+    if(/^ *$/.test(id)) throw `id with just empty spaces is not valid`
+
+    const userCollection = await users()
+    let getId
+
+    try{
+        getId = ObjectID(id);
+    }
+    catch(e){
+        throw `Id is invalid because of ${e}`
+    }
+
+    const user = await userCollection.findOne({ _id: getId})
+
+    if(user === null) throw `No user exists with that id`;
+
+    return JSON.parse(JSON.stringify(user));
 
 }
 
@@ -412,7 +434,7 @@ async function updateUser(id, profilePicture, firstName, lastName, emailAddress,
     if(typeof gender !== "string") throw 'gender must be string'
     if(typeof userType !== "string") throw 'userType must be string'
     if(typeof phoneNumber !== "string") throw 'phoneNumber must be string'
-    if(typeof dateOfBirth !== "date") throw 'dateOfBirth must be date'
+    if(typeof dateOfBirth !== "string") throw 'dateOfBirth must be date'
     // if(typeof username !== "string") throw `userName must be string`
     if(typeof id !== 'string') throw `id must be string`
 
@@ -703,7 +725,10 @@ async function updateUser(id, profilePicture, firstName, lastName, emailAddress,
 
     if (!countryList.includes(country)) throw `Please enter a valid coountry`
 
-    if (gender !== "Female" || gender !== "Male" || gender !== "other") throw `Gender must be Male or Female or other`
+    let gen = ["Female", "Male", "other"]
+
+    // if (gender !== "Female" || gender !== "Male" || gender !== "other") throw `Gender must be Male or Female or other`
+    if(!gen.includes(gender))
 
     if (userType !== "Patient" || userType !== "Doctor") throw `Usertype must be a patient or a doctor`
 
