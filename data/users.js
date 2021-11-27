@@ -10,13 +10,13 @@ function validateEmail(email) {
 }
 
 function validateDate(date) {
-    let datePattern = /^\d{2}\/\d{2}\/\d{4}$/ 
-        if(!date.match(datePattern)) throw `dateOfReview should be in format mm/dd/yyyy`
+    let datePattern = /^\d{4}-\d{2}-\d{2}$/ 
+        if(!date.match(datePattern)) throw `dateOfReview should be in format yyyy-mm-dd`
         const today = new Date()
-        let date_arr = date.split("/")
-        parsedMonth = Number(date_arr[0])
-        parsedDay = Number(date_arr[1])
-        parsedYear = Number(date_arr[2])
+        let date_arr = date.split("-")
+        parsedMonth = Number(date_arr[1])
+        parsedDay = Number(date_arr[2])
+        parsedYear = Number(date_arr[0])
         if(parsedMonth < 1 || parsedMonth > 12){
             throw `Invalid month`
         }
@@ -35,19 +35,21 @@ function validateDate(date) {
             throw `The month february does not have more than 28 days`
         }
         
-        // if (Number(date_arr[1]) > today.getDate() &&
-        // Number(date_arr[0]) > (today.getMonth() + 1) &&
-        // Number(date_arr[2]) > today.getFullYear()) throw `date of birth cannot be greater than today`
+        let d1 = new Date(Date.parse(date));
+        let d2 = new Date(Date.parse(today));
+        var diff = d2.getTime() - d1.getTime();
 
-        if (date > today) throw `date of birth cannot be greater than today`
-
-        return true
-
+        if (diff < 0) {
+            return false; 
+        } else {
+            return true;
+        }
+    
 }
   
 
 async function createUser(profilePicture, firstName, lastName, username, emailAddress, password, phoneNumber, country, biography, gender, userType, dateOfBirth){
-    if(!profilePicture || !firstName || !lastName || !userName || !emailAddress || !password || !phoneNumber || !country || !biography || !gender || !userType || !dateOfBirth){
+    if(!profilePicture || !firstName || !lastName || !username || !emailAddress || !password || !phoneNumber || !country || !biography || !gender || !userType || !dateOfBirth){
         throw `All fields must be supplied`
     }
 
@@ -60,7 +62,7 @@ async function createUser(profilePicture, firstName, lastName, username, emailAd
     if(typeof gender !== "string") throw 'gender must be string'
     if(typeof userType !== "string") throw 'userType must be string'
     if(typeof phoneNumber !== "string") throw 'phoneNumber must be string'
-    if(typeof dateOfBirth !== "date") throw 'dateOfBirth must be date'
+    if(typeof dateOfBirth !== "string") throw 'dateOfBirth must be string'
     if(typeof username !== "string") throw `userName must be string`
 
     if (/^ *$/.test(firstName)) throw `firstName cannot be empty`
@@ -347,9 +349,12 @@ async function createUser(profilePicture, firstName, lastName, username, emailAd
         "Åland Islands"
     ];
 
-    if (!countryList.includes(country)) throw `Please enter a valid coountry`
+    if (!countryList.includes(country)) throw `Please enter a valid country`
 
-    if (gender !== "Female" || gender !== "Male" || gender !== "other") throw `Gender must be Male or Female or other`
+    let gen = ["Female", "Male", "other"]
+
+    // if (gender !== "Female" || gender !== "Male" || gender !== "other") throw `Gender must be Male or Female or other`
+    if(!gen.includes(gender))
 
     if (userType !== "Patient" || userType !== "Doctor") throw `Usertype must be a patient or a doctor`
 
@@ -384,8 +389,8 @@ async function createUser(profilePicture, firstName, lastName, username, emailAd
     const insertInfo = await userCollection.insertOne(newUser)
     if (insertInfo.insertCount == 0) throw `Could not add user`
 
-    const newId = insertInfo.insertedId.toString();
-    const user = await this.get(newId);
+    // const newId = insertInfo.insertedId.toString();
+    // const user = await this.get(newId);
 
     return {userInserted: true}; 
 
