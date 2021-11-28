@@ -158,9 +158,12 @@ const createDisease = async function createDisease(diseaseName, description, sug
 }
 
 
-const searchDisease = async function searchDisease()
+const searchDisease = async function searchDisease(searchTerm)
 {
-    
+    if(searchTerm==null || searchTerm==undefined)
+    {
+        
+    }
 }   
 
 
