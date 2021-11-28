@@ -22,10 +22,10 @@ module.exports = {
     if(typeof title !== "string") {
       throw "The title is not a string.";
     }
-
     if(typeof content !== "string") {
       throw "The content is not a string.";
     }
+    
     if(diseaseId.match(/^\s+$/g) || title === "") {
       throw "The diseaseId is just empty spaces.";
     }
@@ -41,6 +41,11 @@ module.exports = {
     if(content.match(/^\s+$/g) || title === "") {
       throw "The content is just empty spaces.";
     }
+
+    if(diseaseId.length !== 12 && diseaseId.length !== 24) throw "The diseaseId provided is not a valid ObjectId.";
+    if(diseaseId.length === 24 && !diseaseId.match(/^[A-Fa-f0-9]+$/g)) throw "The diseaseId provided is not a valid ObjectId.";
+    if(userId.length !== 12 && userId.length !== 24) throw "The userId provided is not a valid ObjectId.";
+    if(userId.length === 24 && !userId.match(/^[A-Fa-f0-9]+$/g)) throw "The userId provided is not a valid ObjectId.";
 
     let postTime = new Date().toUTCString();
 
@@ -71,6 +76,9 @@ module.exports = {
       throw "The userId is just empty spaces.";
     }
 
+    if(userId.length !== 12 && userId.length !== 24) throw "The userId provided is not a valid ObjectId.";
+    if(userId.length === 24 && !userId.match(/^[A-Fa-f0-9]+$/g)) throw "The userId provided is not a valid ObjectId.";
+
     const postCollection = await posts();
     const postList = await postCollection.find({userId: userId}).toArray();
     if(postList.length !== 0) {
@@ -89,6 +97,9 @@ module.exports = {
     if(diseaseId.match(/^\s+$/g) || diseaseId === "") {
       throw "The diseaseId is just empty spaces.";
     }
+
+    if(diseaseId.length !== 12 && diseaseId.length !== 24) throw "The diseaseId provided is not a valid ObjectId.";
+    if(diseaseId.length === 24 && !diseaseId.match(/^[A-Fa-f0-9]+$/g)) throw "The diseaseId provided is not a valid ObjectId.";
 
     const postCollection = await posts();
     const postList = await postCollection.find({diseaseId: diseaseId}).toArray();
@@ -152,7 +163,7 @@ module.exports = {
     let commentList = commentData.getAllCommentsOfPost(postId);
     if(commentList.length !== 0) {
       for(let i = 0; i < commentList.length; i++) {
-        await commentData.deleteCommentById(commentList[i].commentId);
+        await commentData.deleteComment(commentList[i].commentId);
       }
     }
 
