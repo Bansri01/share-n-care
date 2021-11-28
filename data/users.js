@@ -172,6 +172,8 @@ async function get(id){
 
 
 
+
+
 async function updateUser(id, profilePicture, firstName, lastName, emailAddress, phoneNumber, country, biography, gender, userType, dateOfBirth){
     if(!id || !profilePicture || !firstName || !lastName  || !emailAddress || !phoneNumber || !country || !biography || !gender || !userType || !dateOfBirth){
         throw `All fields must be supplied`
@@ -281,6 +283,7 @@ async function updateUser(id, profilePicture, firstName, lastName, emailAddress,
 
 module.exports = {
     createUser,
+    get,
     updateUser
 }
 
