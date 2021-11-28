@@ -1,3 +1,8 @@
+
+const express = require('express');
+const router = express.Router();
+const data = require('../data');
+const usersData = data.users;
 const express = require("express");
 const router = express.Router();
 const multer = require("multer");
@@ -27,6 +32,17 @@ router.post('/profile', upload.single('profile'), (req, res) => {
   });
 
   module.exports= router;
+router.get('/',async (req, res) => {
+    res.render('Users/Login');
+  });
+  
+//   router.post('/signup',async (req, res) => {
+//     const postSignup = await usersData.createUser(req.body.username,req.body.password);
+//     if(postSignup.userInserted){
+//         return res.redirect('/');
+//     }
+//   });
 
 
 
+module.exports = router;
