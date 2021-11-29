@@ -1,6 +1,5 @@
 
 const express = require('express');
-const router = express.Router();
 const data = require('../data');
 const usersData = data.users;
 const multer = require("multer");
@@ -43,5 +42,23 @@ router.get('/',async (req, res) => {
 //         return res.redirect('/');
 //     }
 //   });
+
+router.get('/signup',async (req, res) => {
+        res.render("Users/signup");      
+  });
+  router.post('/signup',async (req, res) => {
+    try{
+        const { profilePicture, firstName, lastName, username, emailAddress, password, phoneNumber, country, biography, gender, userType, dateOfBirth} = blogPostData;
+        const postSignup = await userData.createUser(profilePicture, firstName, lastName, username, emailAddress, password, phoneNumber, country, biography, gender, userType, dateOfBirth);
+            if(postSignup.userInserted){
+                return res.redirect('/');
+            }
+        }
+    catch(e){
+        res.status(500).json({ error: e });
+        //res.status().render('users/signup',{title:"SignUp",error: e.message||`Internal Server Error`})
+    }
+  })
+
 
 module.exports = router;
