@@ -1,5 +1,15 @@
 <main>
     <div>
-        <img src=""
+        {{!-- <img src="" --}}
+        <h1>{{firstname}}{{lastname}}</h1>
+        <button class="edit-btn" onclick="/updateUser">Edit</button>
+    </div>
+    <div>
+        <div class = "biodiv"></div>
+            <p class= "bio">{{biography}}</p>
+        </div>
+        <p class= "gender">Gender: {{gender}}</p>
+        <p class= "contact">Contact: {{phoneNumber}} <br> {{emailAddress}}</p>
+        <p class= "location">Location: {{location}} </p>
     </div>
 </main>
