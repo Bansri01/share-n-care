@@ -21,20 +21,20 @@ module.exports = {
       throw "The content is not a string.";
     }
 
-    if(postId.match(/^\s+$/g) || title === "") {
+    if(postId.match(/^\s+$/g) || postId === "") {
       throw "The postId is just empty spaces.";
     }
-    if(userId.match(/^\s+$/g) || title === "") {
+    if(userId.match(/^\s+$/g) || userId === "") {
       throw "The userId is just empty spaces.";
     }
-    if(userName.match(/^\s+$/g) || title === "") {
+    if(userName.match(/^\s+$/g) || userName === "") {
       throw "The userName is just empty spaces.";
     }
-    if(content.match(/^\s+$/g) || title === "") {
+    if(content.match(/^\s+$/g) || content === "") {
       throw "The content is just empty spaces.";
     }
 
-    let commentTime = new Date().toUTCString();
+    let commentTime = new Date().toLocaleString();
 
     let newComment = {
       postId: postId, 

@@ -26,19 +26,19 @@ module.exports = {
       throw "The content is not a string.";
     }
     
-    if(diseaseId.match(/^\s+$/g) || title === "") {
+    if(diseaseId.match(/^\s+$/g) || diseaseId === "") {
       throw "The diseaseId is just empty spaces.";
     }
-    if(userId.match(/^\s+$/g) || title === "") {
+    if(userId.match(/^\s+$/g) || userId === "") {
       throw "The userId is just empty spaces.";
     }
-    if(userName.match(/^\s+$/g) || title === "") {
+    if(userName.match(/^\s+$/g) || userName === "") {
       throw "The userName is just empty spaces.";
     }
     if(title.match(/^\s+$/g) || title === "") {
       throw "The title is just empty spaces.";
     }
-    if(content.match(/^\s+$/g) || title === "") {
+    if(content.match(/^\s+$/g) || content === "") {
       throw "The content is just empty spaces.";
     }
 
@@ -47,7 +47,7 @@ module.exports = {
     if(userId.length !== 12 && userId.length !== 24) throw "The userId provided is not a valid ObjectId.";
     if(userId.length === 24 && !userId.match(/^[A-Fa-f0-9]+$/g)) throw "The userId provided is not a valid ObjectId.";
 
-    let postTime = new Date().toUTCString();
+    let postTime = new Date().toLocaleString();
 
     let newPost = {
       diseaseId: diseaseId, 
