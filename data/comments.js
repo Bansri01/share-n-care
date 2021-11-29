@@ -3,10 +3,10 @@ const comments = mongoCollections.comments;
 const { ObjectId } = require("mongodb");
 
 module.exports = { 
-  async createComment(postId, userId, userName, content) {
+  async createComment(postId, userId, username, content) {
     if(!postId) throw "You must provide the postId!";
     if(!userId) throw "You must provide the userId!";
-    if(!userName) throw "You must provide the userName!";
+    if(!username) throw "You must provide the username!";
     if(!content) throw "You must provide the content for the comment!";
     if(typeof postId !== "string") {
       throw "The postId is not a string.";
@@ -14,8 +14,8 @@ module.exports = {
     if(typeof userId !== "string") {
       throw "The userId is not a string.";
     }
-    if(typeof userName !== "string") {
-      throw "The userName is not a string.";
+    if(typeof username !== "string") {
+      throw "The username is not a string.";
     }
     if(typeof content !== "string") {
       throw "The content is not a string.";
@@ -27,8 +27,8 @@ module.exports = {
     if(userId.match(/^\s+$/g) || userId === "") {
       throw "The userId is just empty spaces.";
     }
-    if(userName.match(/^\s+$/g) || userName === "") {
-      throw "The userName is just empty spaces.";
+    if(username.match(/^\s+$/g) || username === "") {
+      throw "The username is just empty spaces.";
     }
     if(content.match(/^\s+$/g) || content === "") {
       throw "The content is just empty spaces.";
@@ -39,7 +39,7 @@ module.exports = {
     let newComment = {
       postId: postId, 
       userId: userId, 
-      userName: userName,
+      username: username,
       content: content,
       commentTime: commentTime
     };

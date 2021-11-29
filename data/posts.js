@@ -4,10 +4,10 @@ const { ObjectId } = require("mongodb");
 const commentData = require('./comments');
 
 module.exports = { 
-  async createPost(diseaseId, userId, userName, title, content) {
+  async createPost(diseaseId, userId, username, title, content) {
     if(!diseaseId) throw "You must provide the diseaseId!";
     if(!userId) throw "You must provide the userId!";
-    if(!userName) throw "You must provide the userName!";
+    if(!username) throw "You must provide the username!";
     if(!title) throw "You must provide a title for the post!";
     if(!content) throw "You must provide the content for the post!";
     if(typeof diseaseId !== "string") {
@@ -16,8 +16,8 @@ module.exports = {
     if(typeof userId !== "string") {
       throw "The userId is not a string.";
     }
-    if(typeof userName !== "string") {
-      throw "The userName is not a string.";
+    if(typeof username !== "string") {
+      throw "The username is not a string.";
     }
     if(typeof title !== "string") {
       throw "The title is not a string.";
@@ -32,8 +32,8 @@ module.exports = {
     if(userId.match(/^\s+$/g) || userId === "") {
       throw "The userId is just empty spaces.";
     }
-    if(userName.match(/^\s+$/g) || userName === "") {
-      throw "The userName is just empty spaces.";
+    if(username.match(/^\s+$/g) || username === "") {
+      throw "The username is just empty spaces.";
     }
     if(title.match(/^\s+$/g) || title === "") {
       throw "The title is just empty spaces.";
@@ -52,7 +52,7 @@ module.exports = {
     let newPost = {
       diseaseId: diseaseId, 
       userId: userId, 
-      userName: userName,
+      username: username,
       title: title,
       content: content,
       postTime: postTime
