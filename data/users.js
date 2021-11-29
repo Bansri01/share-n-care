@@ -170,8 +170,28 @@ async function get(id){
 
 }
 
+async function getByUsername(username){
+    if(!username) throw `You must provide a proper id`
+    if(typeof username != 'string') throw `${username} is not string`
+    if(/^ *$/.test(username)) throw `username with just empty spaces is not valid`
 
+    if(/[^A-Za-z0-9]/g.test(username)){
+        throw `Username should only have numbers and alphabets`
+    }
 
+    if(username.length < 4){
+        throw `Username should have atleast 4 characters`
+    }
+
+    const userCollection = await users()
+    
+    const user = await userCollection.findOne({ username: username})
+
+    if(user === null) throw `No user exists with that username`;
+
+    return JSON.parse(JSON.stringify(user));
+
+}
 
 
 async function updateUser(id, profilePicture, firstName, lastName, emailAddress, phoneNumber, country, biography, gender, userType, dateOfBirth){
@@ -332,7 +352,8 @@ module.exports = {
     createUser,
     get,
     updateUser,
-    checkUser
+    checkUser,
+    getByUsername
 }
 
 

@@ -1,37 +1,37 @@
 
 const express = require('express');
-const router = express.Router();
 const data = require('../data');
 const usersData = data.users;
-const express = require("express");
-const router = express.Router();
 const multer = require("multer");
 const mongoCollections = require('../config/mongoCollections')
-const data = require('../data');
-const userData = data.users;
 const userColl = mongoCollections.users;
 const ObjectID  = require('mongodb').ObjectId;
 
-var storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-      cb(null, "public/images/users")
-    },
-    filename: function (req, file, cb) {
-      cb(null, file.fieldname + '-' + Date.now())
-    }
+// var storage = multer.diskStorage({
+//     destination: function (req, file, cb) {
+//       cb(null, "public/images/users")
+//     },
+//     filename: function (req, file, cb) {
+//       cb(null, file.fieldname + '-' + Date.now())
+//     }
+// })
+
+// var upload = multer({ storage: storage })
+
+// router.post('/profile', upload.single('profile'), (req, res) => {
+//     try {
+//       res.send(req.file);
+//     }catch(err) {
+//       res.send(400);
+//     }
+//   });
+
+router.get('/profile', async (req, res) => {
+    // const userdata = await getbyUsername(req.session.user)
+    const userdata = await usersData.getByUsername("user01")
+    res.render("users/userProfile", {firstname: userdata.firstName, lastname: userdata.lastName, biography: userdata.biography, gender: userdata.gender, phoneNumber: userdata.phoneNumber, emailAddress: userdata.emailAddress, location: userdata.country})
 })
 
-var upload = multer({ storage: storage })
-
-router.post('/profile', upload.single('profile'), (req, res) => {
-    try {
-      res.send(req.file);
-    }catch(err) {
-      res.send(400);
-    }
-  });
-
-  module.exports= router;
 router.get('/',async (req, res) => {
     res.render('Users/Login');
   });
@@ -43,6 +43,22 @@ router.get('/',async (req, res) => {
 //     }
 //   });
 
+router.get('/signup',async (req, res) => {
+        res.render("Users/signup");      
+  });
+  router.post('/signup',async (req, res) => {
+    try{
+        const { profilePicture, firstName, lastName, username, emailAddress, password, phoneNumber, country, biography, gender, userType, dateOfBirth} = blogPostData;
+        const postSignup = await userData.createUser(profilePicture, firstName, lastName, username, emailAddress, password, phoneNumber, country, biography, gender, userType, dateOfBirth);
+            if(postSignup.userInserted){
+                return res.redirect('/');
+            }
+        }
+    catch(e){
+        res.status(500).json({ error: e });
+        //res.status().render('users/signup',{title:"SignUp",error: e.message||`Internal Server Error`})
+    }
+  })
 
 
 module.exports = router;
