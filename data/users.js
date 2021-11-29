@@ -170,8 +170,28 @@ async function get(id){
 
 }
 
+async function getByUsername(username){
+    if(!username) throw `You must provide a proper id`
+    if(typeof username != 'string') throw `${username} is not string`
+    if(/^ *$/.test(username)) throw `username with just empty spaces is not valid`
 
+    if(/[^A-Za-z0-9]/g.test(username)){
+        throw `Username should only have numbers and alphabets`
+    }
 
+    if(username.length < 4){
+        throw `Username should have atleast 4 characters`
+    }
+
+    const userCollection = await users()
+    
+    const user = await userCollection.findOne({ username: username})
+
+    if(user === null) throw `No user exists with that username`;
+
+    return JSON.parse(JSON.stringify(user));
+
+}
 
 
 async function updateUser(id, profilePicture, firstName, lastName, emailAddress, phoneNumber, country, biography, gender, userType, dateOfBirth){
@@ -220,10 +240,11 @@ async function updateUser(id, profilePicture, firstName, lastName, emailAddress,
     //     throw `Password should be atleast 8 characters long`
     // }
 
-    // const hashedPwd = await bcrypt.hash(password, saltRounds);
+    // const hashedPwd = await bcrypt.hash(password, saltRounds); 123-154-1245
 
-    let phoneRe = /^\d{3}\-\d{3}\-\d{4}$/
-    if(!phoneNumber.match(phoneRe)) throw `Phone number must be of format xxx-xxx-xxxx and all numbers`
+    // let phoneRe = /^\d{3}\-\d{3}\-\d{4}$/
+    let phoneRe = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
+    if(!phoneNumber.match(phoneRe)) throw `Phone number must be all numbers and correct format`
 
     const countryCodes = Object.keys(countries.countries);
     const countryNames = countryCodes.map(code => countries.countries[code].name);
@@ -281,10 +302,58 @@ async function updateUser(id, profilePicture, firstName, lastName, emailAddress,
     return {userUpdated: true}
 }
 
+async function checkUser(username, password){
+    if(!username || !password){
+        throw `All fields need to have valid values`
+    }
+
+    if(typeof username !== 'string' || /^ *$/.test(username)){
+        throw `Please enter a valid string`
+    }
+
+    if(/[^A-Za-z0-9]/g.test(username)){
+        throw `Username should only have numbers and alphabets`
+    }
+
+    if(username.length < 4){
+        throw `Username should have atleast 4 characters`
+    }
+
+    if(/^ *$/.test(password)) throw `password cannot be empty`
+
+    if(/\s/g.test(password)) throw `password cannot have spaces`
+
+    if(password.length < 8){
+        throw `Password should be atleast 8 characters long`
+    }
+
+    const userCollection = await users()
+    const user = await userCollection.findOne({ username: username.toLowerCase()})
+
+    if(user === null) throw `Either the username or password is invalid`;
+
+    let compareToMatch = false;
+
+    try {
+        compareToMatch = await bcrypt.compare(password, user.password);
+    } catch (e) {
+        //no op
+    }
+
+    if (compareToMatch) {
+        return {authenticated: true}
+    } else {
+        throw `Either the username or password is invalid`
+    }
+
+}
+
 module.exports = {
     createUser,
     get,
-    updateUser
+    updateUser,
+    checkUser,
+    getByUsername
 }
 
 
