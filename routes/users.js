@@ -34,7 +34,7 @@ router.get('/profile', async (req, res) => {
 })
 
 router.get('/',async (req, res) => {
-    res.render('Users/Login');
+    res.render('users/Login');
   });
   
 //   router.post('/signup',async (req, res) => {
