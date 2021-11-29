@@ -3,12 +3,8 @@ const express = require('express');
 const router = express.Router();
 const data = require('../data');
 const usersData = data.users;
-const express = require("express");
-const router = express.Router();
 const multer = require("multer");
 const mongoCollections = require('../config/mongoCollections')
-const data = require('../data');
-const userData = data.users;
 const userColl = mongoCollections.users;
 const ObjectID  = require('mongodb').ObjectId;
 
@@ -32,8 +28,9 @@ const ObjectID  = require('mongodb').ObjectId;
 //   });
 
 router.get('/profile', async (req, res) => {
-    const userdata = await getbyUsername(req.session.user)
-    res.render("users/userProfile", {firstname: userdata.firstname, lastname: userdata.lastname, biography: userdata.biography, gender: userdata.gender, phoneNumber: userdata.phoneNumber, emailAddress: userdata.emailAddress, location: userdata.location})
+    // const userdata = await getbyUsername(req.session.user)
+    const userdata = await usersData.getByUsername("user01")
+    res.render("users/userProfile", {firstname: userdata.firstName, lastname: userdata.lastName, biography: userdata.biography, gender: userdata.gender, phoneNumber: userdata.phoneNumber, emailAddress: userdata.emailAddress, location: userdata.country})
 })
 
 router.get('/',async (req, res) => {

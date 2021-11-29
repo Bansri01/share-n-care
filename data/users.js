@@ -352,7 +352,8 @@ module.exports = {
     createUser,
     get,
     updateUser,
-    checkUser
+    checkUser,
+    getByUsername
 }
 
 
