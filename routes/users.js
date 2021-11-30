@@ -6,6 +6,7 @@ const multer = require("multer");
 const mongoCollections = require('../config/mongoCollections')
 const userColl = mongoCollections.users;
 const ObjectID  = require('mongodb').ObjectId;
+const router = express.Router();
 
 // var storage = multer.diskStorage({
 //     destination: function (req, file, cb) {
