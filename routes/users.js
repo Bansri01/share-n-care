@@ -142,8 +142,9 @@ router.get('/signup',async (req, res) => {
         res.status(400).render('users/signup',{ title:"SignUp",error: 'biography must be string'});
         return;
     }
-    if(typeof gender !== "string") throw 'gender must be string'{
-        
+    if(typeof gender !== "string"){
+        res.status(400).render('users/signup',{ title:"SignUp",error: 'gender must be string'});
+        return; 
     }
     if(typeof userType !== "string") throw 'userType must be string'
     if(typeof phoneNumber !== "string") throw 'phoneNumber must be string'
