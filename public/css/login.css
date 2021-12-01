@@ -205,3 +205,9 @@ form.search input[type=text]{
     background: #f1f1f1;
 }
 
+select {
+    color: rgb(120, 119, 119);
+}
+.dateInput{
+    color: rgb(120, 119, 119);
+}
