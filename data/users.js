@@ -313,33 +313,33 @@ async function updateUser(id, profilePicture, firstName, lastName, emailAddress,
 
 async function checkUser(username, password){
     if(!username || !password){
-        throw `All fields need to have valid values`
+        throw {message:`All fields need to have valid values`,error:400};
     }
 
     if(typeof username !== 'string' || /^ *$/.test(username)){
-        throw `Please enter a valid string`
+        throw {message:`Please enter a valid string`,error:400};
     }
 
     if(/[^A-Za-z0-9]/g.test(username)){
-        throw `Username should only have numbers and alphabets`
+        throw {message: `Username should only have numbers and alphabets`,error:400};
     }
 
     if(username.length < 4){
-        throw `Username should have atleast 4 characters`
+        throw {message: `Username should have atleast 4 characters`,error:400};
     }
 
-    if(/^ *$/.test(password)) throw `password cannot be empty`
+    if(/^ *$/.test(password)) throw {message: `password cannot be empty`,error:400};
 
-    if(/\s/g.test(password)) throw `password cannot have spaces`
+    if(/\s/g.test(password)) throw {message:`password cannot have spaces`,error:400};
 
     if(password.length < 8){
-        throw `Password should be atleast 8 characters long`
+        throw {message:`Password should be atleast 8 characters long`,error:400};
     }
 
     const userCollection = await users()
     const user = await userCollection.findOne({ username: username.toLowerCase()})
 
-    if(user === null) throw `Either the username or password is invalid`;
+    if(user === null) throw {message:`Either the username or password is invalid`,error:400};
 
     let compareToMatch = false;
 
@@ -352,7 +352,7 @@ async function checkUser(username, password){
     if (compareToMatch) {
         return {authenticated: true}
     } else {
-        throw `Either the username or password is invalid`
+        throw {message:`Either the username or password is invalid`,error:400};
     }
 
 }

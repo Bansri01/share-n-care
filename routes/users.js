@@ -58,12 +58,12 @@ function validateDate(date) {
 
 
 router.get('/',async (req, res) => {
-    if (req.session.user) {
-        return res.redirect('/private');
-      } else {
+    // if (req.session.user) {
+    //     return res.redirect('/private');
+    //   } else {
         res.render('homepage/Landingpage',{title: "Share and Care"});
        
-      }
+      //}
     
   });
 
@@ -273,12 +273,12 @@ router.get('/signup',async (req, res) => {
         res.status(400).render('users/signup',{ title:"SignUp",error: 'Please Enter valid date of birth'});
         return
     }
-}
-catch(e){
-    res.status(400).render('users/signup',{ title:"SignUp",error: e});
-    return
+    }
+    catch(e){
+        res.status(400).render('users/signup',{ title:"SignUp",error: e});
+        return
 
-}
+    }
 
    
 
@@ -295,14 +295,70 @@ catch(e){
     }
   })
 
-//   router.get('/Login',async (req, res) => {
-//     if (req.session.user) {
-//         return res.redirect('/private');
-//       } else {
-//         res.render("users/login",{title: "LOGIN"});
-//       }
-//   });      
+  router.get('/Login',async (req, res) => {
+    if (req.session.user) {
+        return res.redirect('/private');
+      } else {
+        res.render("users/login",{title: "LOGIN"});
+      }
+  });      
+  
+  
+  router.post('/login',async (req, res) => {
+    if (!req.body.username )  {
+        res.status(400).render('users/Login',{ title:"login",error: 'You must provide Username'});
+        return;
+      }
+    if (!req.body.password )  {
+        res.status(400).render('users/Login',{ title:"login",error: 'You must provide Password'});
+        return;
+    } 
+    if(typeof req.body.username !== 'string'){
+        res.status(400).render('users/Login',{ title:"login",error: 'Please enter a valid string'});
+        return;
+    }
+      
+    if(/^ *$/.test(req.body.username)){
+        res.status(400).render('users/Login',{ title:"login",error: 'Username cannot be empty'});
+        return;
+    }
+    if(/[^A-Za-z0-9]/g.test(req.body.username)){
+        res.status(400).render('users/Login',{ title:"login",error: 'Username should only have numbers and alphabets'});
+        return;
+    }
+    if(req.body.username.length < 4){
+        res.status(400).render('users/Login',{ title:"login",error: 'Username should have atleast 4 characters'});
+        return;
+    }
+
+    if(/^ *$/.test(req.body.password)){
+        res.status(400).render('users/Login',{ title:"login",error: 'password cannot be empty'});
+        return;
+    }
+
+    if(/\s/g.test(req.body.password)){
+        res.status(400).render('users/Login',{ title:"login",error: 'password cannot have spaces'});
+        return;
+    }
+
+    if(req.body.password.length < 8){
+        res.status(400).render('users/Login',{ title:"login",error: 'Password should be atleast 8 characters long'});
+        return;
+    }
+ 
     
+    try{
+        const postLogIn = await usersData.checkUser(req.body.username,req.body.password);
+      if(postLogIn.authenticated){
+          req.session.user = req.body.username;
+          return res.redirect("/private");
+          
+      }
+    }
+    catch(e){
+        res.status(e.error || 500).render('users/login',{title:"login",error: e.message ||`Internal Server Error`})
+    }
+});
 
 
   router.get('/private',async (req, res) => {
