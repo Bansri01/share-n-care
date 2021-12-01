@@ -72,7 +72,7 @@ router.get('/Login',async (req, res) => {
     res.render("users/Login");      
 });
 
-router.get('/signup',async (req, res) => {
+router. get('/signup',async (req, res) => {
     if (req.session.user) {
         return res.redirect('/private');
       } else {

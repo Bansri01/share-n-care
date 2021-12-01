@@ -1,0 +1,49 @@
+<main>
+{{#if diseaseName }}
+<h1>
+    {{diseaseName}}
+</h1>
+{{/if}}
+
+{{#if description }}
+<h2>
+    {{description}}
+</h2>
+{{/if}}
+
+
+{{#if symptoms }}
+<h2>
+    symptoms:
+</h2>
+<ul class="symptoms">
+    {{#each symptoms}}
+    <li><span>{{name}}</span></li>
+    {{/each}} 
+  </ul>
+{{/if}}
+
+
+{{#if suggestions }}
+<h2>
+    General Recommendations:
+</h2>
+<ul class="suggestions">
+    {{#each suggestions}}
+    <li><span>{{name}}</span></li>
+    {{/each}} 
+  </ul>
+{{/if}}
+
+
+{{#if medicines }}
+<h2>
+    Recommended Medicines:
+</h2>
+<ul class="medicines">
+    {{#each medicines}}
+    <li><span>{{name}}</span></li>
+    {{/each}} 
+  </ul>
+{{/if}}
+</main>
