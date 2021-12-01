@@ -1,6 +1,10 @@
 <main>
     <div>
-        {{!-- <img src="" --}}
+        {{#if profilePicture}}
+            <img class="profile-picture rounded-circle" src="../public/images/users/{{profilePicture}}" alt="{{firstName}}" />
+        {{else}}
+            <img class="profile-picture rounded-circle" src="../public/images/users/avatar-profile.jpeg" alt="{{firstName}}" />
+        {{/if}}
         <h1>{{firstname}} {{lastname}}</h1>
         <button class="edit-btn" onclick="/updateUser">Edit</button>
     </div>

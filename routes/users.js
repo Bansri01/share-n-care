@@ -6,17 +6,18 @@ const mongoCollections = require('../config/mongoCollections')
 const userColl = mongoCollections.users;
 const ObjectID  = require('mongodb').ObjectId;
 const router = express.Router();
+const countries = require("countries-list");
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
       cb(null, "public/images/users")
     },
     filename: function (req, file, cb) {
-      cb(null, file.fieldname + '-' + Date.now())
+      cb(null, file.originalname.replace(" ", "_") + '-' + Date.now())
     }
 })
 
-var upload = multer({ storage: storage })
+const upload = multer({ storage: storage })
 
 router.post('/profile', upload.single('profile'), (req, res) => {
     try {
@@ -28,8 +29,8 @@ router.post('/profile', upload.single('profile'), (req, res) => {
 
 router.get('/profile', async (req, res) => {
     // const userdata = await getbyUsername(req.session.user)
-    const userdata = await usersData.getByUsername("user01")
-    res.render("users/userProfile", {firstname: userdata.firstName, lastname: userdata.lastName, biography: userdata.biography, gender: userdata.gender, phoneNumber: userdata.phoneNumber, emailAddress: userdata.emailAddress, location: userdata.country})
+    const userdata = await usersData.getByUsername("user07")
+    res.render("users/userProfile", {profilePicture: userdata.profilePicture, firstname: userdata.firstName, lastname: userdata.lastName, biography: userdata.biography, gender: userdata.gender, phoneNumber: userdata.phoneNumber, emailAddress: userdata.emailAddress, location: userdata.country})
 })
 
 router.get('/',async (req, res) => {
@@ -107,9 +108,8 @@ router. get('/signup',async (req, res) => {
 
 
 
-  router.post('/signup',async (req, res) => {
-
-    if (!req.body.profilePicture )  {
+  router.post('/signup', upload.single('profilePicture'), async (req, res) => {
+    if (!req.file.filename)  {
         res.status(400).render('users/signup',{ title:"SignUp",error: 'You must provide Profile picture'});
         return;
       }
@@ -272,9 +272,9 @@ router. get('/signup',async (req, res) => {
         res.status(400).render('users/signup',{ title:"SignUp",error: 'Password should be atleast 8 characters long'});
         return; 
     }
-    let phoneRe = /^\d{3}\-\d{3}\-\d{4}$/
+    let phoneRe = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
     if(!req.body.phoneNumber.match(phoneRe)){
-        res.status(400).render('users/signup',{ title:"SignUp",error: 'Phone number must be of format xxx-xxx-xxxx and all numbers'});
+        res.status(400).render('users/signup',{ title:"SignUp",error: 'Phone number must be of correct format and all numbers'});
         return
     }
     const countryCodes = Object.keys(countries.countries);
@@ -311,6 +311,7 @@ router. get('/signup',async (req, res) => {
 
     try{
         const user_data = req.body;
+        user_data.profilePicture = req.file.filename;
         const { profilePicture, firstName, lastName, username, emailAddress, password, phoneNumber, country, biography, gender, userType, dateOfBirth} = user_data;
         const postSignup = await usersData.createUser(profilePicture, firstName, lastName, username, emailAddress, password, phoneNumber, country, biography, gender, userType, dateOfBirth);
             if(postSignup){
@@ -322,7 +323,7 @@ router. get('/signup',async (req, res) => {
     }
   })
 
-  router.get('/Login',async (req, res) => {
+  router.get('/login',async (req, res) => {
     if (req.session.user) {
         return res.redirect('/private');
       } else {

@@ -95,8 +95,8 @@ async function createUser(profilePicture, firstName, lastName, username, emailAd
 
     const hashedPwd = await bcrypt.hash(password, saltRounds);
     
-    let phoneRe = /^\d{3}\-\d{3}\-\d{4}$/
-    if(!phoneNumber.match(phoneRe)) throw {message:`Phone number must be of format xxx-xxx-xxxx and all numbers`, error: 400};
+    let phoneRe = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
+    if(!phoneNumber.match(phoneRe)) throw {message:`Phone number must be in correct format and all numbers`, error: 400};
   
     const countryCodes = Object.keys(countries.countries);
     const countryNames = countryCodes.map(code => countries.countries[code].name);
