@@ -1,12 +1,5 @@
-<!DOCTYPE html>
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta charset="utf-8">
-    <title>Login Form</title>
-    {{!-- <link rel="shortcut icon" href="/assets/favicon.ico"> --}}
-    <link rel="stylesheet" href="/public/css/login.css">
-</head>
 <body>
+
     <div class="container">
         {{!-- add action"POST" --}}
         <form class="form" id="login"> 
@@ -20,6 +13,11 @@
                 <input type="password" class="form__input" autofocus placeholder="Password">
                 <div class="form__input-error-message"></div>
             </div>
+            <div>
+            {{#if error}}
+            <p class="not-found">{{error}}</p>
+            {{/if}}
+           </div>
             <button class="form__button" type="submit">Continue</button>
             {{!-- <p class="form__text">
                 <a href="#" class="form__link">Forgot your password?</a>
@@ -32,4 +30,4 @@
         
     </div>
     <script src="/public/js/Landing.js"></script>
-</body>
+    </body>

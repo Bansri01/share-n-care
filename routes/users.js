@@ -34,7 +34,13 @@ const router = express.Router();
 // })
 
 router.get('/',async (req, res) => {
-    res.render('homepage/Landingpage');
+    if (req.session.user) {
+        return res.redirect('/private');
+      } else {
+        res.render('homepage/Landingpage',{title: "Share and Care"});
+       // res.render("users/login",{title: "LOGIN"});
+      }
+    
   });
 //   router.get('/',async (req, res) => {
 //     res.render('Users/Login');
@@ -52,21 +58,40 @@ router.get('/Login',async (req, res) => {
 });
 
 router.get('/signup',async (req, res) => {
-        res.render("Users/signup");      
+    if (req.session.user) {
+        return res.redirect('/private');
+      } else {
+        res.render("Users/signup",{title: "SIGNUP"});
+      }     
   });
   router.post('/signup',async (req, res) => {
     try{
         const { profilePicture, firstName, lastName, username, emailAddress, password, phoneNumber, country, biography, gender, userType, dateOfBirth} = blogPostData;
-        const postSignup = await userData.createUser(profilePicture, firstName, lastName, username, emailAddress, password, phoneNumber, country, biography, gender, userType, dateOfBirth);
-            if(postSignup.userInserted){
+        const postSignup = await usersData.createUser(profilePicture, firstName, lastName, username, emailAddress, password, phoneNumber, country, biography, gender, userType, dateOfBirth);
+            if(postSignup){
                 return res.redirect('/');
             }
         }
     catch(e){
-        res.status(500).json({ error: e });
+        res.status(400).render("Users/signup");
         //res.status().render('users/signup',{title:"SignUp",error: e.message||`Internal Server Error`})
     }
   })
+
+  router.get('/private',async (req, res) => {
+    
+    if (req.session.user) {
+        return res.render("Users/private",{title:"Private", username: req.session.user})
+      }
+    });
+
+
+  router.get('/logout',async (req, res) => {
+    req.session.destroy();
+    return res.render("Users/logout",{title:"Logout"})
+    
+
+});
 
 
 module.exports = router;

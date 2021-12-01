@@ -32,13 +32,27 @@ document.addEventListener("DOMContentLoaded", () => {
     //     createAccountForm.classList.add("form--hidden");
     // });
 
-    loginForm.addEventListener("submit", e => {
-        e.preventDefault();
+    // loginForm.addEventListener("submit", e => {
+    //     e.preventDefault();
 
-        // Perform your AJAX/Fetch login
+    //     // Perform your AJAX/Fetch login
 
-        setFormMessage(loginForm, "error", "Invalid username/password combination");
-    });
+    //     setFormMessage(loginForm, "error", "Invalid username/password combination");
+    // });
+
+    // createAccountForm.addEventListener("submit", e => {
+    //     e.preventDefault();
+
+    //     // Perform your AJAX/Fetch login
+
+    //     //setFormMessage(loginForm, "error", "Invalid username/password combination");
+    // });
+
+
+
+
+
+
 
     document.querySelectorAll(".form__input").forEach(inputElement => {
         inputElement.addEventListener("blur", e => {
