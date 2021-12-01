@@ -2,7 +2,7 @@ function setFormMessage(formElement, type, message) {
     const messageElement = formElement.querySelector(".form__message");
 
     messageElement.textContent = message;
-    messageElement.classList.remove("form__message--success", "form__message--error");
+    messageElement.classList.remove("form__message--error");//success removed redirect to landing after login
     messageElement.classList.add(`form__message--${type}`);
 }
 
@@ -32,19 +32,34 @@ document.addEventListener("DOMContentLoaded", () => {
     //     createAccountForm.classList.add("form--hidden");
     // });
 
-    loginForm.addEventListener("submit", e => {
-        e.preventDefault();
+    // loginForm.addEventListener("submit", e => {
+    //     e.preventDefault();
 
-        // Perform your AJAX/Fetch login
+    //     // Perform your AJAX/Fetch login
 
-        setFormMessage(loginForm, "error", "Invalid username/password combination");
-    });
+    //     setFormMessage(loginForm, "error", "Invalid username or password");
+    // });
+
+    // createAccountForm.addEventListener("submit", e => {
+    //     e.preventDefault();
+
+    //     // Perform your AJAX/Fetch login
+
+    //     //setFormMessage(loginForm, "error", "Invalid username/password combination");
+    // });
+
+
+
+
+
+
 
     document.querySelectorAll(".form__input").forEach(inputElement => {
         inputElement.addEventListener("blur", e => {
-            if (e.target.id === "signupUsername" && e.target.value.length > 0 && e.target.value.length < 10) {
-                setInputError(inputElement, "Username must be at least 10 characters in length");
+            if (e.target.id === "signupUsername" && e.target.value.length > 0 && e.target.value.length < 5) {
+                setInputError(inputElement, "Username must be at least 5 characters in length");
             }
+            //password implement
         });
 
         inputElement.addEventListener("input", e => {
