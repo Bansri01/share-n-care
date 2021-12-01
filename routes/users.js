@@ -64,9 +64,16 @@ router.get('/signup',async (req, res) => {
         res.render("Users/signup",{title: "SIGNUP"});
       }     
   });
+
+
+
   router.post('/signup',async (req, res) => {
+     
+    const user_data = req.body;
+    console.log(user_data)
+
     try{
-        const { profilePicture, firstName, lastName, username, emailAddress, password, phoneNumber, country, biography, gender, userType, dateOfBirth} = blogPostData;
+        const { profilePicture, firstName, lastName, username, emailAddress, password, phoneNumber, country, biography, gender, userType, dateOfBirth} = user_data;
         const postSignup = await usersData.createUser(profilePicture, firstName, lastName, username, emailAddress, password, phoneNumber, country, biography, gender, userType, dateOfBirth);
             if(postSignup){
                 return res.redirect('/');
