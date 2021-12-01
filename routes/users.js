@@ -6,6 +6,7 @@ const multer = require("multer");
 const mongoCollections = require('../config/mongoCollections')
 const userColl = mongoCollections.users;
 const ObjectID  = require('mongodb').ObjectId;
+const router = express.Router();
 
 // var storage = multer.diskStorage({
 //     destination: function (req, file, cb) {
@@ -26,15 +27,18 @@ const ObjectID  = require('mongodb').ObjectId;
 //     }
 //   });
 
-router.get('/profile', async (req, res) => {
-    // const userdata = await getbyUsername(req.session.user)
-    const userdata = await usersData.getByUsername("user01")
-    res.render("users/userProfile", {firstname: userdata.firstName, lastname: userdata.lastName, biography: userdata.biography, gender: userdata.gender, phoneNumber: userdata.phoneNumber, emailAddress: userdata.emailAddress, location: userdata.country})
-})
+// router.get('/profile', async (req, res) => {
+//     // const userdata = await getbyUsername(req.session.user)
+//     const userdata = await usersData.getByUsername("user01")
+//     res.render("users/userProfile", {firstname: userdata.firstName, lastname: userdata.lastName, biography: userdata.biography, gender: userdata.gender, phoneNumber: userdata.phoneNumber, emailAddress: userdata.emailAddress, location: userdata.country})
+// })
 
 router.get('/',async (req, res) => {
-    res.render('Users/Login');
+    res.render('homepage/Landingpage');
   });
+//   router.get('/',async (req, res) => {
+//     res.render('Users/Login');
+//   });
   
 //   router.post('/signup',async (req, res) => {
 //     const postSignup = await usersData.createUser(req.body.username,req.body.password);
@@ -42,6 +46,10 @@ router.get('/',async (req, res) => {
 //         return res.redirect('/');
 //     }
 //   });
+
+router.get('/Login',async (req, res) => {
+    res.render("Users/Login");      
+});
 
 router.get('/signup',async (req, res) => {
         res.render("Users/signup");      
