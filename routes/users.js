@@ -64,6 +64,9 @@ router.get('/signup',async (req, res) => {
         res.render("users/signup",{title: "SIGNUP"});
       }     
   });
+
+
+
   router.post('/signup',async (req, res) => {
 
     if (!req.body.profilePicture )  {
@@ -146,9 +149,12 @@ router.get('/signup',async (req, res) => {
     if(typeof phoneNumber !== "string") throw 'phoneNumber must be string'
     if(typeof dateOfBirth !== "string") throw 'dateOfBirth must be string'
     if(typeof username !== "string") throw `userName must be string`
+     
+    const user_data = req.body;
+    console.log(user_data)
 
     try{
-        const { profilePicture, firstName, lastName, username, emailAddress, password, phoneNumber, country, biography, gender, userType, dateOfBirth} = blogPostData;
+        const { profilePicture, firstName, lastName, username, emailAddress, password, phoneNumber, country, biography, gender, userType, dateOfBirth} = user_data;
         const postSignup = await usersData.createUser(profilePicture, firstName, lastName, username, emailAddress, password, phoneNumber, country, biography, gender, userType, dateOfBirth);
             if(postSignup){
                 return res.redirect('/');
