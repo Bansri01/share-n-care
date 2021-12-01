@@ -68,9 +68,7 @@ router.get('/',async (req, res) => {
   });
 
 
-router.get('/Login',async (req, res) => {
-    res.render("users/Login");      
-});
+
 
 router.get('/signup',async (req, res) => {
     if (req.session.user) {
@@ -296,6 +294,16 @@ catch(e){
         res.status(e.error || 500).render('users/signup',{title:"SignUp",error: e.message ||`Internal Server Error`})
     }
   })
+
+//   router.get('/Login',async (req, res) => {
+//     if (req.session.user) {
+//         return res.redirect('/private');
+//       } else {
+//         res.render("users/login",{title: "LOGIN"});
+//       }
+//   });      
+    
+
 
   router.get('/private',async (req, res) => {
     

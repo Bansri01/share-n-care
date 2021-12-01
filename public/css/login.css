@@ -179,3 +179,9 @@ ul li{
 .Home-btn{
     float: left;
 }
+select {
+    color: rgb(120, 119, 119);
+}
+.dateInput{
+    color: rgb(120, 119, 119);
+}

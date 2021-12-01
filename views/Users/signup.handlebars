@@ -37,19 +37,32 @@
                 <div class="form__input-error-message"></div>
             </div>
             <div class="form__input-group">
-                <input type="text" class="form__input" autofocus placeholder="Biography" name="biography" required>
+                <textarea type="text" class="form__input" autofocus placeholder="Biography" rows="4" cols="50" name="biography" required></textarea>
                 <div class="form__input-error-message"></div>
             </div>
+            <div class="form__input-group">
+            <select id="genderList" class="form__input" placeholder="Gender" name="gender" class="gen" required>
+                <option disabled selected hidden>Gender</option>
+                <option value="Female">Female</option>
+                <option value="Male">Male</option>
+                <option value="other">other</option>
+            </select>
+            <div class="form__input-error-message"></div>
+            </div>
+
+
+
              <div class="form__input-group">
-                <input type="text" class="form__input" autofocus placeholder="Gender" name="gender" required>
+                <select id="userType" class="form__input" placeholder="UserType" name="userType" class="gen" required>
+                <option disabled selected hidden>UserType</option>
+                <option value="Patient">Patient</option>
+                <option value="Doctor">Doctor</option>
+                </select>
                 <div class="form__input-error-message"></div>
             </div>
+
              <div class="form__input-group">
-                <input type="text" class="form__input" autofocus placeholder="User Type" name="userType" required>
-                <div class="form__input-error-message"></div>
-            </div>
-             <div class="form__input-group">
-                <input type="text" class="form__input" autofocus placeholder="Date Of Birth" name="dateOfBirth" required>
+                <input type="date" class="form__input dateInput" name="dateOfBirth" required>
                 <div class="form__input-error-message"></div>
             </div>
             <div>
