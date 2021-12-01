@@ -1,5 +1,6 @@
 const ObjectId  = require('mongodb').ObjectId;
 const mongoCollections = require('../config/mongoCollections')
+const dbConnection = require("../config/mongoConnection");
 const diseases = mongoCollections.diseases
 
 function checkSpace (mystr)
@@ -35,10 +36,10 @@ function isValidObjectId(id){
     return false;
 }
 
-const createDisease = async function createDisease(diseaseName, description, suggestions,medicines,filters)
+const createDisease = async function createDisease(diseaseName, description, symptoms,suggestions,medicines,filters)
 {
     
-    if (diseaseName==null || description==null || suggestions==null|| medicines==null || filters==null){
+    if (diseaseName==null || description==null || suggestions==null|| medicines==null || filters==null || symptoms==null){
        throw `All the input parameter must be provided in the function`;
    }
 
@@ -55,6 +56,35 @@ const createDisease = async function createDisease(diseaseName, description, sug
     {
         throw `description field cannot be just empty spaces`
     }
+
+
+    if (!Array.isArray(symptoms))
+    {
+        throw `symptoms is not an array. It should be an array`
+    }
+
+    for(i=0;i<symptoms.length;i++)
+    {
+        if (symptoms[i]==null || symptoms[i]==undefined){
+            throw `items in suggestions cannot be null or undefined`;
+        }
+
+    
+    if (typeof(symptoms[i])!=='string'){
+        throw 'The suggestions should be string! No Other Datatype is allowed!'
+    }
+
+    if(checkSpace(symptoms[i]))
+    {
+        throw `Suggestion cannot be just empty spaces`
+    }
+
+    symptoms[i] = symptoms[i].trim()
+
+}
+
+    
+
 
     if (!Array.isArray(suggestions))
     {
@@ -76,6 +106,9 @@ const createDisease = async function createDisease(diseaseName, description, sug
     {
         throw `Suggestion cannot be just empty spaces`
     }
+
+    suggestions[i] = suggestions[i].trim()
+
 
 }
 
@@ -107,6 +140,8 @@ const createDisease = async function createDisease(diseaseName, description, sug
         throw `Medicine Names cannot be just empty spaces`
     }
 
+    element = element.trim();
+
     });
 
 
@@ -137,13 +172,26 @@ const createDisease = async function createDisease(diseaseName, description, sug
         throw `filter Names cannot be just empty spaces`
     }
 
+    element = element.trim()
+
     });
+
+    for(i=0;i<filters.length;i++)
+    {
+        filters[i]=filters[i].toLowerCase();
+    }
+
+
+    diseaseName = diseaseName.trim();
+    description = description.trim();
+
 
     const diseasesCollection = await diseases();
 
     let newdiseases = {
         diseaseName: diseaseName,
         introduction: description,
+        symptoms: symptoms,
         suggestions:suggestions,
         medicines:medicines,
         filters:filters
@@ -162,8 +210,34 @@ const searchDisease = async function searchDisease(searchTerm)
 {
     if(searchTerm==null || searchTerm==undefined)
     {
-        
+        throw `Search Term must be provided in the function`;
     }
+
+    if (typeof(searchTerm)!=='string'){
+        throw 'The searchTerm be string. No Other Datatype is allowed!'
+    }
+
+    if(checkSpace(searchTerm))
+    {
+        throw `searchTerm field cannot be just empty spaces`
+    }
+
+    const diseasesCollection = await diseases();
+    searchTerm=searchTerm.toLocaleLowerCase();
+
+    let DiseaseList = await diseasesCollection.find({}).toArray();
+    const db = await dbConnection.connectToDb();
+
+    const findInfo = await diseasesCollection.find( { "filters": { $all: [searchTerm] } } ).toArray()
+
+    
+    for(i=0;i<findInfo.length;i++)
+    {
+        console.log(findInfo[i].diseaseName)
+    }
+    
+
+
 }   
 
 
