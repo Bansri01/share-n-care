@@ -60,6 +60,28 @@ document.addEventListener("DOMContentLoaded", () => {
                 setInputError(inputElement, "Username must be at least 5 characters in length");
             }
             //password implement
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
         });
 
         inputElement.addEventListener("input", e => {
