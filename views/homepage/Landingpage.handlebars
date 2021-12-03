@@ -31,12 +31,22 @@
         
 </div>  
 <div class = "nav1">
-    <form action="/" method="post" class="search">
+    <form action="/" method="post" class="search" id ="searchDisease">
     <lable for="searchDisease">Search Disease</lable>
-    <input type="text" class="form__input" placeholder="Search disease" name="searchDisease"> 
+    <input type="text" class="form__input" placeholder="Search disease" name="searchDisease" id="searchInput"> 
     <button type="submit" class="diseaseButton"><i class="fa fa-search"></i></button>
+    <div id="error" hidden></div>
 </form>
+<div id="resultContainer" hidden>
 </div>
+</div>
+
+
+
+<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+    crossorigin="anonymous"></script>
+    <script src="/public/js/landing.js"></script>
+
 
 
 

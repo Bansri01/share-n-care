@@ -230,12 +230,18 @@ const searchDisease = async function searchDisease(searchTerm)
 
     const findInfo = await diseasesCollection.find( { "filters": { $all: [searchTerm] } } ).toArray()
 
-    
+    disease_names=[]
     for(i=0;i<findInfo.length;i++)
     {
         console.log(findInfo[i].diseaseName)
+        disease_names[i]=
+        {
+            diseaseName :findInfo[i].diseaseName,
+            id :(findInfo[i]._id).toString()
+        }
     }
     
+    return disease_names;
 
 
 }   
