@@ -7,8 +7,6 @@ body {
     --border-radius: 4px;
 
     margin: 0;
-    /* height: 100vh; */
-    /* height: 170vh; */
     display: flex;
     align-items: center;
     justify-content: center;

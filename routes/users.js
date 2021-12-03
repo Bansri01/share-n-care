@@ -294,7 +294,7 @@ router. get('/signup',async (req, res) => {
         res.status(400).render('users/signup',{ title:"SignUp",error: 'Password should be atleast 8 characters long'});
         return; 
     }
-    let phoneRe = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
+    let phoneRe = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4}$/im;
     if(!req.body.phoneNumber.match(phoneRe)){
         res.status(400).render('users/signup',{ title:"SignUp",error: 'Phone number must be of correct format and all numbers'});
         return

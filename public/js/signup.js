@@ -1,3 +1,5 @@
+
+
 function setFormMessage(formElement, type, message) {
     const messageElement = formElement.querySelector(".form__message");
 
@@ -24,6 +26,58 @@ function validateEmail(email) {
 }
 //---------------End of function to validate Email----------------------//
 
+
+//--------------function to Validate Date----------------//
+function validateDate(date) {
+    let datePattern = /^\d{4}-\d{2}-\d{2}$/ 
+        if(!date.match(datePattern)) throw `dateOfReview should be in format yyyy-mm-dd`
+        const today = new Date()
+        let date_arr = date.split("-")
+        parsedMonth = Number(date_arr[1])
+        parsedDay = Number(date_arr[2])
+        parsedYear = Number(date_arr[0])
+        if(parsedMonth < 1 || parsedMonth > 12){
+            throw `Invalid month`
+        }
+        if(parsedDay < 1 || parsedDay > 31){
+            throw 'Invalid Day value'
+        }
+        monthArr1 = [1, 3, 5, 7, 8, 10, 12]
+        monthArr2 = [4, 6, 9, 11]
+        if(monthArr1.includes(parsedMonth) && parsedDay > 31){
+            throw `The month does not have more than 31 days`
+        }
+        else if(monthArr2.includes(parsedMonth) && parsedDay > 30){
+            throw `The month does not have more than 30 days`
+        }
+        else if(parsedMonth === 2 && parsedDay > 28 ){
+            throw `The month february does not have more than 28 days`
+        }
+        
+        let d1 = new Date(Date.parse(date));
+        let d2 = new Date(Date.parse(today));
+        var diff = d2.getTime() - d1.getTime();
+
+        if (diff < 0) {
+            return false; 
+        } else {
+            return true;
+        }
+    
+}
+
+//--------------End of Function to Validate Date----------------//
+
+
+
+
+
+
+
+
+
+
+
 document.addEventListener("DOMContentLoaded", () => {
     const loginForm = document.querySelector("#login");
     const createAccountForm = document.querySelector("#createAccount");
@@ -49,9 +103,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.querySelectorAll(".form__input").forEach(inputElement => {
         inputElement.addEventListener("blur", e => {
-            // if (e.target.id === "signupUsername" && e.target.value.length > 0 && e.target.value.length < 5) {
-            //     setInputError(inputElement, "Username must be at least 5 characters in length");
-            // }
             
             if (e.target.id == "firstName" && !e.target.value )  {
                 setInputError(inputElement, "You must provide profile First Name");
@@ -136,23 +187,44 @@ document.addEventListener("DOMContentLoaded", () => {
                 setInputError(inputElement, "password cannot have spaces");
             }
 
+            if(e.target.id === "password" && e.target.value.length < 8){
+                setInputError(inputElement, "Password should be atleast 8 characters long");
+            }
+            let phoneRe = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4}$/im;
+            if(e.target.id === "phoneNumber" && !e.target.value.match(phoneRe)){
+                setInputError(inputElement, "Phone number must be of correct format and all numbers");
+            }
+
+            let gen = ["Female", "Male", "other"]
+            if(e.target.id === "genderList" && !gen.includes(e.target.value)){
+                setInputError(inputElement, "Please enter valid gender");
+            }
+        
+        
+            if (e.target.id.trim() === "userType" && e.target.value.trim() != "Patient" && e.target.value.trim() != "Doctor"){
+                setInputError(inputElement, "Usertype must be a patient or a doctor"); 
+            }
+
+            try{ 
+                if (e.target.id === "dateOfBirth" && !e.target.value){
+                    setInputError(inputElement, "Please Enter valid date of birth"); 
+
+                }
+                else if(e.target.id === "dateOfBirth")
+                {
+                    isvalid = validateDate(e.target.value)
+                    if(isvalid == false)
+                    {
+                        setInputError(inputElement, "Please Enter valid date of birth"); 
+                    }
+                }
+                }
+                catch(e2){
+                    setInputError(inputElement, e2);
+            
+                }
         });
-        // inputElement.addEventListener("blur", e => {
-            
-            
-                    
-        // });
-
-
-
-
-
-
-
-
-
-
-
+        
 
 
         inputElement.addEventListener("input", e => {
