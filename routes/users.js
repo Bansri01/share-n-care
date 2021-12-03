@@ -8,6 +8,8 @@ const ObjectID  = require('mongodb').ObjectId;
 const router = express.Router();
 const countries = require("countries-list");
 
+
+//-------------for Storing Images------------------//
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
       cb(null, "public/images/users")
@@ -17,8 +19,13 @@ var storage = multer.diskStorage({
     }
 })
 
-const upload = multer({ storage: storage })
 
+const upload = multer({ storage: storage })
+//-----------End of storing images-----------------------
+
+
+
+//-------------Post Profile-----------------------------
 router.post('/profile', upload.single('profile'), (req, res) => {
     try {
       res.send(req.file);
@@ -26,23 +33,33 @@ router.post('/profile', upload.single('profile'), (req, res) => {
       res.send(400);
     }
   });
+//-------------End Post Profile----------------------//
 
+
+//------------Get Profile-------------------------//
 router.get('/profile', async (req, res) => {
     // const userdata = await getbyUsername(req.session.user)
     const userdata = await usersData.getByUsername("user07")
     res.render("users/userProfile", {profilePicture: userdata.profilePicture, firstname: userdata.firstName, lastname: userdata.lastName, biography: userdata.biography, gender: userdata.gender, phoneNumber: userdata.phoneNumber, emailAddress: userdata.emailAddress, location: userdata.country})
 })
+//--------------End of get Profile----------------//
 
-router.get('/',async (req, res) => {
-    res.render('users/Login');
-  });
+
+// router.get('/',async (req, res) => {
+//     res.render('users/Login');
+//   });
   
-
+//----------------function to validate Email---------------------------//
 function validateEmail(email) {
     const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(String(email).toLowerCase());
 }
+//---------------End of function to validate Email----------------------//
 
+
+
+
+//--------------function to Validate Date----------------//
 function validateDate(date) {
         let datePattern = /^\d{4}-\d{2}-\d{2}$/ 
             if(!date.match(datePattern)) throw `dateOfReview should be in format yyyy-mm-dd`
@@ -81,10 +98,12 @@ function validateDate(date) {
         
     }
 
+//--------------End of Function to Validate Date----------------//
 
 
 
 
+//------------get Landing Page--------------------//
 router.get('/',async (req, res) => {
     // if (req.session.user) {
     //     return res.redirect('/private');
@@ -94,10 +113,11 @@ router.get('/',async (req, res) => {
       //}
     
   });
+//-----------End of get landing Page---------------//
 
 
 
-
+//-------------get SignUp Page-------------------//
 router. get('/signup',async (req, res) => {
     if (req.session.user) {
         return res.redirect('/private');
@@ -105,15 +125,11 @@ router. get('/signup',async (req, res) => {
         res.render("users/signup",{title: "SIGNUP"});
       }     
   });
+//------------end of Get SignUp page--------------//
 
 
-
+//-------------Post Sign Up--------------------//
   router.post('/signup', upload.single('profilePicture'), async (req, res) => {
-    // if (!req.file.filename)  {
-    //     res.status(400).render('users/signup',{ title:"SignUp",error: 'You must provide Profile picture'});
-    //     return;
-    // }
-
     if (!req.file)  {
         res.status(400).render('users/signup',{ title:"SignUp",error: 'You must provide Profile picture'});
         return;
@@ -329,15 +345,24 @@ router. get('/signup',async (req, res) => {
     }
   })
 
+//------------End of Post Signup------------------------//
+
+
+
+//--------------Get Login---------------------//
+
   router.get('/login',async (req, res) => {
     if (req.session.user) {
         return res.redirect('/private');
       } else {
         res.render("users/login",{title: "LOGIN"});
       }
-  });      
+  });  
+  
+  //--------------End of Get Login----------------------//
   
   
+  //--------------Post Login---------------------------//
   router.post('/login',async (req, res) => {
     if (!req.body.username )  {
         res.status(400).render('users/Login',{ title:"login",error: 'You must provide Username'});
@@ -394,21 +419,26 @@ router. get('/signup',async (req, res) => {
     }
 });
 
+//-------------End of Post Login---------------------//
 
-  router.get('/private',async (req, res) => {
+
+//   router.get('/private',async (req, res) => {
     
-    if (req.session.user) {
-        return res.render("users/private",{title:"Private", username: req.session.user})
-      }
-    });
+//     if (req.session.user) {
+//         return res.render("users/private",{title:"Private", username: req.session.user})
+//       }
+//     });
 
 
+//--------------------Get Logout---------------------//
   router.get('/logout',async (req, res) => {
     req.session.destroy();
     return res.render("users/logout",{title:"Logout"})
     
 
 });
+
+//--------------------End of Get Logout------------------//
 
 
 module.exports = router;

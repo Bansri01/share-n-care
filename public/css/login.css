@@ -15,6 +15,8 @@ body {
     font-size: 18px;
     background: url(./background.jpeg);
     background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 .container {
@@ -158,9 +160,9 @@ body {
 .form__link:hover {
     text-decoration: underline;
 }
-ul li{
+/* ul li{
     display: inline;
-}
+} */
 .centertext{
     text-align: center;
     width: auto;

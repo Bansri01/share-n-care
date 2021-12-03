@@ -6,19 +6,26 @@
 {{/if}}
 
 {{#if description }}
+<dl>
+    <dt>
 <h2>
-    {{description}}
+    Overview
 </h2>
+</dt>
+<dd>
+     {{description}}
+</dd>
+</dl>
 {{/if}}
 
 
 {{#if symptoms }}
 <h2>
-    symptoms:
+    Symptoms:
 </h2>
 <ul class="symptoms">
     {{#each symptoms}}
-    <li><span>{{name}}</span></li>
+    <li><span>{{this}}</span></li>
     {{/each}} 
   </ul>
 {{/if}}
@@ -30,7 +37,7 @@
 </h2>
 <ul class="suggestions">
     {{#each suggestions}}
-    <li><span>{{name}}</span></li>
+    <li><span>{{this}}</span></li>
     {{/each}} 
   </ul>
 {{/if}}
@@ -42,7 +49,7 @@
 </h2>
 <ul class="medicines">
     {{#each medicines}}
-    <li><span>{{name}}</span></li>
+    <li><span>{{this}}</span></li>
     {{/each}} 
   </ul>
 {{/if}}
