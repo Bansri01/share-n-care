@@ -353,7 +353,7 @@ router. get('/signup',async (req, res) => {
 
   router.get('/login',async (req, res) => {
     if (req.session.user) {
-        return res.redirect('/private');
+        return res.redirect('/profile');
       } else {
         res.render("users/login",{title: "LOGIN"});
       }
@@ -410,7 +410,7 @@ router. get('/signup',async (req, res) => {
         const postLogIn = await usersData.checkUser(req.body.username,req.body.password);
       if(postLogIn.authenticated){
           req.session.user = req.body.username;
-          return res.redirect("/private");
+          return res.redirect("/profile");
           
       }
     }
