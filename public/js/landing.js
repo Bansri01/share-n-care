@@ -23,6 +23,12 @@
          $.ajax(requestConfig).then(function(responseMessage) {
       console.log(responseMessage)
       disease_list=responseMessage
+
+      if(responseMessage.length==0)
+      {
+        $('#error').text("Sorry No Match Found.Please try again!").show()
+      }
+      else{
       let html=`<ul>`
       for(i=0;i<disease_list.length;i++)
       {
@@ -32,6 +38,7 @@
       html = html + `</ul>`
       resultContainer.append(html);
       resultContainer.show();
+    }
     });
 
     }
