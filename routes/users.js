@@ -109,10 +109,16 @@ router. get('/signup',async (req, res) => {
 
 
   router.post('/signup', upload.single('profilePicture'), async (req, res) => {
-    if (!req.file.filename)  {
+    // if (!req.file.filename)  {
+    //     res.status(400).render('users/signup',{ title:"SignUp",error: 'You must provide Profile picture'});
+    //     return;
+    // }
+
+    if (!req.file)  {
         res.status(400).render('users/signup',{ title:"SignUp",error: 'You must provide Profile picture'});
         return;
-      }
+    }
+
 
     if (!req.body.firstName )  {
         res.status(400).render('users/signup',{ title:"SignUp",error: 'You must provide First Name'});
