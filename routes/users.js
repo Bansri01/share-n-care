@@ -133,7 +133,8 @@ router. get('/signup',async (req, res) => {
     if (!req.file)  {
         res.status(400).render('users/signup',{ title:"SignUp",error: 'You must provide Profile picture'});
         return;
-      }
+    }
+
 
     if (!req.body.firstName )  {
         res.status(400).render('users/signup',{ title:"SignUp",error: 'You must provide First Name'});
@@ -352,7 +353,7 @@ router. get('/signup',async (req, res) => {
 
   router.get('/login',async (req, res) => {
     if (req.session.user) {
-        return res.redirect('/private');
+        return res.redirect('/profile');
       } else {
         res.render("users/login",{title: "LOGIN"});
       }
@@ -409,7 +410,7 @@ router. get('/signup',async (req, res) => {
         const postLogIn = await usersData.checkUser(req.body.username,req.body.password);
       if(postLogIn.authenticated){
           req.session.user = req.body.username;
-          return res.redirect("/private");
+          return res.redirect("/profile");
           
       }
     }

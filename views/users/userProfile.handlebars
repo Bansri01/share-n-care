@@ -1,19 +1,16 @@
-<main>
-    <div>
-        {{#if profilePicture}}
-            <img class="profile-picture rounded-circle" src="../public/images/users/{{profilePicture}}" alt="{{firstName}}" />
-        {{else}}
-            <img class="profile-picture rounded-circle" src="../public/images/users/avatar-profile.jpeg" alt="{{firstName}}" />
-        {{/if}}
-        <h1>{{firstname}} {{lastname}}</h1>
-        <button class="edit-btn" onclick="/updateUser">Edit</button>
-    </div>
-    <div>
-        <div class = "biodiv"></div>
-            <p class= "bio">{{biography}}</p>
-        </div>
-        <p class= "gender">Gender: {{gender}}</p>
-        <p class= "contact">Contact: {{phoneNumber}} <br> {{emailAddress}}</p>
-        <p class= "location">Location: {{location}} </p>
-    </div>
-</main>
+<link href="/public/css/profile.css" rel="stylesheet">
+<div class="card-container">
+	{{#if profilePicture}}
+        <img class="round" src="../public/images/users/{{profilePicture}}" alt="{{firstName}}" />
+    {{else}}
+        <img class="round" src="../public/images/users/avatar-profile.jpeg" alt="{{firstName}}" />
+    {{/if}}
+	<h1>{{firstname}} {{lastname}}</h1>
+	<p>{{location}}</p>
+	<p>{{biography}}</p>
+    <p class= "gender">Gender: {{gender}}</p>
+    <p class= "contact">Contact: {{phoneNumber}} <br> {{emailAddress}}</p>
+    <button class="btn" onclick="/updateUser">Edit Profile</button>
+    <br/>
+    <br/>
+</div>
