@@ -160,9 +160,9 @@ body {
 .form__link:hover {
     text-decoration: underline;
 }
-ul li{
+/* ul li{
     display: inline;
-}
+} */
 .centertext{
     text-align: center;
     width: auto;
