@@ -247,8 +247,42 @@ const searchDisease = async function searchDisease(searchTerm)
 }   
 
 
+const getDiseaseById = async function getDiseaseById(id)
+{
+    if (arguments.length!=1)
+    {
+        throw {msg:`The Number of Arguements should be only 1`,err:400};
+    }
+
+    if (id == null || id == undefined) {
+        throw {msg:`There is no Input in id Parameter. It cannot be null`,err:400};
+    }
+
+    if (typeof id !== "string") {
+        throw {msg:`The ID Parameter should be string`,err:400};
+      }
+
+    if (checkSpace(id)) {
+        throw {msg:`id field cannot be just empty spaces`,err:400};
+      }
+
+      try {
+        var parsedId = ObjectId(id);
+      } catch (e) {
+        throw {msg:`Input ID should be valid mongodb Object ID`,err:400};
+      }
+
+      let diseaseCollection = await diseases();
+      let disease = await diseaseCollection.findOne({ _id: parsedId });
+      if (disease === null) throw {msg:"No Disease with that id is available",err:404};
+
+      return disease;
+
+}
+
 module.exports={
     createDisease,
-    searchDisease
+    searchDisease,
+    getDiseaseById
 
 }
