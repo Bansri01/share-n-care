@@ -26,7 +26,7 @@ async function main() {
       "rifampin (RIF)",
       "ethambutol (EMB)",
       "pyrazinamide (PZA)"],
-    ["TB","Tuberculosis","Tuber","Active TB Disease","Miliary TB","Latent TB Infection","Phthisis"," scrofula","Active Tuberculosis","struma","pulmonary","Miliary Tuberculosis","Latent Tuberculosis"]
+    ["TB","Tuberculosis","Tuber","Active TB Disease","Miliary TB","Latent TB Infection","Phthisis"," scrofula","Active Tuberculosis","struma","pulmonary","Miliary Tuberculosis","Latent Tuberculosis","cough"]
 
       );
       console.log("Done seeding database");
@@ -118,7 +118,7 @@ async function main() {
       "Keppra",
       "Frisium",
     "Rivotril"],
-    ["Epilepsy","seizures","Convulsive seizures","convolutions","convolution","seizure","convulsion","stroke","attack","fit","collapse","paroxysm","tremor","contortion"]
+    ["Epilepsy","seizures","Convulsive seizures","convolutions","convolution","seizure","convulsion","stroke","attack","fit","collapse","paroxysm","tremor","contortion","stress"]
 
       );
       console.log("Done seeding database");
@@ -155,7 +155,9 @@ async function main() {
       "Biological therapy",
       "Targeted therapy",
     "Cryotherapy"],
-    ["skin cancer","cancer","skin","Basal cell carcinoma.","carcinoma","Melanoma","Squamous cell carcinoma"]
+    ["skin cancer","cancer","skin","Basal cell carcinoma.","carcinoma",
+    "Melanoma","Squamous cell carcinoma","Allergy","Skin Allergy","Germs",
+    "skin rashes","rashes","dark spots","spots","itching"]
 
       );
       console.log("Done seeding database");
@@ -199,6 +201,64 @@ async function main() {
   } catch (e) {
     console.log(e);
   }
+
+   try {
+    let newDisease = await dis.createDisease(
+      "Hypertension",
+      "High blood pressure (hypertension) is a common condition in which the long-term force of the blood against your artery walls is high enough that it may eventually cause health problems, such as heart disease.",
+       ["Most people with high blood pressure have no signs or symptoms, even if blood pressure readings reach dangerously high levels.",
+        "A few people with high blood pressure may have headaches, shortness of breath or nosebleeds",
+        "The above signs and symptoms aren't specific and usually don't occur until high blood pressure has reached a severe or life-threatening stage."],
+      
+      ["Current guidelines recommend that all people, including those with hypertension, engage in at least 150 minutesTrusted Source of moderate-intensity, aerobic exercise every week, or 75 minutes per week of high-intensity exercise.",
+        "Avoiding or learning to manage stress can help a person control blood pressure.",
+       "Reducing salt intake, moderating alcohol consumption, and eating more fruits and vegetables and less fat."
+      ],
+    ["Thiazides",
+      "Chlorthalidone",
+      "indapamide",
+      "beta-blockers",
+    "alpha-blockers",
+  "vasodilators",
+"angiotensin-converting enzyme (ACE) inhibitors",
+"angiotensin receptor blockers"
+],
+    ["hypertension","high blood pressure","stress","pressure","tension","Hyper","blood Pressure","sleep","no sleep"]
+
+      );
+      console.log("Done seeding database");
+  } catch (e) {
+    console.log(e);
+  }
+
+
+  try {
+    let newDisease = await dis.createDisease(
+      "",
+      "",
+       ["","","","","","",""],
+      
+      ["",
+        "",
+       "",
+       "",
+       "",
+       ""
+      ],
+    ["",
+      "",
+      "",
+      ""],
+    ["","","","","",""]
+
+      );
+      console.log("Done seeding database");
+  } catch (e) {
+    console.log(e);
+  }
+
+
+
 
   // try {
   //   let newDisease = await dis.createDisease(
