@@ -209,6 +209,11 @@ select {
     color: rgb(120, 119, 119);
 }
 
+.show_name{
+    color:white;
+    width: 100%
+}
+
 
 /* Add a black background color to the top navigation */
 /* .topnav {
