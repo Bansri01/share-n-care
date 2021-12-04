@@ -105,12 +105,13 @@ function validateDate(date) {
 
 //------------get Landing Page--------------------//
 router.get('/',async (req, res) => {
-    // if (req.session.user) {
-    //     return res.redirect('/private');
-    //   } else {
+    if (req.session.user) {
+        res.render('homepage/Landingpage',{title: "Share and Care",name:req.session.user});
+        console.log("I am in")
+      } else {
         res.render('homepage/Landingpage',{title: "Share and Care"});
        
-      //}
+      }
     
   });
 //-----------End of get landing Page---------------//
@@ -120,7 +121,7 @@ router.get('/',async (req, res) => {
 //-------------get SignUp Page-------------------//
 router. get('/signup',async (req, res) => {
     if (req.session.user) {
-        return res.redirect('/private');
+        return res.redirect('/');
       } else {
         res.render("users/signup",{title: "SIGNUP"});
       }     
@@ -336,9 +337,13 @@ router. get('/signup',async (req, res) => {
         user_data.profilePicture = req.file.filename;
         const { profilePicture, firstName, lastName, username, emailAddress, password, phoneNumber, country, biography, gender, userType, dateOfBirth} = user_data;
         const postSignup = await usersData.createUser(profilePicture, firstName, lastName, username, emailAddress, password, phoneNumber, country, biography, gender, userType, dateOfBirth);
-            if(postSignup){
+       
+        if(postSignup){
+            req.session.user= username
                 return res.redirect('/');
             }
+
+            
         }
     catch(e){
         res.status(e.error || 500).render('users/signup',{title:"SignUp",error: e.message ||`Internal Server Error`})
@@ -353,7 +358,7 @@ router. get('/signup',async (req, res) => {
 
   router.get('/login',async (req, res) => {
     if (req.session.user) {
-        return res.redirect('/profile');
+        return res.redirect('/');
       } else {
         res.render("users/login",{title: "LOGIN"});
       }
@@ -410,13 +415,15 @@ router. get('/signup',async (req, res) => {
         const postLogIn = await usersData.checkUser(req.body.username,req.body.password);
       if(postLogIn.authenticated){
           req.session.user = req.body.username;
-          return res.redirect("/profile");
+          return res.redirect("/");
           
       }
     }
     catch(e){
         res.status(e.error || 500).render('users/login',{title:"login",error: e.message ||`Internal Server Error`})
     }
+
+
 });
 
 //-------------End of Post Login---------------------//
