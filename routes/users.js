@@ -339,8 +339,7 @@ router. get('/signup',async (req, res) => {
         const postSignup = await usersData.createUser(profilePicture, firstName, lastName, username, emailAddress, password, phoneNumber, country, biography, gender, userType, dateOfBirth);
        
         if(postSignup){
-            req.session.user= username
-                return res.redirect('/');
+                return res.redirect('/login');
             }
 
             
