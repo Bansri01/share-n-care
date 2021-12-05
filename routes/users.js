@@ -132,200 +132,200 @@ router. get('/signup',async (req, res) => {
 //-------------Post Sign Up--------------------//
   router.post('/signup', upload.single('profilePicture'), async (req, res) => {
     if (!req.file)  {
-        res.status(400).render('users/signup',{ title:"SignUp",error: 'You must provide Profile picture'});
+        res.status(400).render('users/signup',{ title:"signUp",error: 'You must provide Profile picture'});
         return;
     }
 
 
     if (!req.body.firstName )  {
-        res.status(400).render('users/signup',{ title:"SignUp",error: 'You must provide First Name'});
+        res.status(400).render('users/signup',{ title:"signUp",error: 'You must provide First Name'});
         return;
       }
     if (!req.body.lastName )  {
-        res.status(400).render('users/signup',{ title:"SignUp",error: 'You must provide profile Last Name'});
+        res.status(400).render('users/signup',{ title:"signUp",error: 'You must provide profile Last Name'});
         return;
       }
     if (!req.body.username )  {
-        res.status(400).render('users/signup',{ title:"SignUp",error: 'You must provide profile Username'});
+        res.status(400).render('users/signup',{ title:"signUp",error: 'You must provide profile Username'});
         return;
       }  
     if (!req.body.emailAddress )  {
-        res.status(400).render('users/signup',{ title:"SignUp",error: 'You must provide profile Email Address'});
+        res.status(400).render('users/signup',{ title:"signUp",error: 'You must provide profile Email Address'});
         return;
       } 
     if (!req.body.password )  {
-        res.status(400).render('users/signup',{ title:"SignUp",error: 'You must provide profile Password'});
+        res.status(400).render('users/signup',{ title:"signUp",error: 'You must provide profile Password'});
         return;
       } 
     if (!req.body.phoneNumber )  {
-        res.status(400).render('users/signup',{ title:"SignUp",error: 'You must provide profile Phone Number'});
+        res.status(400).render('users/signup',{ title:"signUp",error: 'You must provide profile Phone Number'});
         return;
       } 
     if (!req.body.country )  {
-        res.status(400).render('users/signup',{ title:"SignUp",error: 'You must provide profile Country'});
+        res.status(400).render('users/signup',{ title:"signUp",error: 'You must provide profile Country'});
         return;
     }
     if (!req.body.biography )  {
-        res.status(400).render('users/signup',{ title:"SignUp",error: 'You must provide profile Biography'});
+        res.status(400).render('users/signup',{ title:"signUp",error: 'You must provide profile Biography'});
         return;
     }
     if (!req.body.gender)  {
-        res.status(400).render('users/signup',{ title:"SignUp",error: 'You must provide Gender'});
+        res.status(400).render('users/signup',{ title:"signUp",error: 'You must provide Gender'});
         return;
     }
     if (!req.body.userType)  {
-        res.status(400).render('users/signup',{ title:"SignUp",error: 'You must provide UserType'});
+        res.status(400).render('users/signup',{ title:"signUp",error: 'You must provide UserType'});
         return;
     }
     if (!req.body.dateOfBirth)  {
-        res.status(400).render('users/signup',{ title:"SignUp",error: 'You must provide Date of Birth'});
+        res.status(400).render('users/signup',{ title:"signUp",error: 'You must provide Date of Birth'});
         return;
     }
     if(typeof req.body.firstName !== "string") {
-        res.status(400).render('users/signup',{ title:"SignUp",error: 'Firstname must be string'});
+        res.status(400).render('users/signup',{ title:"signUp",error: 'Firstname must be string'});
         return; 
     }
     if(typeof req.body.lastName !== "string" ) {
-        res.status(400).render('users/signup',{ title:"SignUp",error: 'Lastname must be string'});
+        res.status(400).render('users/signup',{ title:"signUp",error: 'Lastname must be string'});
         return; 
     }
     if(typeof req.body.emailAddress !== "string"){
-        res.status(400).render('users/signup',{ title:"SignUp",error: 'EmailAddress must be string'});
+        res.status(400).render('users/signup',{ title:"signUp",error: 'EmailAddress must be string'});
         return; 
     }
     if(typeof req.body.password !== "string"){
-        res.status(400).render('users/signup',{ title:"SignUp",error: 'Password must be string'});
+        res.status(400).render('users/signup',{ title:"signUp",error: 'Password must be string'});
         return;   
     }
     if(typeof req.body.country !== "string"){
-        res.status(400).render('users/signup',{ title:"SignUp",error: 'Country must be string'});
+        res.status(400).render('users/signup',{ title:"signUp",error: 'Country must be string'});
         return; 
     }
     if(typeof req.body.biography !== "string"){
-        res.status(400).render('users/signup',{ title:"SignUp",error: 'Biography must be string'});
+        res.status(400).render('users/signup',{ title:"signUp",error: 'Biography must be string'});
         return;
     }
     if(typeof req.body.gender !== "string"){
-        res.status(400).render('users/signup',{ title:"SignUp",error: 'Gender must be string'});
+        res.status(400).render('users/signup',{ title:"signUp",error: 'Gender must be string'});
         return; 
     }
     if(typeof req.body.userType !== "string"){
-        res.status(400).render('users/signup',{ title:"SignUp",error: 'UserType must be string'});
+        res.status(400).render('users/signup',{ title:"signUp",error: 'UserType must be string'});
         return; 
     }
     if(typeof req.body.phoneNumber !== "string"){
-        res.status(400).render('users/signup',{ title:"SignUp",error: 'PhoneNumber must be string'});
+        res.status(400).render('users/signup',{ title:"signUp",error: 'PhoneNumber must be string'});
         return; 
     }
     if(typeof req.body.dateOfBirth !== "string"){
-        res.status(400).render('users/signup',{ title:"SignUp",error: 'DateOfBirth must be string'});
+        res.status(400).render('users/signup',{ title:"signUp",error: 'DateOfBirth must be string'});
         return; 
     }
     if(typeof req.body.username !== "string"){
-        res.status(400).render('users/signup',{ title:"SignUp",error: 'UserName must be string'});
+        res.status(400).render('users/signup',{ title:"signUp",error: 'UserName must be string'});
         return; 
     }
 
     if (/^ *$/.test(req.body.firstName)){
-        res.status(400).render('users/signup',{ title:"SignUp",error: 'Firstname cannot be empty'});
+        res.status(400).render('users/signup',{ title:"signUp",error: 'Firstname cannot be empty'});
         return; 
     }
     if (/^ *$/.test(req.body.lastName)){
-        res.status(400).render('users/signup',{ title:"SignUp",error: 'Lastname cannot be empty'});
+        res.status(400).render('users/signup',{ title:"signUp",error: 'Lastname cannot be empty'});
         return; 
     }
     if (/^ *$/.test(req.body.emailAddress)){
-        res.status(400).render('users/signup',{ title:"SignUp",error: 'EmailAddress cannot be empty'});
+        res.status(400).render('users/signup',{ title:"signUp",error: 'EmailAddress cannot be empty'});
         return;
     }
     if (/^ *$/.test(req.body.password)){
-        res.status(400).render('users/signup',{ title:"SignUp",error: 'Password cannot be empty'});
+        res.status(400).render('users/signup',{ title:"signUp",error: 'Password cannot be empty'});
         return; 
     }
     if (/^ *$/.test(req.body.country)){
-        res.status(400).render('users/signup',{ title:"SignUp",error: 'Country cannot be empty'});
+        res.status(400).render('users/signup',{ title:"signUp",error: 'Country cannot be empty'});
         return;
     }
     if (/^ *$/.test(req.body.biography)){
-        res.status(400).render('users/signup',{ title:"SignUp",error: 'Biography cannot be empty'});
+        res.status(400).render('users/signup',{ title:"signUp",error: 'Biography cannot be empty'});
         return;
     }
     if (/^ *$/.test(req.body.gender)){
-        res.status(400).render('users/signup',{ title:"SignUp",error: 'Gender cannot be empty'});
+        res.status(400).render('users/signup',{ title:"signUp",error: 'Gender cannot be empty'});
         return;
     }
     if (/^ *$/.test(req.body.userType)){
-        res.status(400).render('users/signup',{ title:"SignUp",error: 'UserType cannot be empty'});
+        res.status(400).render('users/signup',{ title:"signUp",error: 'UserType cannot be empty'});
         return;
     }
     if (/^ *$/.test(req.body.phoneNumber)){
-        res.status(400).render('users/signup',{ title:"SignUp",error: 'PhoneNumber cannot be empty'});
+        res.status(400).render('users/signup',{ title:"signUp",error: 'PhoneNumber cannot be empty'});
         return;
     }
     if (/^ *$/.test(req.body.dateOfBirth)){
-        res.status(400).render('users/signup',{ title:"SignUp",error: 'DateOfBirth cannot be empty'});
+        res.status(400).render('users/signup',{ title:"signUp",error: 'DateOfBirth cannot be empty'});
         return;
     }
     if (/^ *$/.test(req.body.username)){
-        res.status(400).render('users/signup',{ title:"SignUp",error: 'Username cannot be empty'});
+        res.status(400).render('users/signup',{ title:"signUp",error: 'Username cannot be empty'});
         return;
     }
 
 
     if(/[^A-Za-z0-9]/g.test(req.body.username)){
-        res.status(400).render('users/signup',{ title:"SignUp",error: 'Username should only have numbers and alphabets'});
+        res.status(400).render('users/signup',{ title:"signUp",error: 'Username should only have numbers and alphabets'});
         return;
     }
 
     if(req.body.username.length < 4){
-        res.status(400).render('users/signup',{ title:"SignUp",error: 'Username should have atleast 4 characters'});
+        res.status(400).render('users/signup',{ title:"signUp",error: 'Username should have atleast 4 characters'});
         return;
     }
     
     if(!validateEmail(req.body.emailAddress)){
-        res.status(400).render('users/signup',{ title:"SignUp",error: 'Please Enter valid Email Address'});
+        res.status(400).render('users/signup',{ title:"signUp",error: 'Please Enter valid Email Address'});
         return;
     }
 
     if(/\s/g.test(req.body.password)){
-        res.status(400).render('users/signup',{ title:"SignUp",error: 'password cannot have spaces'});
+        res.status(400).render('users/signup',{ title:"signUp",error: 'password cannot have spaces'});
         return;  
     }
     if(req.body.password.length < 8){
-        res.status(400).render('users/signup',{ title:"SignUp",error: 'Password should be atleast 8 characters long'});
+        res.status(400).render('users/signup',{ title:"signUp",error: 'Password should be atleast 8 characters long'});
         return; 
     }
     let phoneRe = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4}$/im;
     if(!req.body.phoneNumber.match(phoneRe)){
-        res.status(400).render('users/signup',{ title:"SignUp",error: 'Phone number must be of correct format and all numbers'});
+        res.status(400).render('users/signup',{ title:"signUp",error: 'Phone number must be of correct format and all numbers'});
         return
     }
     const countryCodes = Object.keys(countries.countries);
     const countryNames = countryCodes.map(code => countries.countries[code].name);
     if (!countryNames.includes(req.body.country)){
-        res.status(400).render('users/signup',{ title:"SignUp",error: 'Please enter a valid country'});
+        res.status(400).render('users/signup',{ title:"signUp",error: 'Please enter a valid country'});
         return
     }
     let gen = ["Female", "Male", "other"]
     if(!gen.includes(req.body.gender)){
-        res.status(400).render('users/signup',{ title:"SignUp",error: 'Please enter valid gender'});
+        res.status(400).render('users/signup',{ title:"signUp",error: 'Please enter valid gender'});
         return
     }
 
 
     if (req.body.userType.trim() != "Patient" && req.body.userType.trim() != "Doctor"){
-        res.status(400).render('users/signup',{ title:"SignUp",error: 'Usertype must be a patient or a doctor'});
+        res.status(400).render('users/signup',{ title:"signUp",error: 'Usertype must be a patient or a doctor'});
         return  
     }
     
      try{ 
     if (!validateDate(req.body.dateOfBirth)){
-        res.status(400).render('users/signup',{ title:"SignUp",error: 'Please Enter valid date of birth'});
+        res.status(400).render('users/signup',{ title:"signUp",error: 'Please Enter valid date of birth'});
         return
     }
     }
     catch(e){
-        res.status(400).render('users/signup',{ title:"SignUp",error: e});
+        res.status(400).render('users/signup',{ title:"signUp",error: e});
         return
 
     }
@@ -346,7 +346,7 @@ router. get('/signup',async (req, res) => {
             
         }
     catch(e){
-        res.status(e.error || 500).render('users/signup',{title:"SignUp",error: e.message ||`Internal Server Error`})
+        res.status(e.error || 500).render('users/signup',{title:"signUp",error: e.message ||`Internal Server Error`})
     }
   })
 
