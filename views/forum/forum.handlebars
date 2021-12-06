@@ -9,9 +9,13 @@
     <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="search-submit">Search</button>
   </form>
 </nav>
+{{#if hasErrors}}
+    <p class="errors">{{errors}}</p>
+{{/if}}
 
 <h1 class="pageTitle">{{forumName}}</h1>
 
+    {{#if name}}
   <form id="addNewPost" method="POST" action="/forum/{{getDiseaseId}}">
         <label for="post-title">Post title</label>
         </br>
@@ -23,6 +27,7 @@
         </br>
         <button type="submit" class="btn btn-primary btn-lg btn-block" name="post-submit">Post</button>
     </form>
+    {{/if}}
 
     {{#if postList}}
         <ul class = "searchPosts">

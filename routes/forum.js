@@ -4,13 +4,32 @@ const data = require('../data');
 const postData = data.posts;
 const commentData = data.comments;
 const diseaseData = data.diseases;
+const userData = data.users;
 
 router.get('/:id', async (req, res) => {
+
+    if(req.session.user)
+    {
+      try {
+        const postList = await postData.getAllPostsOfForum(req.params.id);
+        const getDisease = await diseaseData.getDiseaseById(req.params.id);
+        res.render('forum/forum', {
+          title: getDisease.diseaseName + " Forum",
+          name:req.session.user,
+          forumName: getDisease.diseaseName + " Forum",
+          getDiseaseId: getDisease._id.toString(),
+          postList: postList          
+        });
+      } catch (e) {
+        res.status(500).json({ error: e });
+      }
+    }
+    else{
     try {
       const postList = await postData.getAllPostsOfForum(req.params.id);
       const getDisease = await diseaseData.getDiseaseById(req.params.id);
       res.render('forum/forum', {
-        title: getDisease.diseaseName + " Forum",
+        title: getDisease.diseaseName + " Forum",   
         forumName: getDisease.diseaseName + " Forum",
         getDiseaseId: getDisease._id.toString(),
         postList: postList
@@ -18,9 +37,12 @@ router.get('/:id', async (req, res) => {
     } catch (e) {
       res.status(500).json({ error: e });
     }
+  }
 });
 
 router.get('/post/:id', async (req, res) => {
+    const userInfo = await userData.getByUsername("user01");
+    req.session.user = userInfo.username;
     try {
       const getPost = await postData.getPostById(req.params.id);
       const getComments = await commentData.getAllCommentsOfPost(req.params.id);
@@ -29,6 +51,7 @@ router.get('/post/:id', async (req, res) => {
       //const getCommentLikes = await commentData.checkIsLike(req.params.id, "61a3dedad8226a1572add66f");
       res.render('forum/post', {
         title: getPost.title,
+        name: req.session.user = userInfo.username,
         getPost: getPost,
         getComments: getComments,
         // likes: getPostLikes.likes,
@@ -42,6 +65,28 @@ router.get('/post/:id', async (req, res) => {
 
 router.post('/search', async (req, res) => {
   const postName = req.body.postName;
+  // if (!postName) {
+  // res.status(400).json({ error: "You must provide the post name for search!" });
+  //   return;
+  // }
+
+  if(!postName) {
+    res.render('forum/search', {
+      errors: "You need provide the post name for search",
+      hasErrors: true
+    });
+    return;
+  }
+
+ 
+  if(postName.match(/^\s+$/g) || postName === "") {
+    res.render('forum/search', {
+      errors: "You need provide the post name for search",
+      hasErrors: true
+    });
+    return;
+  }
+
   try {
     const searchPost= await postData.getPostsbyName(postName);
     res.render('forum/search', {
@@ -55,6 +100,9 @@ router.post('/search', async (req, res) => {
 });
 
 router.post('/:id', async (req, res) => {
+  if (!req.session.user) {
+
+  }
     const diseaseId = req.params.id;
     const title = req.body.postTitle;
     const content = req.body.postContent;
@@ -68,6 +116,9 @@ router.post('/:id', async (req, res) => {
 });
 
 router.post('/post/:id', async (req, res) => {
+  if (!req.session.user) {
+
+  }
   const postId = req.params.id;
   const content = req.body.commentContent;
   try {
@@ -80,6 +131,9 @@ router.post('/post/:id', async (req, res) => {
 
 
 router.post('/delete/post/:id', async (req, res) => {
+  if (!req.session.user) {
+
+  }
     if(!req.params.id) {
       res.status(400).json({ error: "You must Supply an ID to delete." });
       return;
