@@ -38,9 +38,13 @@ router.post('/profile', upload.single('profile'), (req, res) => {
 
 //------------Get Profile-------------------------//
 router.get('/profile', async (req, res) => {
+    try{
     // const userdata = await getbyUsername(req.session.user)
-    const userdata = await usersData.getByUsername("user07")
+    const userdata = await usersData.getByUsername("user01")
     res.render("users/userProfile", {profilePicture: userdata.profilePicture, firstname: userdata.firstName, lastname: userdata.lastName, biography: userdata.biography, gender: userdata.gender, phoneNumber: userdata.phoneNumber, emailAddress: userdata.emailAddress, location: userdata.country})
+    }catch(e){
+        res.send(404)
+    }
 })
 //--------------End of get Profile----------------//
 
@@ -63,7 +67,11 @@ function validateEmail(email) {
 function validateDate(date) {
         let datePattern = /^\d{4}-\d{2}-\d{2}$/ 
             if(!date.match(datePattern)) throw `dateOfReview should be in format yyyy-mm-dd`
-            const today = new Date()
+            var today = new Date()
+            var dd = String(today.getDate()).padStart(2, '0');
+            var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+            var yyyy = today.getFullYear();
+            today = mm + '/' + dd + '/' + yyyy;
             let date_arr = date.split("-")
             parsedMonth = Number(date_arr[1])
             parsedDay = Number(date_arr[2])

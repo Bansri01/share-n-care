@@ -13,7 +13,11 @@ function validateEmail(email) {
 function validateDate(date) {
     let datePattern = /^\d{4}-\d{2}-\d{2}$/ 
         if(!date.match(datePattern)) throw `dateOfReview should be in format yyyy-mm-dd`
-        const today = new Date()
+        var today = new Date()
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = today.getFullYear();
+        today = mm + '/' + dd + '/' + yyyy;
         let date_arr = date.split("-")
         parsedMonth = Number(date_arr[1])
         parsedDay = Number(date_arr[2])
@@ -39,7 +43,6 @@ function validateDate(date) {
         let d1 = new Date(Date.parse(date));
         let d2 = new Date(Date.parse(today));
         var diff = d2.getTime() - d1.getTime();
-
         if (diff < 0) {
             return false; 
         } else {
