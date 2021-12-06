@@ -41,7 +41,9 @@ module.exports = {
       userId: userId, 
       username: username,
       content: content,
-      commentTime: commentTime
+      commentTime: commentTime,
+      likes: [],
+      dislikes: []
     };
     
     const commentCollection = await comments();
@@ -138,7 +140,89 @@ module.exports = {
     if(deletionInfo.deletedCount === 0) {
       throw "Could not delete the comment with that id (no exist).";
     }
-    return {commentDeleted: true};
+    return;
   },
 
+  async updateIsLike(commentId, userId, likeStatus) {
+    if(!commentId) throw "You must provide the commentId.";
+    if(!userId) throw "You must provide the userId.";
+    if(typeof commentId !== "string") {
+      throw "The commentId is not a string.";
+    }
+    if(typeof userId !== "string") {
+      throw "The userId is not a string.";
+    }
+    if(commentId.match(/^\s+$/g) || commentId === "") {
+      throw "The commentId is just empty spaces.";
+    }
+    if(userId.match(/^\s+$/g) || userId === "") {
+      throw "The userId is just empty spaces.";
+    }
+    if(commentId.length !== 12 && commentId.length !== 24) throw "The commentId provided is not a valid ObjectId.";
+    if(commentId.length === 24 && !commentId.match(/^[A-Fa-f0-9]+$/g)) throw "The commentId provided is not a valid ObjectId.";
+    if(userId.length !== 12 && userId.length !== 24) throw "The userId provided is not a valid ObjectId.";
+    if(userId.length === 24 && !userId.match(/^[A-Fa-f0-9]+$/g)) throw "The userId provided is not a valid ObjectId.";
+
+    let parsedId = ObjectId(commentId);
+    const commentCollection = await comments();
+    const commentById = await commentCollection.findOne({ _id: parsedId });
+    if(commentById === null) throw "Could not find the comment with that id (no exist).";
+
+    if(likeStatus === 0) {
+      const updatedInfo1 = await commentCollection.updateOne({_id: parsedId}, {$addToSet: {dislikes: userId}});
+      const updatedInfo2 = await commentCollection.updateOne({_id: parsedId}, {$pull: {likes: userId}});
+     
+    } else if(likeStatus === 1) {
+      const updatedInfo1 = await commentCollection.updateOne({_id: parsedId}, {$addToSet: {likes: userId}});
+      const updatedInfo2 = await commentCollection.updateOne({_id: parsedId}, {$pull: {dislikes: userId}});
+    
+    } else {
+      const updatedInfo1 = await commentCollection.updateOne({_id: parsedId},{$pull: {likes: userId}});
+	    const updatedInfo2 = await commentCollection.updateOne({_id: parsedId},{$pull: {dislikes: userId}});
+   
+    }
+    return;
+  },
+
+  async checkIsLike(commentId, userId) {
+    if(!commentId) throw "You must provide the commentId.";
+    if(!userId) throw "You must provide the userId.";
+    if(typeof commentId !== "string") {
+      throw "The commentId is not a string.";
+    }
+    if(typeof userId !== "string") {
+      throw "The userId is not a string.";
+    }
+    if(commentId.match(/^\s+$/g) || commentId === "") {
+      throw "The commentId is just empty spaces.";
+    }
+    if(userId.match(/^\s+$/g) || userId === "") {
+      throw "The userId is just empty spaces.";
+    }
+    if(commentId.length !== 12 && commentId.length !== 24) throw "The commentId provided is not a valid ObjectId.";
+    if(commentId.length === 24 && !commentId.match(/^[A-Fa-f0-9]+$/g)) throw "The commentId provided is not a valid ObjectId.";
+    if(userId.length !== 12 && userId.length !== 24) throw "The userId provided is not a valid ObjectId.";
+    if(userId.length === 24 && !userId.match(/^[A-Fa-f0-9]+$/g)) throw "The userId provided is not a valid ObjectId.";
+
+    let parsedId = ObjectId(commentId);
+    const commentCollection = await comments();
+    const commentById = await commentCollection.findOne({ _id: parsedId });
+    if(commentById === null) throw "Could not find the comment with that id (no exist).";
+
+    if(commentById.likes.length !== 0) {
+      for(let i=0; i < commentById.likes.length; i++) {
+        if(commentById.likes[i] === userId) {
+          return 1;
+        }
+      }
+    }
+    if(commentById.dislikes.length !== 0) {
+      for(let i=0; i < commentById.dislikes.length; i++) {
+        if(commentById.dislikes[i] === userId) {
+          return 0;
+        }
+      }
+    }
+    return 2;
+    }
 };
