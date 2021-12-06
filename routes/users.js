@@ -30,7 +30,7 @@ router.post('/profile', upload.single('profile'), (req, res) => {
     try {
       res.send(req.file);
     }catch(err) {
-      res.send(400);
+      res.sendStatus(400);
     }
   });
 //-------------End Post Profile----------------------//
@@ -39,11 +39,12 @@ router.post('/profile', upload.single('profile'), (req, res) => {
 //------------Get Profile-------------------------//
 router.get('/profile', async (req, res) => {
     try{
+    
     // const userdata = await getbyUsername(req.session.user)
     const userdata = await usersData.getByUsername("user01")
     res.render("users/userProfile", {profilePicture: userdata.profilePicture, firstname: userdata.firstName, lastname: userdata.lastName, biography: userdata.biography, gender: userdata.gender, phoneNumber: userdata.phoneNumber, emailAddress: userdata.emailAddress, location: userdata.country})
     }catch(e){
-        res.send(404)
+        res.sendStatus(404)
     }
 })
 //--------------End of get Profile----------------//
