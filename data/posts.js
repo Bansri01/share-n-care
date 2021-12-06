@@ -55,7 +55,9 @@ module.exports = {
       username: username,
       title: title,
       content: content,
-      postTime: postTime
+      postTime: postTime,
+      likes: [],
+      dislikes: []
     };
     
     const postCollection = await posts();
@@ -160,13 +162,13 @@ module.exports = {
     if(postId.length !== 12 && postId.length !== 24) throw "The postId provided is not a valid ObjectId.";
     if(postId.length === 24 && !postId.match(/^[A-Fa-f0-9]+$/g)) throw "The postId provided is not a valid ObjectId.";
 
-    let commentList = commentData.getAllCommentsOfPost(postId);
+    const commentList = await commentData.getAllCommentsOfPost(postId);
     if(commentList.length !== 0) {
       for(let i = 0; i < commentList.length; i++) {
-        await commentData.deleteComment(commentList[i].commentId);
+        await commentData.deleteComment(commentList[i]._id);
       }
     }
-
+    
     let parsedId = ObjectId(postId);
     const postCollection = await posts();
     const deletionInfo = await postCollection.deleteOne({ _id: parsedId });
@@ -174,5 +176,89 @@ module.exports = {
       throw "Could not delete the post with that id (no exist).";
     }
     return {postDeleted: true};
+  },
+
+  async updateIsLike(postId, userId, likeStatus) {
+    if(!postId) throw "You must provide the postId.";
+    if(!userId) throw "You must provide the userId.";
+    if(typeof postId !== "string") {
+      throw "The postId is not a string.";
+    }
+    if(typeof userId !== "string") {
+      throw "The userId is not a string.";
+    }
+    if(postId.match(/^\s+$/g) || postId === "") {
+      throw "The postId is just empty spaces.";
+    }
+    if(userId.match(/^\s+$/g) || userId === "") {
+      throw "The userId is just empty spaces.";
+    }
+    if(postId.length !== 12 && postId.length !== 24) throw "The postId provided is not a valid ObjectId.";
+    if(postId.length === 24 && !postId.match(/^[A-Fa-f0-9]+$/g)) throw "The postId provided is not a valid ObjectId.";
+    if(userId.length !== 12 && userId.length !== 24) throw "The userId provided is not a valid ObjectId.";
+    if(userId.length === 24 && !userId.match(/^[A-Fa-f0-9]+$/g)) throw "The userId provided is not a valid ObjectId.";
+
+    let parsedId = ObjectId(postId);
+    const postCollection = await posts();
+    const postById = await postCollection.findOne({ _id: parsedId });
+    if(postById === null) throw "Could not find the post with that id (no exist).";
+
+    if(likeStatus === 0) {
+      const updatedInfo1 = await postCollection.updateOne({_id: parsedId}, {$addToSet: {dislikes: userId}});
+      const updatedInfo2 = await postCollection.updateOne({_id: parsedId}, {$pull: {likes: userId}});
+     
+    } else if(likeStatus === 1) {
+      const updatedInfo1 = await postCollection.updateOne({_id: parsedId}, {$addToSet: {likes: userId}});
+      const updatedInfo2 = await postCollection.updateOne({_id: parsedId}, {$pull: {dislikes: userId}});
+    
+    } else {
+      const updatedInfo1 = await postCollection.updateOne({_id: parsedId},{$pull: {likes: userId}});
+	    const updatedInfo2 = await postCollection.updateOne({_id: parsedId},{$pull: {dislikes: userId}});
+   
+    }
+    return;
+  },
+
+  async checkIsLike(postId, userId) {
+    if(!postId) throw "You must provide the postId.";
+    if(!userId) throw "You must provide the userId.";
+    if(typeof postId !== "string") {
+      throw "The postId is not a string.";
+    }
+    if(typeof userId !== "string") {
+      throw "The userId is not a string.";
+    }
+    if(postId.match(/^\s+$/g) || postId === "") {
+      throw "The postId is just empty spaces.";
+    }
+    if(userId.match(/^\s+$/g) || userId === "") {
+      throw "The userId is just empty spaces.";
+    }
+    if(postId.length !== 12 && postId.length !== 24) throw "The postId provided is not a valid ObjectId.";
+    if(postId.length === 24 && !postId.match(/^[A-Fa-f0-9]+$/g)) throw "The postId provided is not a valid ObjectId.";
+    if(userId.length !== 12 && userId.length !== 24) throw "The userId provided is not a valid ObjectId.";
+    if(userId.length === 24 && !userId.match(/^[A-Fa-f0-9]+$/g)) throw "The userId provided is not a valid ObjectId.";
+
+    let parsedId = ObjectId(postId);
+    const postCollection = await posts();
+    const postById = await postCollection.findOne({ _id: parsedId });
+    if(postById === null) throw "Could not find the post with that id (no exist).";
+
+    if(postById.likes.length !== 0) {
+      for(let i=0; i < postById.likes.length; i++) {
+        if(postById.likes[i] === userId) {
+          return 1;
+        }
+      }
+    }
+
+    if(postById.dislikes.length !== 0) {
+      for(let i=0; i < postById.dislikes.length; i++) {
+        if(postById.dislikes[i] === userId) {
+          return 0;
+        }
+      }
+    }
+    return 2;
   }
 };
