@@ -1,5 +1,6 @@
 const userRoutes = require('./users');
 const diseaseRoutes = require('./diseases')
+const forumRoutes = require('./forum')
 const path = require("path")
 
 const constructorMethod = (app) => {
@@ -8,7 +9,8 @@ const constructorMethod = (app) => {
 
   // app.use('/profile',profileRoutes)
 
-  app.use('/disease',diseaseRoutes)
+  app.use('/disease',diseaseRoutes);
+  app.use('/forum',forumRoutes);
 
   app.use('*', (req, res) => {
     res.status(404).sendFile(path.resolve("./static/Error404.html"))

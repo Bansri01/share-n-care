@@ -1,0 +1,28 @@
+<link rel="stylesheet" href= "/public/css/forum.css">
+<script src="/public/js/post.js"></script>
+
+<main>
+    {{!-- <a href="/">Return to homepage</a> --}}
+    <nav class="navbar navbar-light bg-light">
+        <form class="form-inline" id="searchForm" method="POST" action="/forum/search">
+            <label for="search-term">Search Posts</label>
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="search-term" name="postName">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="search-submit">Search</button>
+            </form>
+    </nav>
+    <h1 class="pageTitle">Search Results</h1>
+    {{#if searchPost}}
+        <ul class = "searchPosts">
+            {{#each searchPost}}
+                <li>
+                   <a class="postList" href="/forum/post/{{this._id}}">
+                   <h2>{{this.title}}<h2>
+                   </a>
+                   <p class="content">{{this.content}}</p>
+                   <p class="username">{{this.username}}</p>
+                   <p class="time">{{this.postTime}}</p>
+                </li>
+            {{/each}}
+        </ul>
+    {{/if}}
+</main>
