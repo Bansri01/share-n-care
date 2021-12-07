@@ -142,7 +142,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 setInputError(inputElement, "Firstname cannot be empty");
             }
             if (e.target.id === "lastName" && (/^ *$/.test(e.target.value)))  {
-            setInputError(inputElement, "lastName cannot be empty");
+            setInputError(inputElement, "Lastname cannot be empty");
             } 
             if (e.target.id === "signupUsername" && (/^ *$/.test(e.target.value)))  {
                 setInputError(inputElement, "signupUsername cannot be empty");
@@ -179,7 +179,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 setInputError(inputElement, "Username should have atleast 4 characters");
             }
             if(e.target.id === "emailAddress" && !validateEmail(e.target.value)){
-                setInputError(inputElement, "Please Enter valid Email Address");
+                setInputError(inputElement, "Please enter valid Email Address");
             }
 
 

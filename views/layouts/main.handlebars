@@ -50,6 +50,9 @@
       </div>
       {{else}}
       <div class="d-flex">
+        {{#if diseaseId}}
+        <a class="form-control me-2 btn-outline-success" href="/forum/{{diseaseId}}">Go To Forum</a>
+        {{/if}}
         <a class="form-control me-2 btn-outline-success" href="/login">Login</a>
   
         <a class="form-control me-2 btn-outline-success" href="/signUp">SignUp</a>
