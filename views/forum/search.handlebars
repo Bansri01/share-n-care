@@ -10,6 +10,9 @@
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="search-submit">Search</button>
             </form>
     </nav>
+    {{!-- {{#if hasErrors}}
+        <p class="errors">{{errors}}</p>
+    {{/if}} --}}
     <h1 class="pageTitle">Search Results</h1>
     {{#if searchPost}}
         <ul class = "searchPosts">
@@ -24,5 +27,7 @@
                 </li>
             {{/each}}
         </ul>
-    {{/if}}
+    {{else}}
+        <p class="errors">No matching search results</p>
+    {{/if}}  
 </main>

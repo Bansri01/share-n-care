@@ -141,7 +141,6 @@ function validateDate(date) {
 router.get('/',async (req, res) => {
     if (req.session.user) {
         res.render('homepage/Landingpage',{title: "Share and Care",name:req.session.user});
-        console.log("I am in")
       } else {
         res.render('homepage/Landingpage',{title: "Share and Care"});
        

@@ -1,12 +1,9 @@
 
 
 <body>
-{{!-- <div class="topnav">
-  <a class="active" href="/">Home</a>
-</div> --}}
-
-    <div class="container">
-        <form class="form" id="login" action="/Login" method="post"> 
+    <div class="login_container_out">
+    <div class="login_container">
+        <form class="form" id="login" action="/Login" method="post" enctype="multipart/form-data"> 
             <h1 class="form__title">Login</h1>
             <div class="form__message form__message--error"></div>
             <div class="form__input-group">
@@ -21,15 +18,18 @@
             </div>
             <div>
             {{#if error}}
-            <p class="not-found"><b>{{error}}</b></p>
+            <p class="not-found">{{error}}</p>
             {{/if}}
            </div>
+           <label>
             <button class="form__button" type="submit">Continue</button>
+            </label>
             <p class="form__text">
                 <a class="form__link" href="/signup"  id="linkCreateAccount">Don't have an account? Create account</a>
             </p>
         </form>
         
+    </div>
     </div>
     <script src="/public/js/login.js"></script>
     </body>
