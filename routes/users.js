@@ -52,9 +52,18 @@ router.post('/updateProfile', upload.single('profile'), async (req, res) => {
 //------------Get Profile-------------------------//
 router.get('/profile', async (req, res) => {
     try{
-     //const userdata = await getbyUsername(req.session.user)
-    const userdata = await usersData.getByUsername("user01");
-    res.render("users/userProfile", {profilePicture: userdata.profilePicture, firstname: userdata.firstName, lastname: userdata.lastName, biography: userdata.biography, gender: userdata.gender, phoneNumber: userdata.phoneNumber, emailAddress: userdata.emailAddress, location: userdata.country})
+        // const userdata = await usersData.getByUsername("user08")
+        // res.render("users/userProfile", {profilePicture: userdata.profilePicture, firstname: userdata.firstName, lastname: userdata.lastName, biography: userdata.biography, gender: userdata.gender, phoneNumber: userdata.phoneNumber, emailAddress: userdata.emailAddress, location: userdata.country})
+        
+        if(req.session.user){
+            const userdata = await usersData.getbyUsername("user08")
+            // const userdata = await usersData.getbyUsername(req.session.user);
+            res.render("users/userProfile", {profilePicture: userdata.profilePicture, firstname: userdata.firstName, lastname: userdata.lastName, biography: userdata.biography, gender: userdata.gender, phoneNumber: userdata.phoneNumber, emailAddress: userdata.emailAddress, location: userdata.country})
+        }
+        else{
+            res.render("users/error")
+        }
+    // const userdata = await usersData.getByUsername("user01")
     }catch(e){
         res.sendStatus(404)
     }
