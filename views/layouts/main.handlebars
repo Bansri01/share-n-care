@@ -45,19 +45,31 @@
       </ul>
       {{#if name}}
         <div class="d-flex">
-        {{#if diseaseId}}
+        <p class="show_name ">Hello {{name}}!</p>
+        {{!-- {{#if diseaseId}}
         <a class="form-control me-2 btn-outline-success" href="/forum/{{diseaseId}}">Go To Forum</a>
         {{/if}}
         <p class="show_name ">Hello {{name}}!</p>
-        <a class="form-control me-2 btn-outline-success" href="/profile">Your Profile</a>
-      </div>
+        <a class="form-control me-2 btn-outline-success" href="/profile">Your Profile</a> --}}
+        <div class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <img src="/public/images/profile_icon.png" alt="profile Icon" width="50" height="50">
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+           {{#if diseaseId}}
+            <li><a class="dropdown-item" href="/forum/{{diseaseId}}">Go To Forum</a></li>
+            {{/if}}
+            <li><a class="dropdown-item" href="/profile">Your Profile</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="/logout">Logout</a></li>
+          </ul>
+        </div>
       {{else}}
       <div class="d-flex">
         {{#if diseaseId}}
         <a class="form-control me-2 btn-outline-success" href="/forum/{{diseaseId}}">Go To Forum</a>
         {{/if}}
         <a class="form-control me-2 btn-outline-success" href="/login">Login</a>
-  
         <a class="form-control me-2 btn-outline-success" href="/signUp">SignUp</a>
       </div>
       {{/if}}
