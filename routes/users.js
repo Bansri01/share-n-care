@@ -25,14 +25,14 @@ const upload = multer({ storage: storage })
 //-----------End of storing images-----------------------
 
 router.get('/updateProfile', async (req, res) => {
-    res.render("users/updateProfile", {title: "Update Profile Page"})
-    // try{
-    //     if(req.session.user){
-    //         res.render("users/updateProfile", {title: "Update Profile Page"})
-    //     }
-    // }catch(e){
-    //     res.render("users/error", {title: "Error"})
-    // }
+    // res.render("users/updateProfile", {title: "Update Profile Page"})
+    try{
+        if(req.session.user){
+            res.render("users/updateProfile", {title: "Update Profile Page"})
+        }
+    }catch(e){
+        res.render("users/error", {title: "Error"})
+    }
 })
 
 //-------------Post Profile-----------------------------
@@ -43,7 +43,7 @@ router.post('/updateProfile', upload.single('profile'), async (req, res) => {
         const { profilePicture, firstName, lastName, emailAddress, phoneNumber, country, biography, gender, userType, dateOfBirth } = resInfo
         const userInfo = await usersData.updateUser(req.params.id, profilePicture, firstName, lastName, emailAddress, phoneNumber, country, biography, gender, userType, dateOfBirth)
     }catch(err) {
-      res.send(400);
+      res.sendStatus(400);
     }
   });
 //-------------End Post Profile----------------------//
@@ -52,17 +52,17 @@ router.post('/updateProfile', upload.single('profile'), async (req, res) => {
 //------------Get Profile-------------------------//
 router.get('/profile', async (req, res) => {
     try{
-        const userdata = await usersData.getByUsername("user08")
-        res.render("users/userProfile", {profilePicture: userdata.profilePicture, firstname: userdata.firstName, lastname: userdata.lastName, biography: userdata.biography, gender: userdata.gender, phoneNumber: userdata.phoneNumber, emailAddress: userdata.emailAddress, location: userdata.country})
+        // const userdata = await usersData.getByUsername("user08")
+        // res.render("users/userProfile", {profilePicture: userdata.profilePicture, firstname: userdata.firstName, lastname: userdata.lastName, biography: userdata.biography, gender: userdata.gender, phoneNumber: userdata.phoneNumber, emailAddress: userdata.emailAddress, location: userdata.country})
         
-        // if(req.session.user){
-        //     const userdata = await usersData.getbyUsername("user08")
-        //     // const userdata = await usersData.getbyUsername(req.session.user);
-        //     res.render("users/userProfile", {profilePicture: userdata.profilePicture, firstname: userdata.firstName, lastname: userdata.lastName, biography: userdata.biography, gender: userdata.gender, phoneNumber: userdata.phoneNumber, emailAddress: userdata.emailAddress, location: userdata.country})
-        // }
-        // else{
-        //     res.render("users/error")
-        // }
+        if(req.session.user){
+            const userdata = await usersData.getbyUsername("user08")
+            // const userdata = await usersData.getbyUsername(req.session.user);
+            res.render("users/userProfile", {profilePicture: userdata.profilePicture, firstname: userdata.firstName, lastname: userdata.lastName, biography: userdata.biography, gender: userdata.gender, phoneNumber: userdata.phoneNumber, emailAddress: userdata.emailAddress, location: userdata.country})
+        }
+        else{
+            res.render("users/error")
+        }
     // const userdata = await usersData.getByUsername("user01")
     }catch(e){
         res.sendStatus(404)

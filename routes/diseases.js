@@ -29,11 +29,17 @@ router.get('/diseaseID/:id', async (req, res) => {
         return;
       }
 
-   
+      const {diseaseName,introduction,symptoms,suggestions,medicines} = disease_list;
 
-       const {diseaseName,introduction,symptoms,suggestions,medicines} = disease_list;
-
-       res.render('disease/disease', {diseaseName:diseaseName,description:introduction,symptoms:symptoms,suggestions:suggestions,medicines:medicines});
-})
+        if(req.session.user)
+        {
+          res.render('disease/disease', {diseaseName:diseaseName,description:introduction,symptoms:symptoms,suggestions:suggestions,medicines:medicines,title:diseaseName,name:req.session.user,diseaseId:id});
+          return;
+        }
+        else{
+       res.render('disease/disease', {diseaseName:diseaseName,description:introduction,symptoms:symptoms,suggestions:suggestions,medicines:medicines,title:diseaseName,diseaseId:id});
+        return;
+        }
+      })
 
 module.exports = router;

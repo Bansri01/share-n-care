@@ -213,6 +213,9 @@ select {
     color:white;
     width: 100%
 }
+.not-found{
+    color:var(--color-error) ;
+}
 
 
 /* Add a black background color to the top navigation */
