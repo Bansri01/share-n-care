@@ -7,6 +7,7 @@ const userColl = mongoCollections.users;
 const ObjectID  = require('mongodb').ObjectId;
 const router = express.Router();
 const countries = require("countries-list");
+const { updateUser } = require('../data/users');
 
 
 //-------------for Storing Images------------------//
@@ -23,12 +24,24 @@ var storage = multer.diskStorage({
 const upload = multer({ storage: storage })
 //-----------End of storing images-----------------------
 
-
+router.get('/updateProfile', async (req, res) => {
+    // res.render("users/updateProfile", {title: "Update Profile Page"})
+    try{
+        if(req.session.user){
+            res.render("users/updateProfile", {title: "Update Profile Page"})
+        }
+    }catch(e){
+        res.render("users/error", {title: "Error"})
+    }
+})
 
 //-------------Post Profile-----------------------------
-router.post('/profile', upload.single('profile'), (req, res) => {
+router.post('/updateProfile', upload.single('profile'), async (req, res) => {
     try {
-      res.send(req.file);
+    //   res.send(req.file);
+        const resInfo = req.body
+        const { profilePicture, firstName, lastName, emailAddress, phoneNumber, country, biography, gender, userType, dateOfBirth } = resInfo
+        const userInfo = await usersData.updateUser(req.params.id, profilePicture, firstName, lastName, emailAddress, phoneNumber, country, biography, gender, userType, dateOfBirth)
     }catch(err) {
       res.sendStatus(400);
     }
@@ -39,10 +52,18 @@ router.post('/profile', upload.single('profile'), (req, res) => {
 //------------Get Profile-------------------------//
 router.get('/profile', async (req, res) => {
     try{
-    
-    // const userdata = await getbyUsername(req.session.user)
-    const userdata = await usersData.getByUsername("user01")
-    res.render("users/userProfile", {profilePicture: userdata.profilePicture, firstname: userdata.firstName, lastname: userdata.lastName, biography: userdata.biography, gender: userdata.gender, phoneNumber: userdata.phoneNumber, emailAddress: userdata.emailAddress, location: userdata.country})
+        // const userdata = await usersData.getByUsername("user08")
+        // res.render("users/userProfile", {profilePicture: userdata.profilePicture, firstname: userdata.firstName, lastname: userdata.lastName, biography: userdata.biography, gender: userdata.gender, phoneNumber: userdata.phoneNumber, emailAddress: userdata.emailAddress, location: userdata.country})
+        
+        if(req.session.user){
+            const userdata = await usersData.getbyUsername("user08")
+            // const userdata = await usersData.getbyUsername(req.session.user);
+            res.render("users/userProfile", {profilePicture: userdata.profilePicture, firstname: userdata.firstName, lastname: userdata.lastName, biography: userdata.biography, gender: userdata.gender, phoneNumber: userdata.phoneNumber, emailAddress: userdata.emailAddress, location: userdata.country})
+        }
+        else{
+            res.render("users/error")
+        }
+    // const userdata = await usersData.getByUsername("user01")
     }catch(e){
         res.sendStatus(404)
     }
