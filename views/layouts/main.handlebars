@@ -43,6 +43,9 @@
       </ul>
       {{#if name}}
         <div class="d-flex">
+        {{#if diseaseId}}
+        <a class="form-control me-2 btn-outline-success" href="/forum/{{diseaseId}}">Go To Forum</a>
+        {{/if}}
         <p class="show_name ">Hello {{name}}!</p>
         <a class="form-control me-2 btn-outline-success" href="/profile">Your Profile</a>
       </div>
