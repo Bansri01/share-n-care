@@ -41,11 +41,13 @@ router.post('/updateProfile', upload.single('profilePicture'), async (req, res) 
     //   res.send(req.file);
         const userdata = req.body
         console.log(req.body)
-        userdata.profilePicture = req.file.filename;
+        if(req.file) userdata.profilePicture = req.file.filename;
         userdata.username="user08"
-        const { username, profilePicture, firstName, lastName, emailAddress, phoneNumber, country, biography, gender} = userdata
-        const userInfo = await usersData.updateUser(username, profilePicture, firstName, lastName, emailAddress, phoneNumber, country, biography, gender)
-        res.render("users/userProfile")
+        // const { username, profilePicture, firstName, lastName, emailAddress, phoneNumber, country, biography, gender} = userdata
+        // const userInfo = await usersData.updateUser(username, profilePicture, firstName, lastName, emailAddress, phoneNumber, country, biography, gender)
+        const userInfo = await usersData.updateUser(userdata)
+        const user = await usersData.getByUsername(username)
+        res.render("users/userProfile", {profilePicture: user.profilePicture, firstname: user.firstName, lastname: user.lastName, biography: user.biography, gender: user.gender, phoneNumber: user.phoneNumber, emailAddress: user.emailAddress, location: user.country})
     }catch(err) {
       res.sendStatus(400);
     }
