@@ -8,32 +8,32 @@
           <div class="panel-body text-center">
            <img src="../public/images/users/{{profilePicture}}" class="img-circle profile-avatar" alt="User avatar">
             <label for="profilePicture"> Upload Profile: </label>
-            <input type="file" id="img" name="profilePicture" accept="image/*">
+            <input type="file" id="profilePicture" name="profilePicture" accept="image/*">
           </div>
         </div>
         <div class="updateError"><p>{{error}}</p></div>
       <div class="panel panel-default">
         <div class="panel-heading">
-        <h4 class="panel-title">User info</h4>
+        <h1 class="panel-title">User info</h1>
         </div>
         <div class="panel-body">
           <div class="form-group">
             <label class="col-sm-2 control-label" for="firstName">Firstname</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" value={{ firstName }}  name="firstName" required>
+                <input type="text" id="firstName" class="form-control" value={{ firstName }}  name="firstName" required>
             </div>
           </div>
           <div class="form-group">
             <label class="col-sm-2 control-label" for="lastName">Lastname</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" value= {{ lastName }} name="lastName" required>
+              <input type="text" id="firstName" class="form-control" value= {{ lastName }} name="lastName" required>
             </div>
           </div>
 
           <div class="form-group">
             <label class="col-sm-2 control-label" for ="biography">Biography</label>
             <div>
-              <textarea rows="3" class="form-control" name ="biography" required>{{ biography }}</textarea>
+              <textarea rows="3" id="biography" class="form-control" name ="biography" required>{{ biography }}</textarea>
             </div>
           </div>
 
@@ -68,19 +68,19 @@
         <br/>
       <div class="panel panel-default">
         <div class="panel-heading">
-        <h4 class="panel-title">Contact info</h4>
+        <h1 class="panel-title">Contact info</h1>
         </div>
         <div class="panel-body">
           <div class="form-group">
             <label class="col-sm-2 control-label" for="phoneNumber"> phoneNumber </label>
             <div class="col-sm-10">
-              <input type="tel" class="form-control" value= {{ phoneNumber }} name="phoneNumber" required>
+              <input type="tel" id="phoneNumber" class="form-control" value= {{ phoneNumber }} name="phoneNumber" required>
             </div>
           </div>
           <div class="form-group">
             <label class="col-sm-2 control-label" for="emailAddress">E-mail address</label>
             <div class="col-sm-10">
-              <input type="email" class="form-control" value= {{ emailAddress }} name="emailAddress" required>
+              <input type="email" id="emailAddress" class="form-control" value= {{ emailAddress }} name="emailAddress" required>
             </div>
           </div>
           <br/>
@@ -88,7 +88,7 @@
           <div class="form-group">
             <div class="col-sm-10 col-sm-offset-2">
               <button type="submit" class="btn btn-primary">Submit</button>
-              <a type="reset" class="btn btn-default" href="/profile">Cancel</a>
+              <a type="reset" class="btn btn-default" href="/profile" title="Click to return to Profile">Cancle</a>
             </div>
           </div>
         </div>
