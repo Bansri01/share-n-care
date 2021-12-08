@@ -94,12 +94,12 @@
                         <input type="text" id="commentId-{{this._id}}" name="commentId" value={{this._id}} hidden/>
                         <button type="submit" class="btn btn-link" name="commentDelete">Delete</button>
                     </form>
-                    {{#if ../hasdeleteError}}
-                        <p class="errors">{{../deleteError}}</p>
-                    {{/if}}
                 </li>
             {{/each}}
         </ul>
+    {{/if}}
+    {{#if hasdeleteError}}
+        <p class="errors">{{deleteError}}</p>
     {{/if}}
 
     <form id="addNewComment" method="POST" action="/forum/post/{{getPost._id}}">
