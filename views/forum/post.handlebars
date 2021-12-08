@@ -1,5 +1,4 @@
 <link rel="stylesheet" href= "/public/css/forum.css">
-<script src="/public/js/post.js"></script>
 
 <main>
     <a class="return-to-forum" href="/forum/{{getPost.diseaseId}}">Return to forum</a>
@@ -8,20 +7,9 @@
         <p class="content">{{getPost.content}}</p>
         <p class="username">{{getPost.username}}</p>
         <p class="time">{{getPost.postTime}}</p>
-        <div id="like-counter" class="like-area">
-            {{!-- {{#if likes}}
-            <i id="up-{{getPost._id}}" class="likebtn fa fa-thumbs-up"></i>
-            {{else}}
-            <i id="up-{{getPost._id}}" class="likebtn fa fa-thumbs-o-up"></i>
-            {{/if}}
-            <span class="likes">{{getPost.likes.length}}</span>
-            {{#if dislikes}}
-            <i id="down-{{getPost._id}}" class="dislikebtn fa fa-thumbs-down"></i>
-            {{else}}
-            <i id="down-{{getPost._id}}" class="dislikebtn fa fa-thumbs-o-down"></i>
-            {{/if}} --}}
 
-             <form id="likePost" method="POST" action="/forum/like/{{getPost._id}}/{{userId}}">
+            {{#if name}}
+             <form id="likePost" method="POST" action="/forum/like/{{getPost._id}}">
                 <input type="text" id="pid" name="pid" value={{getPost._id}} hidden/>
                 <input type="text" id="uid" name="uid" value={{userId}} hidden/>
                 <button type="submit" class="btn btn-link" name="like">
@@ -29,7 +17,7 @@
                     <span class="likes">{{getPost.likes.length}}</span>
                 </button>
             </form>
-            <form id="dislikePost" method="POST" action="/forum/dislike/{{getPost._id}}/{{userId}}">
+            <form id="dislikePost" method="POST" action="/forum/dislike/{{getPost._id}}">
                 <input type="text" id="pid" name="pid" value={{getPost._id}} hidden/>
                 <input type="text" id="uid" name="uid" value={{userId}} hidden/>
                 <button type="submit" class="btn btn-link" name="dislike">
@@ -37,13 +25,28 @@
                     <span class="dislikes">{{getPost.dislikes.length}}</span>
                 </button>
             </form>
+            {{else}}
+             <form id="likePost" method="POST" action="/forum/like/{{getPost._id}}">
+                <button type="submit" class="btn btn-link" name="like">
+                    <i id="up-{{getPost._id}}" class="likebtn fa fa-thumbs-o-up"></i>
+                    <span class="likes">{{getPost.likes.length}}</span>
+                </button>
+            </form>
+            <form id="dislikePost" method="POST" action="/forum/dislike/{{getPost._id}}">
+                <button type="submit" class="btn btn-link" name="dislike">
+                    <i id="down-{{getPost._id}}" class="dislikebtn fa fa-thumbs-o-down"></i>
+                    <span class="dislikes">{{getPost.dislikes.length}}</span>
+                </button>
+            </form>
+            {{/if}}
 
+            {{#if isPostOwner}}
             <form id="deletePost" method="POST" action="/forum/delete/post/{{getPost._id}}">
                 <input type="text" id="postId" name="postId" value={{getPost._id}} hidden/>
                 <button type="submit" class="btn btn-link" name="postDelete">Delete</button>
             </form>
+            {{/if}}
         </div>
-    </div>
     </br>
     </br>
     </br>
@@ -56,41 +59,45 @@
                     <p class="username">{{this.username}}</p>
                     <p class="time">{{this.commentTime}}</p>
 
-                    <form id="likeComment" method="POST" action="/forum/commentLike/{{this._id}}/{{userId}}">
+                    {{#if ../name}}
+                    <form id="likeComment" method="POST" action="/forum/commentLike/{{this._id}}">
                         <input type="text" id="cid" name="cid" value={{this._id}} hidden/>
-                        <input type="text" id="uid" name="uid" value={{userId}} hidden/>
+                        <input type="text" id="uid" name="uid" value={{../userId}} hidden/>
                         <button type="submit" class="btn btn-link" name="like">
                             <i id="up-{{this._id}}" class="likebtn fa fa-thumbs-o-up"></i>
                             <span class="likes">{{this.likes.length}}</span>
                         </button>
                     </form>
-                    <form id="dislikeComment" method="POST" action="/forum/commentDislike/{{this._id}}/{{userId}}">
+                    <form id="dislikeComment" method="POST" action="/forum/commentDislike/{{this._id}}">
                         <input type="text" id="cid" name="cid" value={{this._id}} hidden/>
-                        <input type="text" id="uid" name="uid" value={{userId}} hidden/>
+                        <input type="text" id="uid" name="uid" value={{../userId}} hidden/>
                         <button type="submit" class="btn btn-link" name="dislike">
                             <i id="down-{{this._id}}" class="dislikebtn fa fa-thumbs-o-down"></i>
                             <span class="dislikes">{{this.dislikes.length}}</span>
                         </button>
                     </form>
-
-                    <form id="deleteComment-{{this._id}}" method="POST" action="/forum/delete/comment/{{this._id}}">
+                    {{else}}
+                    <form id="likeComment" method="POST" action="/forum/commentLike/{{this._id}}">
+                        <button type="submit" class="btn btn-link" name="like">
+                            <i id="up-{{this._id}}" class="likebtn fa fa-thumbs-o-up"></i>
+                            <span class="likes">{{this.likes.length}}</span>
+                        </button>
+                    </form>
+                    <form id="dislikeComment" method="POST" action="/forum/commentDislike/{{this._id}}">
+                        <button type="submit" class="btn btn-link" name="dislike">
+                            <i id="down-{{this._id}}" class="dislikebtn fa fa-thumbs-o-down"></i>
+                            <span class="dislikes">{{this.dislikes.length}}</span>
+                        </button>
+                    </form>
+                    {{/if}}
+                    <form id="deleteComment-{{this._id}}" class= "deleteComment" method="POST" action="/forum/delete/comment/{{this._id}}">
                         <input type="text" id="commentId-{{this._id}}" name="commentId" value={{this._id}} hidden/>
                         <button type="submit" class="btn btn-link" name="commentDelete">Delete</button>
                     </form>
-                    {{!-- {{#if this.dislikes === userId}}
-                    <i id="up-{{this._id}}" class="fa fa-thumbs-up"></i>
-                    {{else}}
-                    <i id="up-{{this._id}}" class="fa fa-thumbs-o-up"></i>
+                    {{#if ../hasdeleteError}}
+                        <p class="errors">{{../deleteError}}</p>
                     {{/if}}
-                    <span class="likes">{{this.likes.length}}</span>
-                     {{#if this.dislikes === userId}}
-                    <i id="down-{{this._id}}" class="fa fa-thumbs-down"></i>
-                    {{else}}
-                    <i id="down-{{this._id}}" class="fa fa-thumbs-o-down"></i>
-                    {{/if}}
-                    <span class="dislikes">{{this.dislikes.length}}</span>
-                    {{/each}} --}}
-                </li>    
+                </li>
             {{/each}}
         </ul>
     {{/if}}
@@ -100,4 +107,7 @@
         <textarea class="form-control" type="text" id="commen-content" name="commentContent"></textarea>
         <button type="submit" class="btn btn-primary btn-lg btn-block" name="comment-submit">Add a Comment</button>
     </form>
+    {{#if hasError}}
+        <p class="errors">{{error}}</p>
+    {{/if}}
 </main>

@@ -13,18 +13,6 @@ main {
     cursor: pointer
 }
 
-
-.fa-thumbs-up {
-    color: green;
-    cursor: pointer
-}
-
-.fa-thumbs-down {
-    color: red;
-    cursor: pointer
-}
-
-
 h1.pageTitle {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 50px;
@@ -76,15 +64,12 @@ p.time {
 	color: grey;
 }
 
-
 ul.searchPosts{
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 20px;
     text-align: center;
     color: #007cc0;
 }
-
-
 
 textarea {
     resize: none;
@@ -111,4 +96,10 @@ a:focus {
 
  li {
      list-style-type:none;
+ }
+
+ .errors {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 18px;
+    color: red;
  }
