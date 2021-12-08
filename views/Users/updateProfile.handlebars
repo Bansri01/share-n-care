@@ -7,7 +7,7 @@
         <div class="panel panel-default">
           <div class="panel-body text-center">
            {{!-- <img src="../public/images/users/no_image.jpeg-1638682166957" class="img-circle profile-avatar" alt="User avatar"> --}}
-            <label for="profilePicture"> Upload an image: </label>
+            <label for="profilePicture"> Upload Profile: </label>
             <input type="file" id="img" name="profilePicture" accept="image/*">
           </div>
         </div>
@@ -19,40 +19,40 @@
           <div class="form-group">
             <label class="col-sm-2 control-label" for="firstName">Firstname</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" name="firstName">
+                <input type="text" class="form-control" value={{firstname}}  name="firstName">
             </div>
           </div>
           <div class="form-group">
             <label class="col-sm-2 control-label" for="lastName">Lastname</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" name="lastName">
+              <input type="text" class="form-control" value= {{lastname}} name="lastName">
             </div>
           </div>
 
           <div class="form-group">
             <label class="col-sm-2 control-label" for ="biography">Biography</label>
             <div class="col-sm-10">
-              <input type="textarea" class="form-control" name ="biography">
+              <input type="textarea" class="form-control" value= {{biography}} name ="biography">
             </div>
           </div>
 
-          <div class="form-group">
+          {{!-- <div class="form-group">
             <label class="col-sm-2 control-label" for="gender">Gender</label>
             <div class="col-sm-10">
               <select class="form-control" name="gender">
-                <option selected="">Select Gender</option>
+                <option selected="">{{gender}}</option>
                 <option>Female</option>
                 <option>Male</option>
                 <option>other</option>
               </select>
             </div>
-          </div>
+          </div> --}}
           
-          <div class="form-group">
+          {{!-- <div class="form-group">
             <label class="col-sm-2 control-label" for="country">Location</label>
             <div class="col-sm-10">
               <select class="form-control" name="country">
-                <option selected="">Select country</option>
+                <option></option>
                 <option>Belgium</option>
                 <option>Canada</option>
                 <option>Denmark</option>
@@ -60,7 +60,7 @@
                 <option>France</option>
               </select>
             </div>
-          </div>
+          </div> --}}
         </div>
       </div>
         <br/>
@@ -71,15 +71,15 @@
         </div>
         <div class="panel-body">
           <div class="form-group">
-            <label class="col-sm-2 control-label" for="phoneNumber"> phoneNumber</label>
+            <label class="col-sm-2 control-label" for="phoneNumber"> phoneNumber </label>
             <div class="col-sm-10">
-              <input type="tel" class="form-control" name="phoneNumber">
+              <input type="tel" class="form-control" value= {{phoneNumber}} name="phoneNumber">
             </div>
           </div>
           <div class="form-group">
             <label class="col-sm-2 control-label" for="emailAddress">E-mail address</label>
             <div class="col-sm-10">
-              <input type="email" class="form-control" name="emailAddress">
+              <input type="email" class="form-control" value= {{emailAddress}} name="emailAddress">
             </div>
           </div>
           <br/>

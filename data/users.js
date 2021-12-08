@@ -307,45 +307,45 @@ async function updateUser(updatedData){
     
         if(updatedData.firstName){
             if(typeof updatedData.firstName !== "string") throw {message: `firstName must be string`, error:400}
-            if (/^ *$/.test(updatedData.firstName)) throw {message: `firstName cannot be empty`, error:400}
+            // if (/^ *$/.test(updatedData.firstName)) throw {message: `firstName cannot be empty`, error:400}
         }
         
         if(updatedData.lastName){
             if(typeof updatedData.lastName !== "string" ) throw {message: `lastName must be string`, error:400}
-            if (/^ *$/.test(updatedData.lastName)) throw {message: `lastName cannot be empty`, error:400}
+            // if (/^ *$/.test(updatedData.lastName)) throw {message: `lastName cannot be empty`, error:400}
         }
         
         if(updatedData.emailAddress){
             if(typeof updatedData.emailAddress !== "string") throw {message:'emailAddress must be string', error:400}
-            if (/^ *$/.test(updatedData.emailAddress)) throw {message: `emailAddress cannot be empty`, error:400}
-            if(!validateEmail(emailAddress)) throw {message: `Please Enter valid Email Address`, error:400}
+            // if (/^ *$/.test(updatedData.emailAddress)) throw {message: `emailAddress cannot be empty`, error:400}
+            // if(!validateEmail(emailAddress)) throw {message:`Please Enter valid Email Address`,error:400}
         }
 
-        if(updatedData.country){
-            if(typeof updatedData.country !== "string") throw {message:'country must be string', error:400}
-            if (/^ *$/.test(country)) throw {message: `country cannot be empty`, error:400}
-            const countryCodes = Object.keys(countries.countries);
-            const countryNames = countryCodes.map(code => countries.countries[code].name);
-            if (!countryNames.includes(country)) throw {message: `Please enter a valid country`, error:400}
-        }
+        // if(updatedData.country){
+        //     if(typeof updatedData.country !== "string") throw {message:'country must be string', error:400}
+        //     if (/^ *$/.test(country)) throw {message: `country cannot be empty`, error:400}
+        //     const countryCodes = Object.keys(countries.countries);
+        //     const countryNames = countryCodes.map(code => countries.countries[code].name);
+        //     if (!countryNames.includes(country)) throw {message: `Please enter a valid country`, error:400}
+        // }
 
         if(updatedData.biography){
             if(typeof updatedData.biography !== "string") throw {message: 'biography must be string', error:400}
-            if (/^ *$/.test(biography)) throw {message: `biography cannot be empty`, error:400}
+            // if (/^ *$/.test(biography)) throw {message: `biography cannot be empty`, error:400}
         }
 
-        if(updatedData.gender){
-            if(typeof updatedData.gender !== "string") throw {message: 'gender must be string', error:400}
-            if (/^ *$/.test(gender)) throw {message: `gender cannot be empty`, error:400}
-            let gen = ["Female", "Male", "other"]
-            if(!gen.includes(gender)) throw {message:`Please enter valid gender`, error: 400};
-        }
+        // if(updatedData.gender){
+        //     if(typeof updatedData.gender !== "string") throw {message: 'gender must be string', error:400}
+        //     // if (/^ *$/.test(gender)) throw {message: `gender cannot be empty`, error:400}
+        //     let gen = ["Female", "Male", "other"]
+        //     if(!gen.includes(gender)) throw {message:`Please enter valid gender`, error: 400};
+        // }
 
         if(updatedData.phoneNumber){
             if(typeof updatedData.phoneNumber !== "string") throw {message: 'phoneNumber must be string', error:400}
-            if (/^ *$/.test(phoneNumber)) throw {message: `phoneNumber cannot be empty`, error:400}
-            let phoneRe = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
-            if(!phoneNumber.match(phoneRe)) throw {message: `Phone number must be all numbers and correct format`, error:400}
+            // if (/^ *$/.test(phoneNumber)) throw {message: `phoneNumber cannot be empty`, error:400}
+            // let phoneRe = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
+            // if(!phoneNumber.match(phoneRe)) throw {message: `Phone number must be all numbers and correct format`, error:400}
     
         }
        
@@ -361,11 +361,11 @@ async function updateUser(updatedData){
 
         const userCollection = await users()
 
-        if(updatedData.emailAddress){
-            const lowerUser = emailAddress.toLowerCase()
-            const userexists = await userCollection.findOne({ emailAddress: lowerUser})
-            if(userexists) throw {message: `User with that email address already exists`, error:400}
-        }
+        // if(updatedData.emailAddress){
+        //     const lowerUser = emailAddress.toLowerCase()
+        //     const userexists = await userCollection.findOne({ emailAddress: lowerUser})
+        //     if(userexists) throw {message: `User with that email address already exists`, error:400}
+        // }
         // let updateId
     
         // try{
@@ -375,26 +375,34 @@ async function updateUser(updatedData){
         //     throw `Id is invalid because of ${e}`
         // }
     
-        const user = await userCollection.findOne({ username: username})
+        const user = await userCollection.findOne({ username: updatedData.username})
         if(user === null || user === undefined) throw `username doesn't exist.`
     
-        let exisistingUser = await getByUsername(username)
+        let exisistingUser = await getByUsername(updatedData.username)
+        // let updatedUser = {}
     
-        const updatedUser = {
-            profilePicture: string,
-            firstName: string,
-            lastName: string,
+        let updatedUser = {
+            profilePicture: String,
+            firstName: String,
+            lastName: String,
             username: exisistingUser.username,
-            emailAddress: string,
+            emailAddress: String,
             password: exisistingUser.password,
-            phoneNumber: string,
-            country: string,
-            biography: string,
-            gender: string,
+            phoneNumber: String,
+            country: exisistingUser.country,
+            biography: String,
+            gender: exisistingUser.gender,
             userType: exisistingUser.userType,
             dateOfBirth: exisistingUser.dateOfBirth
         }
         
+        if(updatedData.profilePicture){
+            updatedUser.profilePicture = updatedData.profilePicture
+        }
+        else{
+            updatedUser.profilePicture = exisistingUser.profilePicture
+        }
+
         if(updatedData.firstName){
             if(updatedData.firstName.trim() !== ""){
                 updatedUser.firstName = updatedData.firstName
@@ -414,41 +422,51 @@ async function updateUser(updatedData){
         }
 
         if(updatedData.emailAddress){
-            updatedUser.emailAddress = updatedData.emailAddress
-        }
-        else{
-            updatedUser.emailAddress = exisistingUser.emailAddress
+            if(updatedData.emailAddress.trim() !== ""){
+                updatedUser.emailAddress = updatedData.emailAddress
+            }
+            else{
+                updatedUser.emailAddress = exisistingUser.emailAddress
+            }
         }
 
         if(updatedData.phoneNumber){
-            updatedUser.phoneNumber = updatedData.phoneNumber
-        }
-        else{
-            updatedUser.phoneNumber = exisistingUser.phoneNumber
+            if(updatedData.phoneNumber.trim() !== ""){
+                updatedUser.phoneNumber = updatedData.phoneNumber
+            }
+            else{
+                updatedUser.phoneNumber = exisistingUser.phoneNumber
+            }
         }
 
-        if(updatedData.country){
-            updatedUser.country = updatedData.country
-        }
-        else{
-            updatedUser.country = exisistingUser.country
-        }
+        // if(updatedData.country){
+        //     if(updatedData.country.trim() !== ""){
+        //         updatedUser.country = updatedData.country
+        //     }
+        //     else{
+        //         updatedUser.country = exisistingUser.country
+        //     }
+        // }
 
         if(updatedData.biography){
-            updatedUser.biography = updatedData.biography
-        }
-        else{
-            updatedUser.biography = exisistingUser.biography
+            if(updatedData.biography.trim() !== ""){
+                updatedUser.biography = updatedData.biography
+            }
+            else{
+                updatedUser.biography = exisistingUser.biography
+            }
         }
 
-        if(updatedData.gender){
-            updatedUser.gender = updatedData.gender
-        }
-        else{
-            updatedUser.gender = exisistingUser.gender
-        }
-        
-        const updatedInfo = await userCollection.updateOne({username: username}, {$set: updatedUser});
+        // if(updatedData.gender){
+        //     if(updatedData.gender.trim() !== ""){
+        //         updatedUser.gender = updatedData.gender
+        //     }
+        //     else{
+        //         updatedUser.gender = exisistingUser.gender
+        //     }
+        // }
+
+        const updatedInfo = await userCollection.updateOne({username: updatedData.username}, {$set: updatedUser});
         if (updatedInfo.modifiedCount === 0) {
             throw `could not update User`;
         }  
