@@ -7,24 +7,21 @@ const diseaseData = data.diseases;
 const userData = data.users;
 
 router.get('/:id', async (req, res) => {
-
-    if(req.session.user)
-    {
+  if(req.session.user) {
       try {
         const postList = await postData.getAllPostsOfForum(req.params.id);
         const getDisease = await diseaseData.getDiseaseById(req.params.id);
         res.render('forum/forum', {
           title: getDisease.diseaseName + " Forum",
-          name:req.session.user,
+          name: req.session.user,
           forumName: getDisease.diseaseName + " Forum",
           getDiseaseId: getDisease._id.toString(),
-          postList: postList          
+          postList: postList      
         });
       } catch (e) {
         res.status(500).json({ error: e });
       }
-    }
-    else{
+  } else{
     try {
       const postList = await postData.getAllPostsOfForum(req.params.id);
       const getDisease = await diseaseData.getDiseaseById(req.params.id);
@@ -41,99 +38,187 @@ router.get('/:id', async (req, res) => {
 });
 
 router.get('/post/:id', async (req, res) => {
-    const userInfo = await userData.getByUsername("user01");
-    req.session.user = userInfo.username;
+  if(req.session.user) {
+    try {
+      const userInfo = await userData.getByUsername(req.session.user);
+      const userId = userInfo._id;
+      const getPost = await postData.getPostById(req.params.id);
+      const getComments = await commentData.getAllCommentsOfPost(req.params.id);
+
+      if(userId === getPost.userId) {
+          res.render('forum/post', {
+            title: getPost.title,
+            name: req.session.user,
+            getPost: getPost,
+            getComments: getComments,
+            isPostOwner: true,
+            userId: userId,
+          });
+        } else {
+          res.render('forum/post', {
+            title: getPost.title,
+            name: req.session.user,
+            getPost: getPost,
+            getComments: getComments,
+            userId: userId,
+          });
+        }
+    } catch (e) {
+      res.status(500).json({ error: e });
+    }
+  } else {
     try {
       const getPost = await postData.getPostById(req.params.id);
       const getComments = await commentData.getAllCommentsOfPost(req.params.id);
-      //const getPostLike = await postData.checkIsLike(req.params.id, req.session.user);
-      const getPostLikes = await postData.checkIsLike(req.params.id, "61a3dedad8226a1572add77f");
-      //const getCommentLikes = await commentData.checkIsLike(req.params.id, "61a3dedad8226a1572add66f");
       res.render('forum/post', {
         title: getPost.title,
-        name: req.session.user = userInfo.username,
         getPost: getPost,
         getComments: getComments,
-        // likes: getPostLikes.likes,
-        // dislikes: getPostLikes.dislikes,
-        userId: "61a3dedad8226a1572add66f"
       });
     } catch (e) {
       res.status(500).json({ error: e });
     }
+  }   
 });
 
 router.post('/search', async (req, res) => {
-  const postName = req.body.postName;
-  // if (!postName) {
-  // res.status(400).json({ error: "You must provide the post name for search!" });
-  //   return;
-  // }
-
-  if(!postName) {
-    res.render('forum/search', {
-      errors: "You need provide the post name for search",
-      hasErrors: true
-    });
-    return;
-  }
-
- 
-  if(postName.match(/^\s+$/g) || postName === "") {
-    res.render('forum/search', {
-      errors: "You need provide the post name for search",
-      hasErrors: true
-    });
-    return;
-  }
-
-  try {
-    const searchPost= await postData.getPostsbyName(postName);
-    res.render('forum/search', {
-      title: "Search Results",
-      searchPost:searchPost
-    });
-  } catch (e) {
-    res.status(500).json({ error: e });
+  if(req.session.user) {
+    const postName = req.body.postName;
+    if(postName.match(/^\s+$/g) || postName === "") {
+      res.render('forum/search', {
+        title: "Search Results",
+        name: req.session.user,
+        error: "You need provide the post name for search",
+        hasError: true
+      });
+      return;
+    }
+    try {
+      const searchPost= await postData.getPostsbyName(postName);
+      res.render('forum/search', {
+        title: "Search Results",
+        searchPost:searchPost,
+        name: req.session.user
+      });
+    } catch (e) {
+      res.status(500).json({ error: e });
+    }
+  } else {
+    const postName = req.body.postName;
+    if(postName.match(/^\s+$/g) || postName === "") {
+      res.render('forum/search', {
+        title: "Search Results",
+        name: req.session.user,
+        error: "You need provide the post name for search",
+        hasError: true
+      });
+      return;
+    }
+    try {
+      const searchPost= await postData.getPostsbyName(postName);
+      res.render('forum/search', {
+        title: "Search Results",
+        searchPost:searchPost,
+      });
+    } catch (e) {
+      res.status(500).json({ error: e });
+    }
   }
 
 });
 
 router.post('/:id', async (req, res) => {
-  if (!req.session.user) {
-
+  if(!req.session.user) {
+    res.redirect(`/login`);
   }
-    const diseaseId = req.params.id;
-    const title = req.body.postTitle;
-    const content = req.body.postContent;
-    try {
-      //const newPost= await postData.createPost(diseaseId, req.session.user._id, req.session.user.username, title, content);
-      const newPost= await postData.createPost(diseaseId, "61a3dedad8226a1572add66f", "newuser", title, content);
+
+  const title = req.body.postTitle;
+  const content = req.body.postContent;
+  const postList = await postData.getAllPostsOfForum(req.params.id);
+  const getDisease = await diseaseData.getDiseaseById(req.params.id);
+
+  if(title.match(/^\s+$/g) || title === "") {
+    res.render('forum/forum', {
+      title: getDisease.diseaseName + " Forum",
+      name: req.session.user,
+      forumName: getDisease.diseaseName + " Forum",
+      getDiseaseId: getDisease._id.toString(),
+      postList: postList, 
+      error: "You need provide the title for the post!",
+      hasError: true
+    });
+    return;
+  }
+  if(content.match(/^\s+$/g) || content === "") {
+    res.render('forum/forum', {
+      title: getDisease.diseaseName + " Forum",
+      name: req.session.user,
+      forumName: getDisease.diseaseName + " Forum",
+      getDiseaseId: getDisease._id.toString(),
+      postList: postList, 
+      error: "You need provide the content for the post!",
+      hasError: true
+    });
+    return;
+  }
+  try {
+      const userInfo = await userData.getByUsername(req.session.user);
+      const userId = userInfo._id;
+      const diseaseId = req.params.id;
+      const newPost= await postData.createPost(diseaseId, userId, req.session.user, title, content);
       res.redirect(`/forum/${diseaseId}`);
+  } catch (e) {
+      res.status(500).json({ error: e });
+  }  
+});
+
+router.post('/post/:id', async (req, res) => {
+  if(!req.session.user) {
+    res.redirect(`/login`);
+  }
+
+  const content = req.body.commentContent;
+  const userInfo = await userData.getByUsername(req.session.user);
+  const userId = userInfo._id;
+  const getPost = await postData.getPostById(req.params.id);
+  const getComments = await commentData.getAllCommentsOfPost(req.params.id);
+
+  if(content.match(/^\s+$/g) || content === "") {
+    if(userId === getPost.userId) {
+      res.render('forum/post', {
+        title: getPost.title,
+        name: req.session.user,
+        getPost: getPost,
+        getComments: getComments,
+        isPostOwner: true,
+        userId: userId,
+        error: "You need provide the content for the comment!",
+        hasError: true
+      });
+    } else {
+      res.render('forum/post', {
+        title: getPost.title,
+        name: req.session.user,
+        getPost: getPost,
+        getComments: getComments,
+        userId: userId,
+        error: "You need provide the content for the comment!",
+        hasError: true
+      });
+    }
+    return;
+  }
+    try {
+      const postId = req.params.id;
+      const newComment = await commentData.createComment(postId, userId, req.session.user, content);
+      res.redirect(`/forum/post/${postId}`);
     } catch (e) {
       res.status(500).json({ error: e });
     }
 });
 
-router.post('/post/:id', async (req, res) => {
-  if (!req.session.user) {
-
-  }
-  const postId = req.params.id;
-  const content = req.body.commentContent;
-  try {
-    const newComment = await commentData.createComment(postId, "61a3dedad8226a1572add66f", "newuser", content);
-    res.redirect(`/forum/post/${postId}`);
-  } catch (e) {
-    res.status(500).json({ error: e });
-  }
-});
-
 
 router.post('/delete/post/:id', async (req, res) => {
-  if (!req.session.user) {
-
-  }
     if(!req.params.id) {
       res.status(400).json({ error: "You must Supply an ID to delete." });
       return;
@@ -144,15 +229,34 @@ router.post('/delete/post/:id', async (req, res) => {
       res.status(404).json({ error: "Could not find a post with that id." });
       return;
     }
-    try {
-      const getpost = await postData.getPostById(req.params.id);
-      const diseaseId = getpost.diseaseId;
-      const postId = req.body.postId;
-      await postData.deletePost(postId);
-      //res.status(200).json({ postId: req.params.id, "deleted": true });
-      res.redirect(`/forum/${diseaseId}`);
-    } catch (e) {
-      res.status(500).json({ error: e });
+
+    if(req.session.user) {
+      const userInfo = await userData.getByUsername(req.session.user);
+      const userId = userInfo._id;
+      const getPost = await postData.getPostById(req.params.id);
+      const getComments = await commentData.getAllCommentsOfPost(req.params.id);
+      if(userId === getPost.userId) {
+        try {      
+          const diseaseId = getPost.diseaseId;
+          const postId = req.body.postId;
+          await postData.deletePost(postId);
+          res.redirect(`/forum/${diseaseId}`);
+        } catch (e) {
+          res.status(500).json({ error: e });
+        }
+      } else {
+        res.render('forum/post', {
+          title: getPost.title,
+          name: req.session.user,
+          getPost: getPost,
+          getComments: getComments,
+          userId: userId,
+          deleteError: "You cannot delete other users' post!",
+          hasdeleteError: true
+        });
+      }
+    } else {
+      res.redirect(`/login`);
     }
 });
 
@@ -167,19 +271,69 @@ router.post('/delete/comment/:id', async (req, res) => {
         res.status(404).json({ error: "Could not find a comment with that id." });
         return;
       }
-      try {
+      if(req.session.user) {
+        const userInfo = await userData.getByUsername(req.session.user);
+        const userId = userInfo._id;
         const getcomment = await commentData.getCommentById(req.params.id);
         const postId = getcomment.postId;
-        const commentId = req.body.commentId;
-        await commentData.deleteComment(commentId);
-        //res.status(200).json({ commentId: req.params.id, "deleted": true });
-        res.redirect(`/forum/post/${postId}`);
-      } catch (e) {
-        res.status(500).json({ error: e });
+        const getPost = await postData.getPostById(postId);
+        const getComments = await commentData.getAllCommentsOfPost(postId);  
+        if(userId === getcomment.userId) {
+          try {
+            const commentId = req.body.commentId;
+            await commentData.deleteComment(commentId);
+            res.redirect(`/forum/post/${postId}`);
+          } catch (e) {
+            res.status(500).json({ error: e });
+          }
+        } else {
+          res.render('forum/post', {
+            title: getPost.title,
+            name: req.session.user,
+            getPost: getPost,
+            getComments: getComments,
+            userId: userId,
+            deleteError: "You cannot delete other users' comment!",
+            hasdeleteError: true
+          });
+        }
+      } else {
+        res.redirect(`/login`);
+      } 
+});
+
+router.post('/like/:pid', async (req, res) => {
+  try {
+    await postData.getPostById(req.params.pid);
+  } catch (e) {
+    res.status(404).json({ error: "Could not find a post with that id." });
+    return;
+  }
+  if(req.session.user) {
+    try {
+      const pid = req.body.pid;
+      const uid = req.body.uid;
+      const likeStatus = await postData.checkIsLike(pid, uid);
+      if(likeStatus === 1) {
+        await postData.updateIsLike(pid, uid, 2);
       }
+      if(likeStatus === 0) {
+        await postData.updateIsLike(pid, uid, 1);
+      }
+      if(likeStatus === 2) {
+        await postData.updateIsLike(pid, uid, 1);
+      }
+      res.redirect(`/forum/post/${pid}`);
+    } catch (e) {
+      res.status(500).json({ error: e });
+    }
+  } else {
+    res.redirect(`/login`);
+  }
 });
 
-router.post('/like/:pid/:uid', async (req, res) => {
+
+router.post('/dislike/:pid', async (req, res) => {
   try {
     await postData.getPostById(req.params.pid);
   } catch (e) {
@@ -187,54 +341,62 @@ router.post('/like/:pid/:uid', async (req, res) => {
     return;
   }
 
-  try {
-    const pid = req.body.pid;
-    const uid = req.body.uid;
-    const likeStatus = await postData.checkIsLike(pid, uid);
-    if(likeStatus === 1) {
-      await postData.updateIsLike(pid, uid, 2);
+  if(req.session.user) {
+    try {
+      const pid = req.body.pid;
+      const uid = req.body.uid;
+      const likeStatus = await postData.checkIsLike(pid, uid);
+      if(likeStatus === 1) {
+        await postData.updateIsLike(pid, uid, 0);
+      }
+      if(likeStatus === 0) {
+        await postData.updateIsLike(pid, uid, 2);
+      }
+      if(likeStatus === 2) {
+        await postData.updateIsLike(pid, uid, 0);
+      }
+      res.redirect(`/forum/post/${pid}`);
+    } catch (e) {
+      res.status(500).json({ error: e });
     }
-    if(likeStatus === 0) {
-      await postData.updateIsLike(pid, uid, 1);
-    }
-    if(likeStatus === 2) {
-      await postData.updateIsLike(pid, uid, 1);
-    }
-    res.redirect(`/forum/post/${pid}`);
-  } catch (e) {
-    res.status(500).json({ error: e });
+  } else {
+    res.redirect(`/login`);
   }
 });
 
-
-router.post('/dislike/:pid/:uid', async (req, res) => {
+router.post('/commentLike/:cid', async (req, res) => {
   try {
-    await postData.getPostById(req.params.pid);
+    await commentData.getCommentById(req.params.cid);
   } catch (e) {
-    res.status(404).json({ error: "Could not find a post with that id." });
+    res.status(404).json({ error: "Could not find a comment with that id." });
     return;
   }
-
-  try {
-    const pid = req.body.pid;
-    const uid = req.body.uid;
-    const likeStatus = await postData.checkIsLike(pid, uid);
-    if(likeStatus === 1) {
-      await postData.updateIsLike(pid, uid, 0);
+  if(req.session.user) {
+    try {
+      const cid = req.body.cid;
+      const uid = req.body.uid;
+      const getcomment = await commentData.getCommentById(req.params.cid);
+      const postId = getcomment.postId;
+      const likeStatus = await commentData.checkIsLike(cid, uid);
+      if(likeStatus === 1) {
+        await commentData.updateIsLike(cid, uid, 2);
+      }
+      if(likeStatus === 0) {
+        await commentData.updateIsLike(cid, uid, 1);
+      }
+      if(likeStatus === 2) {
+        await commentData.updateIsLike(cid, uid, 1);
+      }
+      res.redirect(`/forum/post/${postId}`);
+    } catch (e) {
+      res.status(500).json({ error: e });
     }
-    if(likeStatus === 0) {
-      await postData.updateIsLike(pid, uid, 2);
-    }
-    if(likeStatus === 2) {
-      await postData.updateIsLike(pid, uid, 0);
-    }
-    res.redirect(`/forum/post/${pid}`);
-  } catch (e) {
-    res.status(500).json({ error: e });
+  } else {
+    res.redirect(`/login`);
   }
 });
 
-router.post('/commentLike/:cid/:uid', async (req, res) => {
+router.post('/commentDislike/:cid', async (req, res) => {
   try {
     await commentData.getCommentById(req.params.cid);
   } catch (e) {
@@ -242,54 +404,30 @@ router.post('/commentLike/:cid/:uid', async (req, res) => {
     return;
   }
 
-  try {
-    const cid = req.body.cid;
-    const uid = req.body.uid;
-    const getcomment = await commentData.getCommentById(req.params.cid);
-    const postId = getcomment.postId;
-    const likeStatus = await commentData.checkIsLike(cid, uid);
-    if(likeStatus === 1) {
-      await commentData.updateIsLike(cid, uid, 2);
+  if(req.session.user) {
+    try {
+      const cid = req.body.cid;
+      const uid = req.body.uid;
+      const getcomment = await commentData.getCommentById(req.params.cid);
+      const postId = getcomment.postId;
+      const likeStatus = await commentData.checkIsLike(cid, uid);
+      if(likeStatus === 1) {
+        await commentData.updateIsLike(cid, uid, 0);
+      }
+      if(likeStatus === 0) {
+        await commentData.updateIsLike(cid, uid, 2);
+      }
+      if(likeStatus === 2) {
+        await commentData.updateIsLike(cid, uid, 0);
+      }
+      res.redirect(`/forum/post/${postId}`);
+    } catch (e) {
+      res.status(500).json({ error: e });
     }
-    if(likeStatus === 0) {
-      await commentData.updateIsLike(cid, uid, 1);
-    }
-    if(likeStatus === 2) {
-      await commentData.updateIsLike(cid, uid, 1);
-    }
-    res.redirect(`/forum/post/${postId}`);
-  } catch (e) {
-    res.status(500).json({ error: e });
-  }
-});
-
-router.post('/commentDislike/:cid/:uid', async (req, res) => {
-  try {
-    await commentData.getCommentById(req.params.cid);
-  } catch (e) {
-    res.status(404).json({ error: "Could not find a comment with that id." });
-    return;
-  }
-
-  try {
-    const cid = req.body.cid;
-    const uid = req.body.uid;
-    const getcomment = await commentData.getCommentById(req.params.cid);
-    const postId = getcomment.postId;
-    const likeStatus = await commentData.checkIsLike(cid, uid);
-    if(likeStatus === 1) {
-      await commentData.updateIsLike(cid, uid, 0);
-    }
-    if(likeStatus === 0) {
-      await commentData.updateIsLike(cid, uid, 2);
-    }
-    if(likeStatus === 2) {
-      await commentData.updateIsLike(cid, uid, 0);
-    }
-    res.redirect(`/forum/post/${postId}`);
-  } catch (e) {
-    res.status(500).json({ error: e });
+  } else {
+    res.redirect(`/login`);
   }
 });
 
 module.exports = router;
+
