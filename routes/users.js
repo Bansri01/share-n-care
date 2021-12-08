@@ -25,27 +25,22 @@ const upload = multer({ storage: storage })
 //-----------End of storing images-----------------------
 
 router.get('/updateProfile', async (req, res) => {
-    const userdata = await usersData.getByUsername("user08")
-    res.render("users/updateProfile", {profilePicture: userdata.profilePicture, firstname: userdata.firstName, lastname: userdata.lastName, biography: userdata.biography, phoneNumber: userdata.phoneNumber, emailAddress: userdata.emailAddress})  
-    // try{
-    //     if(req.session.user){
-    //         res.render("users/updateProfile", {title: "Update Profile Page"})
-    //     }
-    // }catch(e){
-    //     res.render("users/error", {title: "Error"})
-    // }
+    try{
+        if(req.session.user){
+            const userdata = await usersData.getByUsername(req.session.user)
+            res.render("users/updateProfile", {profilePicture: userdata.profilePicture, firstname: userdata.firstName, lastname: userdata.lastName, biography: userdata.biography, phoneNumber: userdata.phoneNumber, emailAddress: userdata.emailAddress})  
+        }
+    }catch(e){
+        res.render("users/error", {title: "Error"})
+    }
 })
 
 //-------------Post Profile-----------------------------
 router.post('/updateProfile', upload.single('profilePicture'), async (req, res) => {
     try {
-    //   res.send(req.file);
         const userdata = req.body
-        console.log(req.body)
         if(req.file) userdata.profilePicture = req.file.filename;
-        userdata.username="user08"
-        // const { username, profilePicture, firstName, lastName, emailAddress, phoneNumber, country, biography, gender} = userdata
-        // const userInfo = await usersData.updateUser(username, profilePicture, firstName, lastName, emailAddress, phoneNumber, country, biography, gender)
+        userdata.username = req.session.user
         const userInfo = await usersData.updateUser(userdata)
         const user = await usersData.getByUsername(userdata.username)
         res.render("users/userProfile", {profilePicture: user.profilePicture, firstname: user.firstName, lastname: user.lastName, biography: user.biography, gender: user.gender, phoneNumber: user.phoneNumber, emailAddress: user.emailAddress, location: user.country})
@@ -59,18 +54,13 @@ router.post('/updateProfile', upload.single('profilePicture'), async (req, res) 
 //------------Get Profile-------------------------//
 router.get('/profile', async (req, res) => {
     try{
-        const userdata = await usersData.getByUsername("user08")
-        res.render("users/userProfile", {profilePicture: userdata.profilePicture, firstname: userdata.firstName, lastname: userdata.lastName, biography: userdata.biography, gender: userdata.gender, phoneNumber: userdata.phoneNumber, emailAddress: userdata.emailAddress, location: userdata.country})
-        
-        // if(req.session.user){
-        //     const userdata = await usersData.getbyUsername("user08")
-        //     // const userdata = await usersData.getbyUsername(req.session.user);
-        //     res.render("users/userProfile", {profilePicture: userdata.profilePicture, firstname: userdata.firstName, lastname: userdata.lastName, biography: userdata.biography, gender: userdata.gender, phoneNumber: userdata.phoneNumber, emailAddress: userdata.emailAddress, location: userdata.country})
-        // }
-        // else{
-        //     res.render("users/error")
-        // }
-    // // const userdata = await usersData.getByUsername("user01")
+        if(req.session.user){
+            const userdata = await usersData.getByUsername(req.session.user)
+            res.render("users/userProfile", {profilePicture: userdata.profilePicture, firstname: userdata.firstName, lastname: userdata.lastName, biography: userdata.biography, gender: userdata.gender, phoneNumber: userdata.phoneNumber, emailAddress: userdata.emailAddress, location: userdata.country})
+        }
+        else{
+            res.render("users/error")
+        }
     }catch(e){
         res.sendStatus(404)
     }
