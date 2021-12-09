@@ -13,7 +13,7 @@ const constructorMethod = (app) => {
   app.use('/forum',forumRoutes);
 
   app.use('*', (req, res) => {
-    res.status(404).sendFile(path.resolve("./static/Error404.html"))
+    res.status(404).sendFile(path.resolve("./error/error"))
   });
 };
 
