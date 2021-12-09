@@ -36,8 +36,17 @@ function validateDate(date) {
         else if(monthArr2.includes(parsedMonth) && parsedDay > 30){
             throw `The month does not have more than 30 days`
         }
-        else if(parsedMonth === 2 && parsedDay > 28 ){
-            throw `The month february does not have more than 28 days`
+        else if(parsedMonth === 2 && parsedDay > 29 ){
+            throw `The month february does not have more than 29 days`
+        }
+
+        function leapyear(year)
+        {
+            return (year % 100 === 0) ? (year % 400 === 0) : (year % 4 === 0);
+        }
+
+        if(!leapyear(parsedYear) && parsedMonth === 2 && parsedDay === 29){
+            throw {message: `Only a leap year can have 29 days in month of February`}
         }
         
         let d1 = new Date(Date.parse(date));
@@ -107,13 +116,13 @@ async function createUser(profilePicture, firstName, lastName, username, emailAd
     if (!countryNames.includes(country)) throw {message:`Please enter a valid country`, error: 400};
 
 
-    let gen = ["Female", "Male", "other"]
+    let gen = ["Female", "Male", "other", "female", "male", "Other"]
 
     // if (gender !== "Female" || gender !== "Male" || gender !== "other") throw `Gender must be Male or Female or other`
     
     if(!gen.includes(gender)) throw {message:`Please enter valid gender`, error: 400};
     
-    if (userType !== "Patient" && userType !== "Doctor") throw {message:`Usertype must be a patient or a doctor`, error: 400};
+    if (userType !== "Patient" && userType !== "Doctor" && userType !== "patient" && userType !== "doctor") throw {message:`Usertype must be a patient or a doctor`, error: 400};
     try{
     if (!validateDate(dateOfBirth)) throw {
         message:`Please Enter valid date of birth`, error: 400};

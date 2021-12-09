@@ -7,7 +7,7 @@ async function main() {
     await db.dropDatabase();
 
     try{
-        user1 = await user.createUser("user01.jpeg-1639017120258", "Bans", "Patel", "user01", "bpatel@gmail.com", "helloo12", "736-787-8373", "India", "Hello I am Bansri", "Female", "Doctor", "2021-11-27")
+        user1 = await user.createUser("user01.jpeg-1639017120258", "Bans", "Patel", "user01", "bpatel@gmail.com", "helloo12", "736-787-8373", "India", "Hello I am Bansri", "Female", "Doctor", "2021-02-29")
     }catch(e){
         console.log(e);
     }

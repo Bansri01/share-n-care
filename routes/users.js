@@ -173,6 +173,15 @@ function validateDate(date) {
             else if(parsedMonth === 2 && parsedDay > 28 ){
                 throw `The month february does not have more than 28 days`
             }
+
+            function leapyear(year)
+            {
+                return (year % 100 === 0) ? (year % 400 === 0) : (year % 4 === 0);
+            }
+
+            if(!leapyear(parsedYear) && parsedMonth === 2 && parsedDay === 29){
+                throw {message: `Only a leap year can have 29 days in month of February`}
+            }
             
             let d1 = new Date(Date.parse(date));
             let d2 = new Date(Date.parse(today));
@@ -206,11 +215,13 @@ router.get('/',async (req, res) => {
 
 
 //-------------get SignUp Page-------------------//
-router. get('/signup',async (req, res) => {
+router. get('/signup',async (req, res) => { 
     if (req.session.user) {
         return res.redirect('/');
       } else {
-        res.render("users/signup",{title: "SIGNUP"});
+        const countryCodes = Object.keys(countries.countries);
+        const countryNames = countryCodes.map(code => countries.countries[code].name);
+        res.render("users/signup",{title: "SIGNUP", countryNames: countryNames});
       }     
   });
 //------------end of Get SignUp page--------------//
