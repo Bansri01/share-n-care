@@ -62,7 +62,7 @@ function validateDate(date) {
   
 
 async function createUser(profilePicture, firstName, lastName, username, emailAddress, password, phoneNumber, country, biography, gender, userType, dateOfBirth){
-    if(!profilePicture || !firstName || !lastName || !username || !emailAddress || !password || !phoneNumber || !country || !biography || !gender || !userType || !dateOfBirth){
+    if(!firstName || !lastName || !username || !emailAddress || !password || !phoneNumber || !country || !biography || !gender || !userType || !dateOfBirth){
         throw {message: `All fields must be supplied`, error:400}
     }
 
