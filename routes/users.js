@@ -111,6 +111,13 @@ router.post('/updateProfile', upload.single('profilePicture'), async (req, res) 
             return
         }
 
+        const userCollection = await userColl();
+        const checkEmail = await userCollection.findOne({ emailAddress: userdata.emailAddress.toLowerCase(), username : {$ne: req.session.user}});
+        if(checkEmail !== null) {
+            res.status(200).render("users/updateProfile", {profilePicture: existingUserData.profilePicture, firstName:existingUserData.firstName, lastName: existingUserData.lastName, biography: existingUserData.biography, gender:existingUserData.gender, country:existingUserData.country, phoneNumber:existingUserData.phoneNumber, emailAddress:existingUserData.emailAddress ,error: "User with that email address already exists.", name: req.session.user})
+            return
+        }
+
         let updatedUserinfo = {}
         updatedUserinfo.username = req.session.user
         if(existingUserData.profilePicture !== userdata.profilePicture){
