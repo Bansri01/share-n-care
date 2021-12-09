@@ -79,9 +79,10 @@ const createDisease = async function createDisease(diseaseName, description, sym
         throw `Suggestion cannot be just empty spaces`
     }
 
+
     symptoms[i] = symptoms[i].trim()
 
-}
+    }
 
     
 
@@ -188,6 +189,23 @@ const createDisease = async function createDisease(diseaseName, description, sym
 
     const diseasesCollection = await diseases();
 
+
+
+    const findDisease = await diseasesCollection.find({}).project({diseaseName:1,_id:0}).toArray();
+    console.log(findDisease)
+
+    for(let i=0;i<findDisease.length;i++)
+    {
+        findDisease[i].diseaseName=findDisease[i].diseaseName.toLowerCase();
+        if(findDisease[i].diseaseName == diseaseName.toLowerCase())
+        {
+            throw `Disease Name should be Unique.`
+        }
+    }
+
+
+ 
+
     let newdiseases = {
         diseaseName: diseaseName,
         introduction: description,
@@ -198,8 +216,10 @@ const createDisease = async function createDisease(diseaseName, description, sym
 
       };
 
+
+
       const insertInfo = await diseasesCollection.insertOne(newdiseases);
-      if (insertInfo.insertedCount === 0) throw 'Could not add restaurant';
+      if (insertInfo.insertedCount === 0) throw 'Could not add Disease';
         return newdiseases;
 
 
