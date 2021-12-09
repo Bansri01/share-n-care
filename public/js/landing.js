@@ -8,6 +8,7 @@
         event.preventDefault();
 
         st = searchTerm.val();
+        st=st.trim();
         if(/^ *$/.test(st))
       {
         $('#error').text("The searchTerm cannot be empty spaces or null").show()
