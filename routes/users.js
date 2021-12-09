@@ -28,7 +28,7 @@ router.get('/updateProfile', async (req, res) => {
     try{
         if(req.session.user){
             const userdata = await usersData.getByUsername(req.session.user)
-            res.render("users/updateProfile", {profilePicture: userdata.profilePicture, firstName: userdata.firstName, lastName: userdata.lastName, biography: userdata.biography, phoneNumber: userdata.phoneNumber, emailAddress: userdata.emailAddress})  
+            res.render("users/updateProfile", {profilePicture: userdata.profilePicture, firstName: userdata.firstName, lastName: userdata.lastName, biography: userdata.biography, phoneNumber: userdata.phoneNumber, emailAddress: userdata.emailAddress, name: req.session.user})  
         }
     }catch(e){
         res.render("users/error", {title: "Error"})
@@ -51,33 +51,33 @@ router.post('/updateProfile', upload.single('profilePicture'), async (req, res) 
 
         if(!userdata.firstName || !userdata.lastName || !userdata.biography || !userdata.phoneNumber || !userdata.emailAddress){
             // throw {message: `one of the mendatory field is missing`, status:400}
-            res.status(200).render("users/updateProfile", {profilePicture: existingUserData.profilePicture, firstName:existingUserData.firstName, lastName: existingUserData.lastName, biography: existingUserData.biography, gender:existingUserData.gender, location:existingUserData.location, phoneNumber:existingUserData.phoneNumber, emailAddress:existingUserData.emailAddress ,error: "one of the mendatory field is missing"})
+            res.status(200).render("users/updateProfile", {profilePicture: existingUserData.profilePicture, firstName:existingUserData.firstName, lastName: existingUserData.lastName, biography: existingUserData.biography, gender:existingUserData.gender, location:existingUserData.location, phoneNumber:existingUserData.phoneNumber, emailAddress:existingUserData.emailAddress ,error: "one of the mendatory field is missing", name: req.session.user})
             return
         }
 
         if((typeof userdata.firstName !== "string") || (/^ *$/.test(userdata.firstName))){
-            res.status(200).render("users/updateProfile", {profilePicture: existingUserData.profilePicture, firstName:existingUserData.firstName, lastName: existingUserData.lastName, biography: existingUserData.biography, gender:existingUserData.gender, location:existingUserData.location, phoneNumber:existingUserData.phoneNumber, emailAddress:existingUserData.emailAddress ,error: "Please Enter valid Firstname"})
+            res.status(200).render("users/updateProfile", {profilePicture: existingUserData.profilePicture, firstName:existingUserData.firstName, lastName: existingUserData.lastName, biography: existingUserData.biography, gender:existingUserData.gender, location:existingUserData.location, phoneNumber:existingUserData.phoneNumber, emailAddress:existingUserData.emailAddress ,error: "Please Enter valid Firstname", name: req.session.user})
             return
         }
 
         if((typeof userdata.lastName !== "string") || (/^ *$/.test(userdata.lastName))){
-            res.status(200).render("users/updateProfile", {profilePicture: existingUserData.profilePicture, firstName:existingUserData.firstName, lastName: existingUserData.lastName, biography: existingUserData.biography, gender:existingUserData.gender, location:existingUserData.location, phoneNumber:existingUserData.phoneNumber, emailAddress:existingUserData.emailAddress ,error: "Please Enter valid Lastname"})
+            res.status(200).render("users/updateProfile", {profilePicture: existingUserData.profilePicture, firstName:existingUserData.firstName, lastName: existingUserData.lastName, biography: existingUserData.biography, gender:existingUserData.gender, location:existingUserData.location, phoneNumber:existingUserData.phoneNumber, emailAddress:existingUserData.emailAddress ,error: "Please Enter valid Lastname", name: req.session.user})
             return
         }
 
         if((typeof userdata.biography !== "string") || (/^ *$/.test(userdata.biography))){
-            res.status(200).render("users/updateProfile", {profilePicture: existingUserData.profilePicture, firstName:existingUserData.firstName, lastName: existingUserData.lastName, biography: existingUserData.biography, gender:existingUserData.gender, location:existingUserData.location, phoneNumber:existingUserData.phoneNumber, emailAddress:existingUserData.emailAddress ,error: "Please Enter valid Biography"})
+            res.status(200).render("users/updateProfile", {profilePicture: existingUserData.profilePicture, firstName:existingUserData.firstName, lastName: existingUserData.lastName, biography: existingUserData.biography, gender:existingUserData.gender, location:existingUserData.location, phoneNumber:existingUserData.phoneNumber, emailAddress:existingUserData.emailAddress ,error: "Please Enter valid Biography", name: req.session.user})
             return
         }
 
         let phoneRe = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
         if((typeof userdata.phoneNumber !== "string") || (/^ *$/.test(userdata.phoneNumber) || !userdata.phoneNumber.match(phoneRe))){
-            res.status(200).render("users/updateProfile", {profilePicture: existingUserData.profilePicture, firstName:existingUserData.firstName, lastName: existingUserData.lastName, biography: existingUserData.biography, gender:existingUserData.gender, location:existingUserData.location, phoneNumber:existingUserData.phoneNumber, emailAddress:existingUserData.emailAddress ,error: "Please Enter valid phoneNumber"})
+            res.status(200).render("users/updateProfile", {profilePicture: existingUserData.profilePicture, firstName:existingUserData.firstName, lastName: existingUserData.lastName, biography: existingUserData.biography, gender:existingUserData.gender, location:existingUserData.location, phoneNumber:existingUserData.phoneNumber, emailAddress:existingUserData.emailAddress ,error: "Please Enter valid phoneNumber", name: req.session.user})
             return
         }
 
         if((typeof userdata.emailAddress !== "string") || (/^ *$/.test(userdata.emailAddress) || !validateEmail(userdata.emailAddress))){
-            res.status(200).render("users/updateProfile", {profilePicture: existingUserData.profilePicture, firstName:existingUserData.firstName, lastName: existingUserData.lastName, biography: existingUserData.biography, gender:existingUserData.gender, location:existingUserData.location, phoneNumber:existingUserData.phoneNumber, emailAddress:existingUserData.emailAddress ,error: "Please Enter valid Email"})
+            res.status(200).render("users/updateProfile", {profilePicture: existingUserData.profilePicture, firstName:existingUserData.firstName, lastName: existingUserData.lastName, biography: existingUserData.biography, gender:existingUserData.gender, location:existingUserData.location, phoneNumber:existingUserData.phoneNumber, emailAddress:existingUserData.emailAddress ,error: "Please Enter valid Email", name: req.session.user})
             return
         }
 
@@ -109,7 +109,7 @@ router.post('/updateProfile', upload.single('profilePicture'), async (req, res) 
 
         const userInfo = await usersData.updateUser(updatedUserinfo)
         const user = await usersData.getByUsername(userdata.username)
-        res.render("users/userProfile", {profilePicture: user.profilePicture, firstName: user.firstName, lastName: user.lastName, biography: user.biography, gender: user.gender, phoneNumber: user.phoneNumber, emailAddress: user.emailAddress, location: user.country})
+        res.render("users/userProfile", {profilePicture: user.profilePicture, firstName: user.firstName, lastName: user.lastName, biography: user.biography, gender: user.gender, phoneNumber: user.phoneNumber, emailAddress: user.emailAddress, location: user.country, name: req.session.user})
     }catch(err) {
       res.sendStatus(400);
     }
@@ -122,7 +122,7 @@ router.get('/profile', async (req, res) => {
     try{
         if(req.session.user){
             const userdata = await usersData.getByUsername(req.session.user)
-            res.render("users/userProfile", {profilePicture: userdata.profilePicture, firstName: userdata.firstName, lastName: userdata.lastName, biography: userdata.biography, gender: userdata.gender, phoneNumber: userdata.phoneNumber, emailAddress: userdata.emailAddress, location: userdata.country})
+            res.render("users/userProfile", {profilePicture: userdata.profilePicture, firstName: userdata.firstName, lastName: userdata.lastName, biography: userdata.biography, gender: userdata.gender, phoneNumber: userdata.phoneNumber, emailAddress: userdata.emailAddress, location: userdata.country, name: req.session.user})
         }
         else{
             res.render("users/error")
