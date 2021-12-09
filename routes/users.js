@@ -215,11 +215,13 @@ router.get('/',async (req, res) => {
 
 
 //-------------get SignUp Page-------------------//
-router. get('/signup',async (req, res) => {
+router. get('/signup',async (req, res) => { 
     if (req.session.user) {
         return res.redirect('/');
       } else {
-        res.render("users/signup",{title: "SIGNUP"});
+        const countryCodes = Object.keys(countries.countries);
+        const countryNames = countryCodes.map(code => countries.countries[code].name);
+        res.render("users/signup",{title: "SIGNUP", countryNames: countryNames});
       }     
   });
 //------------end of Get SignUp page--------------//

@@ -39,9 +39,19 @@
                 <input type="text" id = "phoneNumber" class="form__input"  placeholder="Phone Number" name="phoneNumber" required>
                 <div class="form__input-error-message"></div>
             </div>
-             <div class="form__input-group">
+             {{!-- <div class="form__input-group">
                  <label for="country">Country</label>
                 <input type="text" id ="country" class="form__input"  placeholder="Country" name="country" required>
+                <div class="form__input-error-message"></div>
+            </div> --}}
+            <div class="form__input-group">
+                <label for="country">Country</label>
+            <select id="country" class="form__input" placeholder="Country" name="country" required>
+                <option disabled selected hidden>Country</option>
+                {{#each countryNames}}
+                <option value="{{this}}">{{this}}</option>
+                {{/each}}
+            </select>
                 <div class="form__input-error-message"></div>
             </div>
             <div class="form__input-group">

@@ -130,6 +130,7 @@ router.post('/search', async (req, res) => {
 router.post('/:id', async (req, res) => {
   if(!req.session.user) {
     res.redirect(`/login`);
+    return
   }
 
   const title = req.body.postTitle;
