@@ -116,13 +116,13 @@ async function createUser(profilePicture, firstName, lastName, username, emailAd
     if (!countryNames.includes(country)) throw {message:`Please enter a valid country`, error: 400};
 
 
-    let gen = ["Female", "Male", "other", "female", "male", "Other"]
+    let gen = ["Female", "Male", "Other"]
 
     // if (gender !== "Female" || gender !== "Male" || gender !== "other") throw `Gender must be Male or Female or other`
     
     if(!gen.includes(gender)) throw {message:`Please enter valid gender`, error: 400};
     
-    if (userType !== "Patient" && userType !== "Doctor" && userType !== "patient" && userType !== "doctor") throw {message:`Usertype must be a patient or a doctor`, error: 400};
+    if (userType !== "Patient" && userType !== "Doctor") throw {message:`Usertype must be a patient or a doctor`, error: 400};
     try{
     if (!validateDate(dateOfBirth)) throw {
         message:`Please Enter valid date of birth`, error: 400};
@@ -232,25 +232,25 @@ async function updateUser(updatedData){
             if(!validateEmail(updatedData.emailAddress)) throw {message:`Please Enter valid Email Address`,error:400}
         }
 
-        // if(updatedData.country){
-        //     if(typeof updatedData.country !== "string") throw {message:'country must be string', error:400}
-            // if (/^ *$/.test(country)) throw {message: `country cannot be empty`, error:400}
-        //     const countryCodes = Object.keys(countries.countries);
-        //     const countryNames = countryCodes.map(code => countries.countries[code].name);
-        //     if (!countryNames.includes(country)) throw {message: `Please enter a valid country`, error:400}
-        // }
+        if(updatedData.country){
+            if(typeof updatedData.country !== "string") throw {message:'country must be string', error:400}
+            if (/^ *$/.test(updatedData.country)) throw {message: `country cannot be empty`, error:400}
+            const countryCodes = Object.keys(countries.countries);
+            const countryNames = countryCodes.map(code => countries.countries[code].name);
+            if (!countryNames.includes(updatedData.country)) throw {message: `Please enter a valid country`, error:400}
+        }
 
         if(updatedData.biography){
             if(typeof updatedData.biography !== "string") throw {message: 'biography must be string', status:400}
             if (/^ *$/.test(updatedData.biography)) throw {message: `biography cannot be empty`, status:400}
         }
 
-        // if(updatedData.gender){
-        //     if(typeof updatedData.gender !== "string") throw {message: 'gender must be string', error:400}
-        //     // if (/^ *$/.test(gender)) throw {message: `gender cannot be empty`, error:400}
-        //     let gen = ["Female", "Male", "other"]
-        //     if(!gen.includes(gender)) throw {message:`Please enter valid gender`, error: 400};
-        // }
+        if(updatedData.gender){
+            if(typeof updatedData.gender !== "string") throw {message: 'gender must be string', error:400}
+            if (/^ *$/.test(updatedData.gender)) throw {message: `gender cannot be empty`, error:400}
+            let gen = ["Female", "Male", "Other"]
+            if(!gen.includes(updatedData.gender)) throw {message:`Please enter valid gender`, error: 400};
+        }
 
         if(updatedData.phoneNumber){
             if(typeof updatedData.phoneNumber !== "string") throw {message: 'phoneNumber must be string', status:400}
@@ -272,11 +272,11 @@ async function updateUser(updatedData){
 
         const userCollection = await users()
 
-        // if(updatedData.emailAddress){
-        //     const lowerUser = emailAddress.toLowerCase()
-        //     const userexists = await userCollection.findOne({ emailAddress: lowerUser})
-        //     if(userexists) throw {message: `User with that email address already exists`, error:400}
-        // }
+        if(updatedData.emailAddress){
+            const lowerUser = updatedData.emailAddress.toLowerCase()
+            const userexists = await userCollection.findOne({ emailAddress: lowerUser})
+            if(userexists) throw {message: `User with that email address already exists`, error:400}
+        }
         // let updateId
     
         // try{
@@ -300,9 +300,9 @@ async function updateUser(updatedData){
             emailAddress: String,
             password: exisistingUser.password,
             phoneNumber: String,
-            country: exisistingUser.country,
+            country: String,
             biography: String,
-            gender: exisistingUser.gender,
+            gender: String,
             userType: exisistingUser.userType,
             dateOfBirth: exisistingUser.dateOfBirth
         }
@@ -341,6 +341,15 @@ async function updateUser(updatedData){
             }
         }
 
+        if(updatedData.country){
+            if(updatedData.country.trim() !== ""){
+                updatedUser.country = updatedData.country
+            }
+            else{
+                updatedUser.country = exisistingUser.country
+            }
+        }
+
         if(updatedData.phoneNumber){
             if(updatedData.phoneNumber.trim() !== ""){
                 updatedUser.phoneNumber = updatedData.phoneNumber
@@ -349,15 +358,6 @@ async function updateUser(updatedData){
                 updatedUser.phoneNumber = exisistingUser.phoneNumber
             }
         }
-
-        // if(updatedData.country){
-        //     if(updatedData.country.trim() !== ""){
-        //         updatedUser.country = updatedData.country
-        //     }
-        //     else{
-        //         updatedUser.country = exisistingUser.country
-        //     }
-        // }
 
         if(updatedData.biography){
             if(updatedData.biography.trim() !== ""){
@@ -368,14 +368,14 @@ async function updateUser(updatedData){
             }
         }
 
-        // if(updatedData.gender){
-        //     if(updatedData.gender.trim() !== ""){
-        //         updatedUser.gender = updatedData.gender
-        //     }
-        //     else{
-        //         updatedUser.gender = exisistingUser.gender
-        //     }
-        // }
+        if(updatedData.gender){
+            if(updatedData.gender.trim() !== ""){
+                updatedUser.gender = updatedData.gender
+            }
+            else{
+                updatedUser.gender = exisistingUser.gender
+            }
+        }
 
         const updatedInfo = await userCollection.updateOne({username: updatedData.username}, {$set: updatedUser});
         if (updatedInfo.matchedCount === 0 && updatedInfo.modifiedCount === 0) {

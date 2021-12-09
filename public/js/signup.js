@@ -204,9 +204,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 setInputError(inputElement, "Phone number must be of correct format and all numbers");
             }
 
-            let gen = ["Female", "Male", "other"]
+            let gen = ["Female", "Male", "Other"]
             if(e.target.id === "genderList" && !gen.includes(e.target.value)){
-                setInputError(inputElement, "Please enter valid gender");
+                setInputError(inputElement, "Please Enter valid gender");
             }
         
         
