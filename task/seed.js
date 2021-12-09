@@ -572,6 +572,94 @@ async function main() {
     console.log(e);
   }
 
+  try{
+    let newDisease = await dis.createDisease(
+      "Lung Cancer",
+      "Lung cancer is a type of cancer that begins in the lungs. Your lungs are two spongy organs in your chest that take in oxygen when you inhale and release carbon dioxide when you exhale. People who smoke have the greatest risk of lung cancer, though lung cancer can also occur in people who have never smoked. The risk of lung cancer increases with the length of time and number of cigarettes you've smoked. If you quit smoking, even after smoking for many years, you can significantly reduce your chances of developing lung cancer.",
+      ["A new cough that doesn't go away", "Coughing up blood, even a small amount", "Shortness of breath", "Chest pain", "Hoarseness", "Losing weight without trying", "Bone pain", "Headache"],
+      ["Don't smoke. If you've never smoked, don't start. Talk to your children about not smoking so that they can understand how to avoid this major risk factor for lung cancer.", 
+      "Avoid secondhand smoke. If you live or work with a smoker, urge him or her to quit.",
+      "Test your home for radon. Have the radon levels in your home checked, especially if you live in an area where radon is known to be a problem.",
+      "Avoid carcinogens at work. Take precautions to protect yourself from exposure to toxic chemicals at work. Follow your employer's precautions.",
+      "Eat a diet full of fruits and vegetables. Choose a healthy diet with a variety of fruits and vegetables. Food sources of vitamins and nutrients are best. Avoid taking large doses of vitamins in pill form, as they may be harmful.",
+      "Exercise most days of the week. If you don't exercise regularly, start out slowly. Try to exercise most days of the week."
+      ],
+      ["Methotrexate", "Docetaxel-Gemciabine regimen", "Bevacizumab", "Erlotinib", "Atezolizumab", "Nivolumab"],
+      ["cancer", "lung cancer", "lung diseases", "carcinoid", "lung", "SCLC", "NSCLC", "carcinoma", "lymphoma", "malignancy", "melanoma"]
+    )
+    console.log("Done seeding database");
+  }catch(e){
+    console.log(e);
+  }
+
+  try{
+    let newDisease = await dis.createDisease(
+      "Cirrhosis",
+      "Cirrhosis is a late stage of scarring (fibrosis) of the liver caused by many forms of liver diseases and conditions, such as hepatitis and chronic alcoholism. Each time your liver is injured — whether by disease, excessive alcohol consumption or another cause — it tries to repair itself. In the process, scar tissue forms. As cirrhosis progresses, more and more scar tissue forms, making it difficult for the liver to function (decompensated cirrhosis). Advanced cirrhosis is life-threatening.The liver damage done by cirrhosis generally can't be undone. But if liver cirrhosis is diagnosed early and the cause is treated, further damage can be limited and, rarely, reversed.",
+      ["Fatigue", "Easily bleeding or bruising", "Loss of appetite", "Nausea", "Swelling in your legs, feet or ankles (edema)", "Weight loss", "Itchy skin", "Yellow discoloration in the skin and eyes (jaundice)", "Fluid accumulation in your abdomen (ascites)", "Spiderlike blood vessels on your skin", "Redness in the palms of the hands", "For women, absent or loss of periods not related to menopause", "For men, loss of sex drive, breast enlargement (gynecomastia) or testicular atrophy", "Confusion, drowsiness and slurred speech (hepatic encephalopathy)"],
+      ["Do not drink alcohol if you have cirrhosis. If you have liver disease, you should avoid alcohol.", 
+      "Eat a healthy diet. Choose a plant-based diet that's full of fruits and vegetables. Select whole grains and lean sources of protein. Reduce the amount of fatty and fried foods you eat", 
+      "Maintain a healthy weight. An excess amount of body fat can damage your liver. Talk to your doctor about a weight-loss plan if you are obese or overweight",
+      "Reduce your risk of hepatitis. Sharing needles and having unprotected sex can increase your risk of hepatitis B and C. Ask your doctor about hepatitis vaccinations."],
+      ["Diuretic: Bumetanide, Spironolactone", "Ammonia Reducer: Lactulose", "Betablocker: Nadolol and Propranolol", "Antiviral drug: Lamivudine"],
+      ["cirrhosis", "liver disease", "fibrosis", "hepatitis", "fatty liver disease", "liver failure", "liver problems"]
+    ) 
+    console.log("Done seeding database");
+  }catch(e){
+    console.log(e);
+  }
+
+  try{
+    let newDisease = await dis.createDisease(
+      "Polio",
+      "Polio is a contagious viral illness that in its most severe form causes nerve injury leading to paralysis, difficulty breathing and sometimes death. In the U.S., the last case of naturally occurring polio was in 1979. Today, despite a worldwide effort to wipe out polio, poliovirus continues to affect children and adults in parts of Asia and Africa. The Centers for Disease Control and Prevention (CDC) advises taking precautions to protect yourself from polio if you're traveling anywhere there's a risk of polio. Adults who have been vaccinated who plan to travel to an area where polio is occurring should receive a booster dose of inactivated poliovirus vaccine (IPV). Immunity after a booster lasts a lifetime.",
+      ["Fever", "Sore throat", "Headache", "Vomiting", "Fatigue", "Back pain or stiffness", "Neck pain or stiffness", "Pain or stiffness in the arms or legs", "Muscle weakness or tenderness", "Loss of reflexes", "Severe muscle aches or weakness", "Loose and floppy limbs (flaccid paralysis)", "Sleep-related breathing disorders, such as sleep apnea", "Decreased tolerance of cold temperatures"],
+      ["The most effective way to prevent polio is vaccination.",
+      "IPV is safe for people with weakened immune systems, although it's not certain just how protective the vaccine is in cases of severe immune deficiency. Common side effects are pain and redness at the injection site."
+      ],
+      ["Nonsteroidal anti-inflammatory drug: Ibuprofen, Aspirin", "Analgesic: Acetaminophen"],
+      ["polio", "Poliomyelitis", "WPV", "viral disease", "contagious disease", "poliovirus", "infantile paralysis", "Heine-Medin disease"]
+    )
+    console.log("Done seeding database");
+  }catch(e){
+    console.log(e);
+  }
+
+  try{
+    let newDisease = await dis.createDisease(
+      "Chronic Kidney Disease ",
+      "Chronic kidney disease, also called chronic kidney failure, involves a gradual loss of kidney function. Your kidneys filter wastes and excess fluids from your blood, which are then removed in your urine. Advanced chronic kidney disease can cause dangerous levels of fluid, electrolytes and wastes to build up in your body. In the early stages of chronic kidney disease, you might have few signs or symptoms. You might not realize that you have kidney disease until the condition is advanced. Treatment for chronic kidney disease focuses on slowing the progression of kidney damage, usually by controlling the cause. But, even controlling the cause might not keep kidney damage from progressing. Chronic kidney disease can progress to end-stage kidney failure, which is fatal without artificial filtering (dialysis) or a kidney transplant.",
+      ["Nausea", "Vomiting", "Loss of appetite", "Fatigue and weakness", "Sleep problems", "Urinating more or less", "Decreased mental sharpness", "Muscle cramps", "Swelling of feet and ankles", "Dry, itchy skin", "High blood pressure (hypertension) that's difficult to control", "Shortness of breath, if fluid builds up in the lungs", "Chest pain, if fluid builds up around the lining of the heart"],
+      ["Follow instructions on over-the-counter medications. When using nonprescription pain relievers, such as aspirin, ibuprofen (Advil, Motrin IB, others) and acetaminophen (Tylenol, others), follow the instructions on the package. Taking too many pain relievers for a long time could lead to kidney damage.",
+      "Maintain a healthy weight. If you're at a healthy weight, maintain it by being physically active most days of the week. If you need to lose weight, talk with your doctor about strategies for healthy weight loss",
+      "Don't smoke. Cigarette smoking can damage your kidneys and make existing kidney damage worse. If you're a smoker, talk to your doctor about strategies for quitting. Support groups, counseling and medications can all help you to stop.",
+      "Manage your medical conditions with your doctor's help. If you have diseases or conditions that increase your risk of kidney disease, work with your doctor to control them. Ask your doctor about tests to look for signs of kidney damage."
+      ],
+      ["Vitamin: Calcitriol, Paricalcitol, Ergocalciferol", "Calcium Reducer: Cinacalcet", "Bone Marrow stimulant: Erythropoietin treatment, Darbepoetin alfa", "Diuretic: Bumetanide, Furosemide", "Dietary Supplements"],
+      ["CKD", "chronic kidney disease", "Chronic kidney failure", "Lupus nephritis", "Polycystic kidney disease", "kidney disease", "kidney failure", "kidney", "kidney infections"]
+    )
+    console.log("Done seeding database");
+  }catch(e){
+    console.log(e);
+  }
+
+  try{
+    let newDisease = await dis.createDisease(
+      "Cystic Fibrosis",
+      "Cystic fibrosis (CF) is an inherited disorder that causes severe damage to the lungs, digestive system and other organs in the body. Cystic fibrosis affects the cells that produce mucus, sweat and digestive juices. These secreted fluids are normally thin and slippery. But in people with CF, a defective gene causes the secretions to become sticky and thick. Instead of acting as lubricants, the secretions plug up tubes, ducts and passageways, especially in the lungs and pancreas. Although cystic fibrosis is progressive and requires daily care, people with CF are usually able to attend school and work. They often have a better quality of life than people with CF had in previous decades. Improvements in screening and treatments mean that people with CF now may live into their mid- to late 30s or 40s, and some are living into their 50s.",
+      ["Respiratory signs and symptoms", "A persistent cough that produces thick mucus (sputum)", "Wheezing", "Exercise intolerance", "Repeated lung infections", "Inflamed nasal passages or a stuffy nose", "Recurrent sinusitis", "Digestive signs and symptoms", "Foul-smelling, greasy stools", "Poor weight gain and growth", "Intestinal blockage, particularly in newborns (meconium ileus)", "Chronic or severe constipation, which may include frequent straining while trying to pass stool, eventually causing part of the rectum to protrude outside the anus (rectal prolapse)"],
+      ["If you or your partner has close relatives with cystic fibrosis, you both may choose to have genetic testing before having children. The test, which is performed in a lab on a sample of blood, can help determine your risk of having a child with CF.",
+      "If you're already pregnant and the genetic test shows that your baby may be at risk of cystic fibrosis, your doctor can conduct additional tests on your developing child.",
+      "Genetic testing isn't for everyone. Before you decide to be tested, you should talk to a genetic counselor about the psychological impact the test results might carry.",
+      ],
+      ["Dietary Supplement: Medium-chain triglyceride", "Antibiotics: Tobramycin, Azithromycin, Meropenem", "Penicillin: Piperacillin / Tazobactam", "Cough Medicine: Dornase alfa, Acetylcysteine"],
+      ["cystic fibrosis", "CF", "fibrosis", "Cystic fibrosis of pancreas", "Fibrocystic disease of pancreas", "Mucoviscidosis", "disease of pancreas", "mucoviscidosis of the pancreas", "pancreas fibrocystic disease"]
+    )
+    console.log("Done seeding database");
+  }catch(e){
+    console.log(e);
+  }
+
 
   // try {
   //   let newDisease = await dis.createDisease(
