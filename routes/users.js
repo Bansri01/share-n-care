@@ -221,6 +221,7 @@ router. get('/signup',async (req, res) => {
       } else {
         const countryCodes = Object.keys(countries.countries);
         const countryNames = countryCodes.map(code => countries.countries[code].name);
+        console.log(countryNames)
         res.render("users/signup",{title: "SIGNUP", countryNames: countryNames});
       }     
   });
@@ -229,10 +230,10 @@ router. get('/signup',async (req, res) => {
 
 //-------------Post Sign Up--------------------//
   router.post('/signup', upload.single('profilePicture'), async (req, res) => {
-    if (!req.file)  {
-        res.status(400).render('users/signup',{ title:"signUp",error: 'You must provide Profile picture'});
-        return;
-    }
+    // if (!req.file)  {
+    //     res.status(400).render('users/signup',{ title:"signUp",error: 'You must provide Profile picture'});
+    //     return;
+    // }
 
 
     if (!req.body.firstName )  {
@@ -432,7 +433,12 @@ router. get('/signup',async (req, res) => {
 
     try{
         const user_data = req.body;
-        user_data.profilePicture = req.file.filename;
+        if(req.file){
+            user_data.profilePicture = req.file.filename;
+        }
+        else{
+            user_data.profilePicture = null;
+        }
         const { profilePicture, firstName, lastName, username, emailAddress, password, phoneNumber, country, biography, gender, userType, dateOfBirth} = user_data;
         const postSignup = await usersData.createUser(profilePicture, firstName, lastName, username, emailAddress, password, phoneNumber, country, biography, gender, userType, dateOfBirth);
        
