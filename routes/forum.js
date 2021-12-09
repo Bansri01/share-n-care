@@ -5,6 +5,7 @@ const postData = data.posts;
 const commentData = data.comments;
 const diseaseData = data.diseases;
 const userData = data.users;
+const xss = require('xss');
 
 router.get('/:id', async (req, res) => {
   if(req.session.user) {
@@ -83,7 +84,7 @@ router.get('/post/:id', async (req, res) => {
 
 router.post('/search', async (req, res) => {
   if(req.session.user) {
-    const postName = req.body.postName;
+    const postName = xss(req.body.postName);
     if(postName.match(/^\s+$/g) || postName === "") {
       res.render('forum/search', {
         title: "Search Results",
@@ -104,7 +105,7 @@ router.post('/search', async (req, res) => {
       res.status(500).json({ error: e });
     }
   } else {
-    const postName = req.body.postName;
+    const postName = xss(req.body.postName);
     if(postName.match(/^\s+$/g) || postName === "") {
       res.render('forum/search', {
         title: "Search Results",
@@ -132,8 +133,8 @@ router.post('/:id', async (req, res) => {
     res.redirect(`/login`);
   }
 
-  const title = req.body.postTitle;
-  const content = req.body.postContent;
+  const title = xss(req.body.postTitle);
+  const content = xss(req.body.postContent);
   const postList = await postData.getAllPostsOfForum(req.params.id);
   const getDisease = await diseaseData.getDiseaseById(req.params.id);
 
@@ -177,7 +178,7 @@ router.post('/post/:id', async (req, res) => {
     res.redirect(`/login`);
   }
 
-  const content = req.body.commentContent;
+  const content = xss(req.body.commentContent);
   const userInfo = await userData.getByUsername(req.session.user);
   const userId = userInfo._id;
   const getPost = await postData.getPostById(req.params.id);
@@ -238,7 +239,7 @@ router.post('/delete/post/:id', async (req, res) => {
       if(userId === getPost.userId) {
         try {      
           const diseaseId = getPost.diseaseId;
-          const postId = req.body.postId;
+          const postId = xss(req.body.postId);
           await postData.deletePost(postId);
           res.redirect(`/forum/${diseaseId}`);
         } catch (e) {
@@ -280,7 +281,7 @@ router.post('/delete/comment/:id', async (req, res) => {
         const getComments = await commentData.getAllCommentsOfPost(postId);  
         if(userId === getcomment.userId) {
           try {
-            const commentId = req.body.commentId;
+            const commentId = xss(req.body.commentId);
             await commentData.deleteComment(commentId);
             res.redirect(`/forum/post/${postId}`);
           } catch (e) {
@@ -311,8 +312,8 @@ router.post('/like/:pid', async (req, res) => {
   }
   if(req.session.user) {
     try {
-      const pid = req.body.pid;
-      const uid = req.body.uid;
+      const pid = xss(req.body.pid);
+      const uid = xss(req.body.uid);
       const likeStatus = await postData.checkIsLike(pid, uid);
       if(likeStatus === 1) {
         await postData.updateIsLike(pid, uid, 2);
@@ -343,8 +344,8 @@ router.post('/dislike/:pid', async (req, res) => {
 
   if(req.session.user) {
     try {
-      const pid = req.body.pid;
-      const uid = req.body.uid;
+      const pid = xss(req.body.pid);
+      const uid = xss(req.body.uid);
       const likeStatus = await postData.checkIsLike(pid, uid);
       if(likeStatus === 1) {
         await postData.updateIsLike(pid, uid, 0);
@@ -373,8 +374,8 @@ router.post('/commentLike/:cid', async (req, res) => {
   }
   if(req.session.user) {
     try {
-      const cid = req.body.cid;
-      const uid = req.body.uid;
+      const cid = xss(req.body.cid);
+      const uid = xss(req.body.uid);
       const getcomment = await commentData.getCommentById(req.params.cid);
       const postId = getcomment.postId;
       const likeStatus = await commentData.checkIsLike(cid, uid);
@@ -406,8 +407,8 @@ router.post('/commentDislike/:cid', async (req, res) => {
 
   if(req.session.user) {
     try {
-      const cid = req.body.cid;
-      const uid = req.body.uid;
+      const cid = xss(req.body.cid);
+      const uid = xss(req.body.uid);
       const getcomment = await commentData.getCommentById(req.params.cid);
       const postId = getcomment.postId;
       const likeStatus = await commentData.checkIsLike(cid, uid);
