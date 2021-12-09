@@ -131,6 +131,7 @@ router.post('/search', async (req, res) => {
 router.post('/:id', async (req, res) => {
   if(!req.session.user) {
     res.redirect(`/login`);
+    return;
   }
 
   const title = xss(req.body.postTitle);
@@ -176,6 +177,7 @@ router.post('/:id', async (req, res) => {
 router.post('/post/:id', async (req, res) => {
   if(!req.session.user) {
     res.redirect(`/login`);
+    return;
   }
 
   const content = xss(req.body.commentContent);
@@ -258,6 +260,7 @@ router.post('/delete/post/:id', async (req, res) => {
       }
     } else {
       res.redirect(`/login`);
+      return;
     }
 });
 
@@ -300,6 +303,7 @@ router.post('/delete/comment/:id', async (req, res) => {
         }
       } else {
         res.redirect(`/login`);
+        return;
       } 
 });
 
@@ -330,6 +334,7 @@ router.post('/like/:pid', async (req, res) => {
     }
   } else {
     res.redirect(`/login`);
+    return;
   }
 });
 
@@ -362,6 +367,7 @@ router.post('/dislike/:pid', async (req, res) => {
     }
   } else {
     res.redirect(`/login`);
+    return;
   }
 });
 
@@ -394,6 +400,7 @@ router.post('/commentLike/:cid', async (req, res) => {
     }
   } else {
     res.redirect(`/login`);
+    return;
   }
 });
 
@@ -427,6 +434,7 @@ router.post('/commentDislike/:cid', async (req, res) => {
     }
   } else {
     res.redirect(`/login`);
+    return;
   }
 });
 
