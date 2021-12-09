@@ -1,6 +1,7 @@
 const dbConnection = require("../config/mongoConnection");
 const data = require("../data/");
 const dis = data.diseases;
+const user = data.users;
 const ObjectId  = require('mongodb').ObjectId;
 
 
@@ -29,7 +30,6 @@ async function main() {
     ["TB","Tuberculosis","Tuber","Active TB Disease","Miliary TB","Latent TB Infection","Phthisis"," scrofula","Active Tuberculosis","struma","pulmonary","Miliary Tuberculosis","Latent Tuberculosis","cough"]
 
       );
-      console.log("Done seeding database");
   } catch (e) {
     console.log(e);
   }
@@ -79,7 +79,6 @@ async function main() {
 "insulin dependent"]
 
       );
-      console.log("Done seeding database");
   } catch (e) {
     console.log(e);
   }
@@ -121,7 +120,6 @@ async function main() {
     ["Epilepsy","seizures","Convulsive seizures","convolutions","convolution","seizure","convulsion","stroke","attack","fit","collapse","paroxysm","tremor","contortion","stress","mental","brain","nervous system"]
 
       );
-      console.log("Done seeding database");
   } catch (e) {
     console.log(e);
   }
@@ -160,7 +158,6 @@ async function main() {
     "skin rashes","rashes","dark spots","spots","itching"]
 
       );
-      console.log("Done seeding database");
   } catch (e) {
     console.log(e);
   }
@@ -197,7 +194,6 @@ async function main() {
     ["arthroscope","ACL","anterior cruciate ligament","Ligament","ligament Tear","tear","Tissue Tear","Knee Pain","Knees","bones","Tenderness","tendon","reconstruct","ACL Reconstruction"]
 
       );
-      console.log("Done seeding database");
   } catch (e) {
     console.log(e);
   }
@@ -226,7 +222,6 @@ async function main() {
     ["hypertension","high blood pressure","stress","pressure","tension","Hyper","blood Pressure","sleep","no sleep"]
 
       );
-      console.log("Done seeding database");
   } catch (e) {
     console.log(e);
   }
@@ -261,7 +256,6 @@ async function main() {
     ["heart disease","heart attack","arrhythmia","heart failure","attack","heart","fainted","cardiovascular disease","arrest","cardiac arrest","chest pains","coronary","coronary infarction","stroke"]
 
       );
-      console.log("Done seeding database");
   } catch (e) {
     console.log(e);
   }
@@ -294,7 +288,6 @@ async function main() {
     ["Asthma","asthma attack","bronchial asthma","attack","bronchospasm","respiratory disease","respiratory disorder","respiratory illness","status asthmaticus","choking","exhausted"]
 
       );
-      console.log("Done seeding database");
   } catch (e) {
     console.log(e);
   }
@@ -328,7 +321,6 @@ async function main() {
     ["gout","gouty arthritis","crystalline arthritis","urarthritis","arthritis","gustation"]
 
       );
-      console.log("Done seeding database");
   } catch (e) {
     console.log(e);
   }
@@ -360,7 +352,6 @@ async function main() {
     ["hyperlipidemia","high cholesterol","hypercholesterolemia","lipemia","hyperlipaemia"]
 
       );
-      console.log("Done seeding database");
   } catch (e) {
     console.log(e);
   }
@@ -401,7 +392,6 @@ async function main() {
     ["Malaria","ague","jungle fever","marsh or swamp fever","paludism","Plasmodium falciparum","falciparum","Plasmodium malariae","Plasmodium"]
 
       );
-      console.log("Done seeding database");
   } catch (e) {
     console.log(e);
   }
@@ -434,7 +424,6 @@ async function main() {
     ["Chicken","Chicken Pox","Pox","Skin","Dots","Varicella","Zoster","Shingles","Varicella-Zoster"]
 
       );
-      console.log("Done seeding database");
   } catch (e) {
     console.log(e);
   }
@@ -496,7 +485,6 @@ async function main() {
     ["corona","covid","covid-19","coronavirus","virus","Sars","Sars-covid","omicron"]
 
       );
-      console.log("Done seeding database");
   } catch (e) {
     console.log(e);
   }
@@ -528,7 +516,6 @@ async function main() {
     ["small pox","small","pox"]
 
       );
-      console.log("Done seeding database");
   } catch (e) {
     console.log(e);
   }
@@ -567,7 +554,6 @@ async function main() {
     ["Alzheimer's","Alzheimer","presenile dementia","senile psychosis","psychosis","psych","mental","brain"]
 
       );
-      console.log("Done seeding database");
   } catch (e) {
     console.log(e);
   }
@@ -576,7 +562,15 @@ async function main() {
     let newDisease = await dis.createDisease(
       "Lung Cancer",
       "Lung cancer is a type of cancer that begins in the lungs. Your lungs are two spongy organs in your chest that take in oxygen when you inhale and release carbon dioxide when you exhale. People who smoke have the greatest risk of lung cancer, though lung cancer can also occur in people who have never smoked. The risk of lung cancer increases with the length of time and number of cigarettes you've smoked. If you quit smoking, even after smoking for many years, you can significantly reduce your chances of developing lung cancer.",
-      ["A new cough that doesn't go away", "Coughing up blood, even a small amount", "Shortness of breath", "Chest pain", "Hoarseness", "Losing weight without trying", "Bone pain", "Headache"],
+      ["A new cough that doesn't go away", 
+      "Coughing up blood, even a small amount", 
+      "Shortness of breath", 
+      "Chest pain", 
+      "Hoarseness", 
+      "Losing weight without trying", 
+      "Bone pain", 
+      "Headache"
+      ],
       ["Don't smoke. If you've never smoked, don't start. Talk to your children about not smoking so that they can understand how to avoid this major risk factor for lung cancer.", 
       "Avoid secondhand smoke. If you live or work with a smoker, urge him or her to quit.",
       "Test your home for radon. Have the radon levels in your home checked, especially if you live in an area where radon is known to be a problem.",
@@ -587,7 +581,6 @@ async function main() {
       ["Methotrexate", "Docetaxel-Gemciabine regimen", "Bevacizumab", "Erlotinib", "Atezolizumab", "Nivolumab"],
       ["cancer", "lung cancer", "lung diseases", "carcinoid", "lung", "SCLC", "NSCLC", "carcinoma", "lymphoma", "malignancy", "melanoma"]
     )
-    console.log("Done seeding database");
   }catch(e){
     console.log(e);
   }
@@ -596,7 +589,21 @@ async function main() {
     let newDisease = await dis.createDisease(
       "Cirrhosis",
       "Cirrhosis is a late stage of scarring (fibrosis) of the liver caused by many forms of liver diseases and conditions, such as hepatitis and chronic alcoholism. Each time your liver is injured — whether by disease, excessive alcohol consumption or another cause — it tries to repair itself. In the process, scar tissue forms. As cirrhosis progresses, more and more scar tissue forms, making it difficult for the liver to function (decompensated cirrhosis). Advanced cirrhosis is life-threatening.The liver damage done by cirrhosis generally can't be undone. But if liver cirrhosis is diagnosed early and the cause is treated, further damage can be limited and, rarely, reversed.",
-      ["Fatigue", "Easily bleeding or bruising", "Loss of appetite", "Nausea", "Swelling in your legs, feet or ankles (edema)", "Weight loss", "Itchy skin", "Yellow discoloration in the skin and eyes (jaundice)", "Fluid accumulation in your abdomen (ascites)", "Spiderlike blood vessels on your skin", "Redness in the palms of the hands", "For women, absent or loss of periods not related to menopause", "For men, loss of sex drive, breast enlargement (gynecomastia) or testicular atrophy", "Confusion, drowsiness and slurred speech (hepatic encephalopathy)"],
+      ["Fatigue", 
+      "Easily bleeding or bruising", 
+      "Loss of appetite", 
+      "Nausea", 
+      "Swelling in your legs, feet or ankles (edema)", 
+      "Weight loss", 
+      "Itchy skin", 
+      "Yellow discoloration in the skin and eyes (jaundice)", 
+      "Fluid accumulation in your abdomen (ascites)", 
+      "Spiderlike blood vessels on your skin", 
+      "Redness in the palms of the hands", 
+      "For women, absent or loss of periods not related to menopause", 
+      "For men, loss of sex drive, breast enlargement (gynecomastia) or testicular atrophy", 
+      "Confusion, drowsiness and slurred speech (hepatic encephalopathy)"
+      ],
       ["Do not drink alcohol if you have cirrhosis. If you have liver disease, you should avoid alcohol.", 
       "Eat a healthy diet. Choose a plant-based diet that's full of fruits and vegetables. Select whole grains and lean sources of protein. Reduce the amount of fatty and fried foods you eat", 
       "Maintain a healthy weight. An excess amount of body fat can damage your liver. Talk to your doctor about a weight-loss plan if you are obese or overweight",
@@ -604,7 +611,6 @@ async function main() {
       ["Diuretic: Bumetanide, Spironolactone", "Ammonia Reducer: Lactulose", "Betablocker: Nadolol and Propranolol", "Antiviral drug: Lamivudine"],
       ["cirrhosis", "liver disease", "fibrosis", "hepatitis", "fatty liver disease", "liver failure", "liver problems"]
     ) 
-    console.log("Done seeding database");
   }catch(e){
     console.log(e);
   }
@@ -613,14 +619,27 @@ async function main() {
     let newDisease = await dis.createDisease(
       "Polio",
       "Polio is a contagious viral illness that in its most severe form causes nerve injury leading to paralysis, difficulty breathing and sometimes death. In the U.S., the last case of naturally occurring polio was in 1979. Today, despite a worldwide effort to wipe out polio, poliovirus continues to affect children and adults in parts of Asia and Africa. The Centers for Disease Control and Prevention (CDC) advises taking precautions to protect yourself from polio if you're traveling anywhere there's a risk of polio. Adults who have been vaccinated who plan to travel to an area where polio is occurring should receive a booster dose of inactivated poliovirus vaccine (IPV). Immunity after a booster lasts a lifetime.",
-      ["Fever", "Sore throat", "Headache", "Vomiting", "Fatigue", "Back pain or stiffness", "Neck pain or stiffness", "Pain or stiffness in the arms or legs", "Muscle weakness or tenderness", "Loss of reflexes", "Severe muscle aches or weakness", "Loose and floppy limbs (flaccid paralysis)", "Sleep-related breathing disorders, such as sleep apnea", "Decreased tolerance of cold temperatures"],
+      ["Fever", 
+      "Sore throat", 
+      "Headache", 
+      "Vomiting", 
+      "Fatigue", 
+      "Back pain or stiffness", 
+      "Neck pain or stiffness", 
+      "Pain or stiffness in the arms or legs", 
+      "Muscle weakness or tenderness", 
+      "Loss of reflexes", 
+      "Severe muscle aches or weakness", 
+      "Loose and floppy limbs (flaccid paralysis)", 
+      "Sleep-related breathing disorders, such as sleep apnea", 
+      "Decreased tolerance of cold temperatures"
+      ],
       ["The most effective way to prevent polio is vaccination.",
       "IPV is safe for people with weakened immune systems, although it's not certain just how protective the vaccine is in cases of severe immune deficiency. Common side effects are pain and redness at the injection site."
       ],
       ["Nonsteroidal anti-inflammatory drug: Ibuprofen, Aspirin", "Analgesic: Acetaminophen"],
       ["polio", "Poliomyelitis", "WPV", "viral disease", "contagious disease", "poliovirus", "infantile paralysis", "Heine-Medin disease"]
     )
-    console.log("Done seeding database");
   }catch(e){
     console.log(e);
   }
@@ -629,7 +648,20 @@ async function main() {
     let newDisease = await dis.createDisease(
       "Chronic Kidney Disease ",
       "Chronic kidney disease, also called chronic kidney failure, involves a gradual loss of kidney function. Your kidneys filter wastes and excess fluids from your blood, which are then removed in your urine. Advanced chronic kidney disease can cause dangerous levels of fluid, electrolytes and wastes to build up in your body. In the early stages of chronic kidney disease, you might have few signs or symptoms. You might not realize that you have kidney disease until the condition is advanced. Treatment for chronic kidney disease focuses on slowing the progression of kidney damage, usually by controlling the cause. But, even controlling the cause might not keep kidney damage from progressing. Chronic kidney disease can progress to end-stage kidney failure, which is fatal without artificial filtering (dialysis) or a kidney transplant.",
-      ["Nausea", "Vomiting", "Loss of appetite", "Fatigue and weakness", "Sleep problems", "Urinating more or less", "Decreased mental sharpness", "Muscle cramps", "Swelling of feet and ankles", "Dry, itchy skin", "High blood pressure (hypertension) that's difficult to control", "Shortness of breath, if fluid builds up in the lungs", "Chest pain, if fluid builds up around the lining of the heart"],
+      ["Nausea", 
+      "Vomiting", 
+      "Loss of appetite", 
+      "Fatigue and weakness", 
+      "Sleep problems", 
+      "Urinating more or less", 
+      "Decreased mental sharpness", 
+      "Muscle cramps", 
+      "Swelling of feet and ankles", 
+      "Dry, itchy skin", 
+      "High blood pressure (hypertension) that's difficult to control", 
+      "Shortness of breath, if fluid builds up in the lungs", 
+      "Chest pain, if fluid builds up around the lining of the heart"
+      ],
       ["Follow instructions on over-the-counter medications. When using nonprescription pain relievers, such as aspirin, ibuprofen (Advil, Motrin IB, others) and acetaminophen (Tylenol, others), follow the instructions on the package. Taking too many pain relievers for a long time could lead to kidney damage.",
       "Maintain a healthy weight. If you're at a healthy weight, maintain it by being physically active most days of the week. If you need to lose weight, talk with your doctor about strategies for healthy weight loss",
       "Don't smoke. Cigarette smoking can damage your kidneys and make existing kidney damage worse. If you're a smoker, talk to your doctor about strategies for quitting. Support groups, counseling and medications can all help you to stop.",
@@ -638,7 +670,6 @@ async function main() {
       ["Vitamin: Calcitriol, Paricalcitol, Ergocalciferol", "Calcium Reducer: Cinacalcet", "Bone Marrow stimulant: Erythropoietin treatment, Darbepoetin alfa", "Diuretic: Bumetanide, Furosemide", "Dietary Supplements"],
       ["CKD", "chronic kidney disease", "Chronic kidney failure", "Lupus nephritis", "Polycystic kidney disease", "kidney disease", "kidney failure", "kidney", "kidney infections"]
     )
-    console.log("Done seeding database");
   }catch(e){
     console.log(e);
   }
@@ -647,7 +678,19 @@ async function main() {
     let newDisease = await dis.createDisease(
       "Cystic Fibrosis",
       "Cystic fibrosis (CF) is an inherited disorder that causes severe damage to the lungs, digestive system and other organs in the body. Cystic fibrosis affects the cells that produce mucus, sweat and digestive juices. These secreted fluids are normally thin and slippery. But in people with CF, a defective gene causes the secretions to become sticky and thick. Instead of acting as lubricants, the secretions plug up tubes, ducts and passageways, especially in the lungs and pancreas. Although cystic fibrosis is progressive and requires daily care, people with CF are usually able to attend school and work. They often have a better quality of life than people with CF had in previous decades. Improvements in screening and treatments mean that people with CF now may live into their mid- to late 30s or 40s, and some are living into their 50s.",
-      ["Respiratory signs and symptoms", "A persistent cough that produces thick mucus (sputum)", "Wheezing", "Exercise intolerance", "Repeated lung infections", "Inflamed nasal passages or a stuffy nose", "Recurrent sinusitis", "Digestive signs and symptoms", "Foul-smelling, greasy stools", "Poor weight gain and growth", "Intestinal blockage, particularly in newborns (meconium ileus)", "Chronic or severe constipation, which may include frequent straining while trying to pass stool, eventually causing part of the rectum to protrude outside the anus (rectal prolapse)"],
+      ["Respiratory signs and symptoms", 
+      "A persistent cough that produces thick mucus (sputum)", 
+      "Wheezing", 
+      "Exercise intolerance", 
+      "Repeated lung infections", 
+      "Inflamed nasal passages or a stuffy nose", 
+      "Recurrent sinusitis", 
+      "Digestive signs and symptoms", 
+      "Foul-smelling, greasy stools", 
+      "Poor weight gain and growth", 
+      "Intestinal blockage, particularly in newborns (meconium ileus)", 
+      "Chronic or severe constipation, which may include frequent straining while trying to pass stool, eventually causing part of the rectum to protrude outside the anus (rectal prolapse)"
+      ],
       ["If you or your partner has close relatives with cystic fibrosis, you both may choose to have genetic testing before having children. The test, which is performed in a lab on a sample of blood, can help determine your risk of having a child with CF.",
       "If you're already pregnant and the genetic test shows that your baby may be at risk of cystic fibrosis, your doctor can conduct additional tests on your developing child.",
       "Genetic testing isn't for everyone. Before you decide to be tested, you should talk to a genetic counselor about the psychological impact the test results might carry.",
@@ -655,37 +698,133 @@ async function main() {
       ["Dietary Supplement: Medium-chain triglyceride", "Antibiotics: Tobramycin, Azithromycin, Meropenem", "Penicillin: Piperacillin / Tazobactam", "Cough Medicine: Dornase alfa, Acetylcysteine"],
       ["cystic fibrosis", "CF", "fibrosis", "Cystic fibrosis of pancreas", "Fibrocystic disease of pancreas", "Mucoviscidosis", "disease of pancreas", "mucoviscidosis of the pancreas", "pancreas fibrocystic disease"]
     )
-    console.log("Done seeding database");
   }catch(e){
     console.log(e);
   }
 
+  console.log("Done seeding disease data")
 
-  // try {
-  //   let newDisease = await dis.createDisease(
-  //     "",
-  //     "",
-  //      ["","","","","","",""],
-      
-  //     ["",
-  //       "",
-  //      "",
-  //      "",
-  //      "",
-  //      ""
-  //     ],
-  //   ["",
-  //     "",
-  //     "",
-  //     ""],
-  //   ["","","","","",""]
+    try{
+      user1 = await user.createUser("user01.jpeg-1639017120258", "Bans", "Patel", "user01", "bpatel@gmail.com", "helloo12", "736-787-8373", "India", "Hello I am Bansri", "Female", "Doctor", "2021-11-27")
+  }catch(e){
+      console.log(e);
+  }
 
-  //     );
-  //     console.log("Done seeding database");
-  // } catch (e) {
-  //   console.log(e);
-  // }
+  try{
+      user2 = await user.createUser("user02.jpeg-1639017199758", "Krina", "Shah", "user02", "kshah@gmail.com", "true1234", "126-547-8373", "Zimbabwe", "Hello I am Krina. I am from Zimbabwe", "Female", "Patient", "2021-04-27")
+  }catch(e){
+      console.log(e);
+  }
 
+  try{
+      user3 = await user.createUser("RossGeller.jpeg-1639017318602", "Ross", "Geller", "user03", "rg123@gmail.com", "friends1234", "336-237-4673", "United States", "Hello I am Ross. I am from US", "Male", "Patient", "2021-12-04")
+  }catch(e){
+      console.log(e);
+  }
+
+  try{
+      user4 = await user.createUser("monica.jpeg-1639017441746", "Moneka", "Bing", "user04", "moneka03@gmail.com", "friends09", "543-217-4863", "China", "Hello I am Moneka. I am from China", "Female", "Doctor", "1971-04-09")
+  }catch(e){
+      console.log(e);
+  }
+
+  try{
+      user5 = await user.createUser("Lee-Min-ho.jpeg-1639017543030", "Lee", "Min Ho", "user05", "dhfjf@gmail.com", "flowers74", "436-256-4653", "South Korea", "Hello I am Lee. I am from SK", "Male", "Patient", "2021-12-03")
+  }catch(e){
+      console.log(e);
+  }
+
+  try{
+      user6 = await user.createUser("user06.jpeg-1639017613794", "Terry", "Smith", "user06", "terry8989@yahoo.com", "terryuser06", "4785468989", "South Africa", "Hello I am Terry. I like to skate. I want to go on a trip", "Male", "Doctor", "1990-03-11")
+  }catch(e){
+      console.log(e);
+  }
+
+  try{
+      user7 = await user.createUser("user07.jpeg-1639017688867", "Lyle", "Autin", "user07", "lyle09@rocket.co", "lyleuser@07", "(551)-789-5678", "Belgium", "Hello I am Lyle. I work at a construction company.", "Male", "Patient", "1986-11-27")
+  }catch(e){
+      console.log(e);
+  }
+
+  try{
+      user8 = await user.createUser("user08.jpeg-1639017757304", "Laura", "Langstass", "user08", "langstass67@mail.com", "laurauser@87", "(656)-989-2318", "Iceland", "Hello I am Laura. I like to workout and remain healthy. I am very health consious", "Female", "Patient", "1989-12-12")
+  }catch(e){
+      console.log(e);
+  }
+
+  try{
+      user9 = await user.createUser("JohnWick.png-1639017869801", "John", "Wick", "user09", "wick8989@mail.com", "wickuser@09", "7679090454", "Brazil", "Hello I am John. I am an actor. I like dogs", "Male", "Doctor", "1980-11-23")
+  }catch(e){
+      console.log(e);
+  }
+
+  try{
+      user10 = await user.createUser("user10.jpeg-1639017948313", "Kate", "Williams", "user10", "katew43@mail.com", "kateuser@10", "3468768989", "Kenya", "Hello I am Kate. I like travelling", "Female", "Patient", "1991-08-12")
+  }catch(e){
+      console.log(e);
+  }
+
+  try{
+      user11 = await user.createUser("user11.jpeg-1639018018451", "Maria", "Hernandez", "user11", "mher9090@hotspot.edu", "heruser@11", "323-987-5678", "Japan", "Hello I am Maria. I like to socialize", "Female", "Patient", "1991-09-15")
+  }catch(e){
+      console.log(e);
+  }
+
+  try{
+      user12 = await user.createUser("user12.jpeg-1639018099237", "Allie", "Parker", "user12", "alliep12@bits.edu", "alluser@12", "(898)-763-9092", "Argentina", "Hello I am Allie. I like to play volleyball. Also, I want to explore the world as much as I can", "Female", "Doctor", "1986-06-19")
+  }catch(e){
+      console.log(e);
+  }
+
+  try{
+      user13 = await user.createUser("user13.jpeg-1639018187974", "Shang", "Lee", "user13", "leeshang12@shanghaiu.edu", "shanguser@13", "8978908333", "China", "Hello I am Shang. I want to explore the world as much as I can. I like to read books", "Female", "Patient", "1975-04-12")
+  }catch(e){
+      console.log(e);
+  }
+
+  try{
+      user14 = await user.createUser("user14.jpeg-1639018255955", "Maya", "Moore", "user14", "mmoore43@gmail.com", "muser@14", "989-767-3456", "Jamaica", "Hello I am Maya. I love adventurous sports. I like to read books too", "Female", "Patient", "1972-02-11")
+  }catch(e){
+      console.log(e);
+  }
+
+  try{
+      user15 = await user.createUser("user15.jpeg-1639018337826", "Sarah", "Kyler", "user15", "sarahk@yahoo.com", "sarahuser@15", "5467894343", "Spain", "Hello I am Sarah. I am a college student. I like computers", "Female", "Patient", "1997-07-17")
+  }catch(e){
+      console.log(e);
+  }
+
+  try{
+      user16 = await user.createUser("user16.jpeg-1639018451856", "Eseed", "Badan", "user16", "Ebada96@pocket.in", "badanuser@16", "9085673343", "Turkey", "Hello I am Eseed Badan. I am a Software Developer at Microgadgets", "Male", "Patient", "1985-04-21")
+  }catch(e){
+      console.log(e);
+  }
+
+  try{
+      user17 = await user.createUser("ben.jpeg-1639018539470", "Ben", "Aflick", "user17", "benaf12@flock.com", "batmenuser@17", "6785673456", "Guatemala", "Hello I am Ben Aflick. I am the new Batmen", "Male", "Doctor", "1980-06-16")
+  }catch(e){
+      console.log(e);
+  }
+
+  try{
+      user18 = await user.createUser("user18.png-1639018644018", "Ken", "Goodson", "user18", "keng09@rocketmail.co.in", "gooduser@18", "9876789089", "Indonesia", "Hello I am Ken Goodson. I am a cardiologist", "Male", "Doctor", "1971-09-11")
+  }catch(e){
+      console.log(e);
+  }
+
+  try{
+      user19 = await user.createUser("user19.jpeg-1639018723574", "Charles", "Barkley", "user19", "charlesB90@yahoo.com", "charlesuser@19", "2346578776", "Australia", "Hello I am Charles. I like traveling. I aspire to be a doctor. I want to cure people from diseases", "Male", "Patient", "1995-05-29")
+  }catch(e){
+      console.log(e);
+  }
+
+  try{
+      user20 = await user.createUser("user20.jpeg-1639018797247", "Shawn", "Rodgers", "user20", "rodgers879@gmail.com", "rodgersuser@20", "8379086789", "Canada", "Hello I am Shawn. I like music. Music heals people", "Male", "Doctor", "1989-03-21")
+  }catch(e){
+      console.log(e);
+  }
+
+  console.log("Done seeding the Database")
 
   await dis.searchDisease("cancer");
   await dbConnection.closeConnection();
