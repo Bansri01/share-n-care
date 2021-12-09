@@ -170,6 +170,20 @@ router.get('/profile', async (req, res) => {
     }
 })
 //--------------End of get Profile----------------//
+
+
+router.get('/profile/:id', async (req, res) => {
+    try{
+        if(req.session.user){
+            const searchTerm = req.body.id
+            const data = await usersData.searchUser(searchTerm)
+            const userdata = await usersData.getByUsername(searchTerm)
+            res.render("users/searchProfile", {profilePicture: userdata.profilePicture, firstName: userdata.firstName, lastName: userdata.lastName, biography: userdata.biography, gender: userdata.gender, phoneNumber: userdata.phoneNumber, emailAddress: userdata.emailAddress, country: userdata.country, name: req.session.user} )
+        }
+    }catch(e){
+
+    }
+})
   
 //----------------function to validate Email---------------------------//
 function validateEmail(email) {

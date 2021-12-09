@@ -431,12 +431,37 @@ async function checkUser(username, password){
 
 }
 
+async function searchUser(searchTerm){
+    if(searchTerm==null || searchTerm==undefined)
+    {
+        throw {message: `Search Term must be provided in the function`, status: 400};
+    }
+
+    if(typeof(searchTerm)!=='string'){
+        throw {message: 'The searchTerm should be string. No Other Datatype is allowed!', status: 400}
+    }
+
+    if(/^ *$/.test(searchTerm)){
+        throw {message: `Enter Something to search`}
+    }
+
+    const userCollection = await users()
+    let searchLower = searchTerm.toLowerCase()
+
+    const user = await getByUsername(searchLower)
+
+    return `${user.firstName} `+ `${user.lastName}`
+
+}
+
+
 module.exports = {
     createUser,
     get,
     updateUser,
     checkUser,
-    getByUsername
+    getByUsername,
+    searchUser
 }
 
 
