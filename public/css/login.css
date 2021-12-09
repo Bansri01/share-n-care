@@ -224,3 +224,26 @@ select {
 .not-found{
     color:var(--color-error) ;
 }
+
+#Second {
+    margin-top: 80px;
+}
+
+.search_label{
+    font-size: 20px;
+}
+
+.disease_search{
+    margin-top: 10px;
+}
+
+
+#disease_list{
+    font-size: 20px;
+    color: black;
+    text-decoration: none;
+}
+
+#disease_list:hover {
+    color: blue;
+  }
