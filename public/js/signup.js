@@ -105,11 +105,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-
-
-
-
-
     document.querySelectorAll(".form__input").forEach(inputElement => {
         inputElement.addEventListener("blur", e => {
             
@@ -119,7 +114,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (e.target.id === "lastName" && !e.target.value )  {
                 setInputError(inputElement, "You must provide profile Last Name");
             }
-            if (e.target.id === "signupUsername" && !e.target.value )  {
+            if (e.target.id === "username" && !e.target.value )  {
                 setInputError(inputElement, "You must provide profile Username");
             }
             if (e.target.id === "emailAddress" && !e.target.value )  {
@@ -134,7 +129,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (e.target.id === "country" && !e.target.value )  {
                 setInputError(inputElement, "You must provide profile Country");
             } 
-            if (e.target.id === "Biography" && !e.target.value )  {
+            if (e.target.id === "biography" && !e.target.value )  {
                 setInputError(inputElement, "You must provide profile Biography");
             }
             if (e.target.id === "genderList" && !e.target.value )  {
@@ -153,7 +148,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (e.target.id === "lastName" && (/^ *$/.test(e.target.value)))  {
             setInputError(inputElement, "Lastname cannot be empty");
             } 
-            if (e.target.id === "signupUsername" && (/^ *$/.test(e.target.value)))  {
+            if (e.target.id === "username" && (/^ *$/.test(e.target.value)))  {
                 setInputError(inputElement, "signupUsername cannot be empty");
             }
             if (e.target.id === "emailAddress" && (/^ *$/.test(e.target.value)))  {
@@ -168,7 +163,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (e.target.id === "country" && (/^ *$/.test(e.target.value)))  {
                 setInputError(inputElement, "country cannot be empty");
             }
-            if (e.target.id === "Biography" && (/^ *$/.test(e.target.value)))  {
+            if (e.target.id === "biography" && (/^ *$/.test(e.target.value)))  {
                 setInputError(inputElement, "Biography cannot be empty");
             } 
             if (e.target.id === "genderList" && (/^ *$/.test(e.target.value)))  {
@@ -181,10 +176,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 setInputError(inputElement, "dateOfBirth cannot be empty");
             }   
 
-            if (e.target.id === "signupUsername" && (/[^A-Za-z0-9]/g.test(e.target.value)))  {
+            if (e.target.id === "username" && (/[^A-Za-z0-9]/g.test(e.target.value)))  {
                 setInputError(inputElement, "Username should only have numbers and alphabets");
             }
-            if(e.target.id === "signupUsername" && e.target.value.length < 4){
+            if(e.target.id === "username" && e.target.value.length < 4){
                 setInputError(inputElement, "Username should have atleast 4 characters");
             }
             if(e.target.id === "emailAddress" && !validateEmail(e.target.value)){
