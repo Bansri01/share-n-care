@@ -180,16 +180,35 @@ router.get('/profile', async (req, res) => {
 
 
 router.get('/profile/:id', async (req, res) => {
-    try{
-        if(req.session.user){
-            const searchTerm = req.body.id
-            const data = await usersData.searchUser(searchTerm)
-            const userdata = await usersData.getByUsername(searchTerm)
-            res.render("users/searchProfile", {profilePicture: userdata.profilePicture, firstName: userdata.firstName, lastName: userdata.lastName, biography: userdata.biography, gender: userdata.gender, phoneNumber: userdata.phoneNumber, emailAddress: userdata.emailAddress, country: userdata.country, name: req.session.user} )
-        }
-    }catch(e){
+    serchTerm = req.params.id
 
+    try{
+    const profile_list = await usersData.searchUser(serchTerm)
+    return res.json(profile_list);}
+    catch(e)
+    {
+        console.log(e)
+        
     }
+
+})
+
+router.get('/searchProfile/:id', async (req, res) => {
+    try{
+    if(req.session.user){
+      
+        const searchTerm = req.params.id
+        console.log(searchTerm)
+        const userdata = await usersData.getByUsername(searchTerm)
+        res.render("users/searchProfile", {profilePicture: userdata.profilePicture, firstName: userdata.firstName, lastName: userdata.lastName, biography: userdata.biography, gender: userdata.gender, phoneNumber: userdata.phoneNumber, emailAddress: userdata.emailAddress, country: userdata.country, name: req.session.user} )
+    }
+    else{
+        res.redirect("/login");
+    }
+}catch(e){
+    console.log(e)
+}
+
 })
   
 //----------------function to validate Email---------------------------//
