@@ -741,7 +741,7 @@ async function main() {
   }
 
   try{
-      user7 = await user.createUser("user07.jpeg-1639017688867", "Lyle", "Autin", "user07", "lyle09@rocket.co", "lyleuser@07", "(551)-789-5678", "Belgium", "Hello I am Lyle. I work at a construction company.", "Male", "Patient", "1986-11-27")
+      user7 = await user.createUser("user07.jpeg-1639017688867", "Lyle", "Autin", "user07", "lyle09@rocket.co", "lyleuser@07", "(551)-789-5678", "Belgium", "Hello I am Lyle. I work at a construction company.", "Other", "Patient", "1986-11-27")
   }catch(e){
       console.log(e);
   }
@@ -813,7 +813,7 @@ async function main() {
   }
 
   try{
-      user19 = await user.createUser("user19.jpeg-1639018723574", "Charles", "Barkley", "user19", "charlesB90@yahoo.com", "charlesuser@19", "2346578776", "Australia", "Hello I am Charles. I like traveling. I aspire to be a doctor. I want to cure people from diseases", "Male", "Patient", "1995-05-29")
+      user19 = await user.createUser("user19.jpeg-1639018723574", "Charles", "Barkley", "user19", "charlesB90@yahoo.com", "charlesuser@19", "2346578776", "Australia", "Hello I am Charles. I like traveling. I aspire to be a doctor. I want to cure people from diseases", "Other", "Patient", "1995-05-29")
   }catch(e){
       console.log(e);
   }

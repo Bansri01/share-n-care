@@ -198,9 +198,13 @@ router.get('/searchProfile/:id', async (req, res) => {
     if(req.session.user){
       
         const searchTerm = req.params.id
-        console.log(searchTerm)
-        const userdata = await usersData.getByUsername(searchTerm)
-        res.render("users/searchProfile", {profilePicture: userdata.profilePicture, firstName: userdata.firstName, lastName: userdata.lastName, biography: userdata.biography, gender: userdata.gender, phoneNumber: userdata.phoneNumber, emailAddress: userdata.emailAddress, country: userdata.country, name: req.session.user} )
+        if(searchTerm === req.session.user){
+            res.redirect("/profile")
+        }
+        else{
+            const userdata = await usersData.getByUsername(searchTerm)
+            res.render("users/searchProfile", {profilePicture: userdata.profilePicture, firstName: userdata.firstName, lastName: userdata.lastName, biography: userdata.biography, gender: userdata.gender, phoneNumber: userdata.phoneNumber, emailAddress: userdata.emailAddress, country: userdata.country, name: req.session.user} )
+        }
     }
     else{
         res.redirect("/login");
