@@ -27,7 +27,7 @@ async function main() {
       "rifampin (RIF)",
       "ethambutol (EMB)",
       "pyrazinamide (PZA)"],
-    ["TB","Tuberculosis","Tuber","Active TB Disease","Miliary TB","Latent TB Infection","Phthisis"," scrofula","Active Tuberculosis","struma","pulmonary","Miliary Tuberculosis","Latent Tuberculosis","cough"]
+    ["TB","Tuberculosis","Tuber","Active TB Disease","Miliary TB","Latent TB Infection","Phthisis"," scrofula","Active Tuberculosis","struma","pulmonary","Miliary Tuberculosis","Latent Tuberculosis","cough","disease"]
 
       );
   } catch (e) {
@@ -76,7 +76,7 @@ async function main() {
     " Prediabetes",
   "diabetics",
 "insulin",
-"insulin dependent"]
+"insulin dependent","disease"]
 
       );
   } catch (e) {
@@ -117,7 +117,7 @@ async function main() {
       "Keppra",
       "Frisium",
     "Rivotril"],
-    ["Epilepsy","seizures","Convulsive seizures","convolutions","convolution","seizure","convulsion","stroke","attack","fit","collapse","paroxysm","tremor","contortion","stress","mental","brain","nervous system"]
+    ["Epilepsy","seizures","Convulsive seizures","convolutions","convolution","seizure","convulsion","stroke","attack","fit","collapse","paroxysm","tremor","contortion","stress","mental","brain","nervous system","disease"]
 
       );
   } catch (e) {
@@ -155,7 +155,7 @@ async function main() {
     "Cryotherapy"],
     ["skin cancer","cancer","skin","Basal cell carcinoma.","carcinoma",
     "Melanoma","Squamous cell carcinoma","Allergy","Skin Allergy","Germs",
-    "skin rashes","rashes","dark spots","spots","itching"]
+    "skin rashes","rashes","dark spots","spots","itching","disease"]
 
       );
   } catch (e) {
@@ -219,7 +219,7 @@ async function main() {
 "angiotensin-converting enzyme (ACE) inhibitors",
 "angiotensin receptor blockers"
 ],
-    ["hypertension","high blood pressure","stress","pressure","tension","Hyper","blood Pressure","sleep","no sleep"]
+    ["hypertension","high blood pressure","stress","pressure","tension","Hyper","blood Pressure","sleep","no sleep","disease"]
 
       );
   } catch (e) {
@@ -253,7 +253,7 @@ async function main() {
       "Diuretics",
       "Vasodilator"
       ],
-    ["heart disease","heart attack","arrhythmia","heart failure","attack","heart","fainted","cardiovascular disease","arrest","cardiac arrest","chest pains","coronary","coronary infarction","stroke"]
+    ["heart disease","heart attack","arrhythmia","heart failure","attack","heart","fainted","cardiovascular disease","arrest","cardiac arrest","chest pains","coronary","coronary infarction","stroke","disease"]
 
       );
   } catch (e) {
@@ -482,7 +482,7 @@ async function main() {
     "Ivermectin. Ivermectin isn't a drug for treating viruses and the FDA hasn’t approved use of this drug to treat or prevent COVID-19. Taking large doses of this drug can cause serious harm. Don't use medications intended for animals on yourself.",
     "Hydroxychloroquine and chloroquine. These malaria drugs were authorized for emergency use by the FDA during the COVID-19 pandemic. However, the FDA withdrew that authorization when data analysis showed that the drugs are not effective for treating COVID-19. They can also cause serious heart problems.",
     "Drugs to prevent COVID-19. Researchers are studying drugs to prevent COVID-19 before and after exposure to the virus."],
-    ["corona","covid","covid-19","coronavirus","virus","Sars","Sars-covid","omicron"]
+    ["corona","covid","covid-19","coronavirus","virus","Sars","Sars-covid","omicron","disease"]
 
       );
   } catch (e) {
@@ -513,7 +513,7 @@ async function main() {
       "TEMBEXA",
       "brincidofovir ",
       "Cidofovir"],
-    ["small pox","small","pox"]
+    ["small pox","small","pox","disease"]
 
       );
   } catch (e) {
@@ -551,7 +551,7 @@ async function main() {
     ["Cholinesterase inhibitors",
       "Memantine",
       "MCI"],
-    ["Alzheimer's","Alzheimer","presenile dementia","senile psychosis","psychosis","psych","mental","brain"]
+    ["Alzheimer's","Alzheimer","presenile dementia","senile psychosis","psychosis","psych","mental","brain","disease"]
 
       );
   } catch (e) {
@@ -579,7 +579,7 @@ async function main() {
       "Exercise most days of the week. If you don't exercise regularly, start out slowly. Try to exercise most days of the week."
       ],
       ["Methotrexate", "Docetaxel-Gemciabine regimen", "Bevacizumab", "Erlotinib", "Atezolizumab", "Nivolumab"],
-      ["cancer", "lung cancer", "lung diseases", "carcinoid", "lung", "SCLC", "NSCLC", "carcinoma", "lymphoma", "malignancy", "melanoma"]
+      ["cancer", "lung cancer", "lung diseases", "carcinoid", "lung", "SCLC", "NSCLC", "carcinoma", "lymphoma", "malignancy", "melanoma","disease"]
     )
   }catch(e){
     console.log(e);
@@ -609,7 +609,7 @@ async function main() {
       "Maintain a healthy weight. An excess amount of body fat can damage your liver. Talk to your doctor about a weight-loss plan if you are obese or overweight",
       "Reduce your risk of hepatitis. Sharing needles and having unprotected sex can increase your risk of hepatitis B and C. Ask your doctor about hepatitis vaccinations."],
       ["Diuretic: Bumetanide, Spironolactone", "Ammonia Reducer: Lactulose", "Betablocker: Nadolol and Propranolol", "Antiviral drug: Lamivudine"],
-      ["cirrhosis", "liver disease", "fibrosis", "hepatitis", "fatty liver disease", "liver failure", "liver problems"]
+      ["cirrhosis", "liver disease", "fibrosis", "hepatitis", "fatty liver disease", "liver failure", "liver problems","disease"]
     ) 
   }catch(e){
     console.log(e);

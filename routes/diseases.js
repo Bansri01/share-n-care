@@ -11,9 +11,13 @@ const router = express.Router();
 
 router.get('/:id', async (req, res) => {
     serchTerm = req.params.id
-
+    try{
     const disease_list = await diseaseData.searchDisease(serchTerm)
     return res.json(disease_list);
+    }catch(e)
+    {
+      console.log(e)
+    }
 })
 
 router.get('/diseaseID/:id', async (req, res) => {

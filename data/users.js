@@ -192,7 +192,7 @@ async function get(id){
 }
 
 async function getByUsername(username){
-    if(!username) throw {message: `You must provide a proper id`, error:400}
+    if(!username) throw {message: `You must provide a proper Username`, error:400}
     if(typeof username != 'string') throw {message: `${username} is not string`, error:400}
     if(/^ *$/.test(username)) throw {message: `username with just empty spaces is not valid`, error:400}
 
@@ -448,9 +448,17 @@ async function searchUser(searchTerm){
     const userCollection = await users()
     let searchLower = searchTerm.toLowerCase()
 
-    const user = await getByUsername(searchLower)
+    const user = await userCollection.findOne({ username: searchLower})
 
-    return `${user.firstName} `+ `${user.lastName}`
+    if(user)
+    {
+        return {firstName:user.firstName,lastName:user.lastName,username:user.username}
+    }
+    else
+    {
+        return null;
+    }
+
 
 }
 
