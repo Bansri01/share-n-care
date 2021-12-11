@@ -7,7 +7,11 @@
       <br/><br/>
         <div class="panel panel-default">
           <div class="panel-body text-center">
-           <img src="../public/images/users/{{profilePicture}}" class="img-circle profile-avatar" alt="User avatar">
+            {{#if profilePicture}}
+            <img src="../public/images/users/{{profilePicture}}" class="img-circle profile-avatar" alt="User avatar">
+            {{else}}
+            <img src="../public/images/users/avatar-profile.jpeg" class="img-circle profile-avatar" alt="User avatar">
+            {{/if}}
             <label for="profilePicture"> Upload Profile: </label>
             <input type="file" id="profilePicture" name="profilePicture" accept="image/*">
           </div>
