@@ -1,27 +1,33 @@
-<link rel="stylesheet" href= "/public/css/forum.css">
-
 <main>
  <nav class="navbar navbar-light bg-light">
   <form class="form-inline" id="searchForm" method="POST" action="/forum/search">
-    <label for="search-term">Search Posts</label>
-    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="search-term" name="postName">
-    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="search-submit">Search</button>
+    <label for="searchPost">Search Posts</label>
+    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="searchPost" name="postName">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="searchSubmit">Search</button>
   </form>
 </nav>
+{{!-- <p class="errors" id="searchError" hidden></p> --}}
+    <p class="errors" id="searchError"></p>
+
+
+
 
 <h1 class="pageTitle">{{forumName}}</h1>
     {{#if hasError}}
     <p class="errors">{{error}}</p>
     {{/if}}
+
     <form id="addNewPost" method="POST" action="/forum/{{getDiseaseId}}">
         <label for="postTitle">Post title</label>
         </br>
         <input class="form-control" type="text" id="postTitle" name="postTitle"/>
         </br>
+        <p class="errors" id="postTitleError"></p>
         <label for="postContent">Post content</label>
         </br>
         <textarea class="form-control" type="text" id="postContent" name="postContent"></textarea>
         </br>
+        <p class="errors" id="postContentError"></p>
         <button type="submit" class="btn btn-primary btn-lg btn-block" name="postSubmit">Post</button>
     </form>
 
@@ -42,5 +48,7 @@
     {{/if}}
 </main>
 
+<link rel="stylesheet" href= "/public/css/forum.css">
+<script src="/public/js/forum.js"></script>
 
 

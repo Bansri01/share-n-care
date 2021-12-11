@@ -54,6 +54,7 @@ router.get('/post/:id', async (req, res) => {
             getComments: getComments,
             isPostOwner: true,
             userId: userId,
+            diseaseId: getPost.diseaseId
           });
         } else {
           res.render('forum/post', {
@@ -62,6 +63,7 @@ router.get('/post/:id', async (req, res) => {
             getPost: getPost,
             getComments: getComments,
             userId: userId,
+            diseaseId: getPost.diseaseId
           });
         }
     } catch (e) {
@@ -75,6 +77,7 @@ router.get('/post/:id', async (req, res) => {
         title: getPost.title,
         getPost: getPost,
         getComments: getComments,
+        diseaseId: getPost.diseaseId
       });
     } catch (e) {
       res.status(500).json({ error: e });
