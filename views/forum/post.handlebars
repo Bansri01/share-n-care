@@ -101,7 +101,7 @@
 
     <form id="addNewComment" method="POST" action="/forum/post/{{getPost._id}}">
         <label for="commentContent"></label>
-        <textarea class="form-control" type="text" id="commentContent" name="commentContent"></textarea>
+        <textarea class="form-control" type="text" placeholder="The content of the comment" id="commentContent" name="commentContent"></textarea>
         <p class="errors" id="commentContentError"></p>
         <button type="submit" class="btn btn-primary btn-lg btn-block" name="comment-submit">Add a Comment</button>
     </form>
