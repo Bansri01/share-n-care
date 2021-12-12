@@ -228,7 +228,10 @@ select {
     color:var(--color-error) ;
 }
 
-#Second {
+#Second1 {
+    margin-top: 80px;
+}
+#Second2 {
     margin-top: 80px;
 }
 
@@ -274,4 +277,12 @@ select {
     background: #eeeeee;
     transition: background 0.2s, border-color 0.2s;
 
+}
+
+.mainDisease{
+    overflow:hidden;
+}
+
+.DD{
+    font-size: 2rem;
 }

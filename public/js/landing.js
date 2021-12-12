@@ -17,7 +17,12 @@
       {
         $('#error').text("The searchTerm cannot be empty spaces or null").show()
         $('#error2').hide()
-        
+        return
+      }
+      if(/^[#\s]{1,}$/.test(st))
+      {
+        $('#error').text("Sorry No Match Found.Please try again!").show()
+        $('#error2').hide()
       }
       else{
         resultContainer.empty()
@@ -62,6 +67,12 @@
       if(/^ *$/.test(st))
     {
       $('#error2').text("The searchTerm cannot be empty spaces or null").show()
+      $('#error').hide()
+      return
+    }
+    else if(/^[#\s]{1,}$/.test(st))
+    {
+      $('#error2').text("Sorry No Match Found.Please try again!").show()
       $('#error').hide()
     }
     else{
