@@ -74,9 +74,11 @@ function clearInputError(inputElement) {
 
 document.addEventListener("DOMContentLoaded", () => {
     const updateForm = document.querySelector("#form-horizontal");
+    console.log("form")
 
-    document.querySelectorAll(".form-group").forEach(inputElement => {
+    document.querySelectorAll(".form-control").forEach(inputElement => {
         inputElement.addEventListener("blur", e => {
+            console.log("form1")
             
             if (e.target.id == "firstName" && !e.target.value )  {
                 setInputError(inputElement, "You must provide profile First Name");
@@ -116,10 +118,10 @@ document.addEventListener("DOMContentLoaded", () => {
             if (e.target.id === "country" && (/^ *$/.test(e.target.value)))  {
                 setInputError(inputElement, "country cannot be empty");
             }
-            if (e.target.id === "Biography" && (/^ *$/.test(e.target.value)))  {
+            if (e.target.id === "biography" && (/^ *$/.test(e.target.value)))  {
                 setInputError(inputElement, "Biography cannot be empty");
             } 
-            if (e.target.id === "genderList" && (/^ *$/.test(e.target.value)))  {
+            if (e.target.id === "gender" && (/^ *$/.test(e.target.value)))  {
                 setInputError(inputElement, "genderList cannot be empty");
             } 
 

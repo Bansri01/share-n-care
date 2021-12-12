@@ -3,8 +3,9 @@
 <div class="container bootstrap snippets bootdeys">
 <div class="row">
   <div class="col-xs-12 col-sm-9">
-    <form class="form-horizontal" method="POST" action="/updateProfile" enctype="multipart/form-data">
+    <form class="form-horizontal" id="form-horizontal" method="POST" action="/updateProfile" enctype="multipart/form-data">
       <br/><br/>
+         <div class="form__message form__message--error"></div>
         <div class="panel panel-default">
           <div class="panel-body text-center">
             {{#if profilePicture}}
