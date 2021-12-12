@@ -71,3 +71,7 @@ body{
     resize: none;
 
   }
+
+  .updateError{
+    color: #FF0000
+  }
