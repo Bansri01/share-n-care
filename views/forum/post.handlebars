@@ -7,16 +7,16 @@
 
             {{#if name}}
              <form id="likePost" method="POST" action="/forum/like/{{getPost._id}}">
-                <input type="text" id="pid" name="pid" value={{getPost._id}} hidden/>
-                <input type="text" id="uid" name="uid" value={{userId}} hidden/>
+                <input type="text" id="pid1" name="pid" value={{getPost._id}} hidden/>
+                <input type="text" id="uid1" name="uid" value={{userId}} hidden/>
                 <button type="submit" class="btn btn-link" name="like">
                     <i id="up-{{getPost._id}}" class="likebtn fa fa-thumbs-o-up"></i>
                     <span class="likes">{{getPost.likes.length}}</span>
                 </button>
             </form>
             <form id="dislikePost" method="POST" action="/forum/dislike/{{getPost._id}}">
-                <input type="text" id="pid" name="pid" value={{getPost._id}} hidden/>
-                <input type="text" id="uid" name="uid" value={{userId}} hidden/>
+                <input type="text" id="pid2" name="pid" value={{getPost._id}} hidden/>
+                <input type="text" id="uid2" name="uid" value={{userId}} hidden/>
                 <button type="submit" class="btn btn-link" name="dislike">
                     <i id="down-{{getPost._id}}" class="dislikebtn fa fa-thumbs-o-down"></i>
                     <span class="dislikes">{{getPost.dislikes.length}}</span>
@@ -54,16 +54,16 @@
 
                     {{#if ../name}}
                     <form method="POST" action="/forum/commentLike/{{this._id}}">
-                        <input type="text" id="cid" name="cid" value={{this._id}} hidden/>
-                        <input type="text" id="uid" name="uid" value={{../userId}} hidden/>
+                        <input type="text" id="cid1" name="cid" value={{this._id}} hidden/>
+                        <input type="text" id="uid3" name="uid" value={{../userId}} hidden/>
                         <button type="submit" class="btn btn-link" name="like">
                             <i id="up-{{this._id}}" class="likebtn fa fa-thumbs-o-up"></i>
                             <span class="likes">{{this.likes.length}}</span>
                         </button>
                     </form>
                     <form method="POST" action="/forum/commentDislike/{{this._id}}">
-                        <input type="text" id="cid" name="cid" value={{this._id}} hidden/>
-                        <input type="text" id="uid" name="uid" value={{../userId}} hidden/>
+                        <input type="text" id="cid2" name="cid" value={{this._id}} hidden/>
+                        <input type="text" id="uid4" name="uid" value={{../userId}} hidden/>
                         <button type="submit" class="btn btn-link" name="dislike">
                             <i id="down-{{this._id}}" class="dislikebtn fa fa-thumbs-o-down"></i>
                             <span class="dislikes">{{this.dislikes.length}}</span>
