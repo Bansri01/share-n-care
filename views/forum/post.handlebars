@@ -44,10 +44,6 @@
             </form>
             {{/if}}
         </div>
-    </br>
-    </br>
-    </br>
-
     {{#if getComments}}
         <ul>
             {{#each getComments}}
@@ -57,7 +53,7 @@
                     <p class="time">{{this.commentTime}}</p>
 
                     {{#if ../name}}
-                    <form id="likeComment" method="POST" action="/forum/commentLike/{{this._id}}">
+                    <form method="POST" action="/forum/commentLike/{{this._id}}">
                         <input type="text" id="cid" name="cid" value={{this._id}} hidden/>
                         <input type="text" id="uid" name="uid" value={{../userId}} hidden/>
                         <button type="submit" class="btn btn-link" name="like">
@@ -65,7 +61,7 @@
                             <span class="likes">{{this.likes.length}}</span>
                         </button>
                     </form>
-                    <form id="dislikeComment" method="POST" action="/forum/commentDislike/{{this._id}}">
+                    <form method="POST" action="/forum/commentDislike/{{this._id}}">
                         <input type="text" id="cid" name="cid" value={{this._id}} hidden/>
                         <input type="text" id="uid" name="uid" value={{../userId}} hidden/>
                         <button type="submit" class="btn btn-link" name="dislike">
@@ -74,13 +70,13 @@
                         </button>
                     </form>
                     {{else}}
-                    <form id="likeComment" method="POST" action="/forum/commentLike/{{this._id}}">
+                    <form method="POST" action="/forum/commentLike/{{this._id}}">
                         <button type="submit" class="btn btn-link" name="like">
                             <i id="up-{{this._id}}" class="likebtn fa fa-thumbs-o-up"></i>
                             <span class="likes">{{this.likes.length}}</span>
                         </button>
                     </form>
-                    <form id="dislikeComment" method="POST" action="/forum/commentDislike/{{this._id}}">
+                    <form method="POST" action="/forum/commentDislike/{{this._id}}">
                         <button type="submit" class="btn btn-link" name="dislike">
                             <i id="down-{{this._id}}" class="dislikebtn fa fa-thumbs-o-down"></i>
                             <span class="dislikes">{{this.dislikes.length}}</span>
@@ -101,7 +97,7 @@
 
     <form id="addNewComment" method="POST" action="/forum/post/{{getPost._id}}">
         <label for="commentContent"></label>
-        <textarea class="form-control" type="text" placeholder="The content of the comment" id="commentContent" name="commentContent"></textarea>
+        <textarea class="form-control" placeholder="The content of the comment" id="commentContent" name="commentContent"></textarea>
         <p class="errors" id="commentContentError"></p>
         <button type="submit" class="btn btn-primary btn-lg btn-block" name="comment-submit">Add a Comment</button>
     </form>
