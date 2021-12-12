@@ -20,7 +20,11 @@ router.get('/:id', async (req, res) => {
           postList: postList      
         });
       } catch (e) {
-        res.status(500).json({ error: e });
+        res.status(400).render('error/error', {
+          error: 'Page Not Found',
+          title:"Error",
+          name: req.session.user
+        });
       }
   } else{
     try {
@@ -33,7 +37,10 @@ router.get('/:id', async (req, res) => {
         postList: postList
       });
     } catch (e) {
-      res.status(500).json({ error: e });
+      res.status(400).render('error/error', {
+        error: 'Page Not Found',
+        title:"Error"
+      });
     }
   }
 });
@@ -67,7 +74,11 @@ router.get('/post/:id', async (req, res) => {
           });
         }
     } catch (e) {
-      res.status(500).json({ error: e });
+      res.status(400).render('error/error', {
+        error: 'Page Not Found',
+        title:"Error",
+        name: req.session.user
+      });
     }
   } else {
     try {
@@ -80,7 +91,10 @@ router.get('/post/:id', async (req, res) => {
         diseaseId: getPost.diseaseId
       });
     } catch (e) {
-      res.status(500).json({ error: e });
+      res.status(400).render('error/error', {
+        error: 'Page Not Found',
+        title:"Error"
+      });
     }
   }   
 });
