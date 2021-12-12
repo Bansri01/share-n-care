@@ -23,6 +23,7 @@
 - we have added 20 users 
 - We have added 20 diseases
 - We have added 20 posts, 42 comments, several thumbs-up and thumbs-down for the first four forums.
+- The first four forums are Tuberculosis, Diabetes, Epilepsy, Skin Cancer.
 
 # About the website
 
