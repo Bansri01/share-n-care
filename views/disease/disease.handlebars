@@ -1,6 +1,7 @@
-<main>
+<main class="mainDisease">
     <div class="row featurette">
             <div class="col-md-7">
+                 <div class="p-2">
 {{#if diseaseName }}
 <h1>
     {{diseaseName}}
@@ -9,11 +10,11 @@
 
 {{#if description }}
 <dl>
-    <dt>
-<h2>
+    <dt class="DD">
+
     Overview
-</h2>
 </dt>
+
 <dd>
      {{description}}
 </dd>
@@ -56,13 +57,15 @@
   </ul>
 {{/if}}
 </div>
+</div>
 <div class="col-md-5">
 <div class="d-flex justify-content-center">
 
 <div class="d-flex flex-column">
-  <div class="p-2"><img src="/public/images/epilpsey.jpg" alt="Logo" width="300" height="300"></div>
-  <div class="p-2"><img src="/public/images/Tuber.png" alt="Logo" width="300" height="300"></div>
-  <div class="p-2">Flex item 3</div>
+<div class="p-2"><h3>Advertisements</h3></div>
+  <div class="p-2"><a href="https://epilepsyawarenessday.org/product/afterthatdaysponsor/" target="_blank"><img src="/public/images/epilpsey.jpg" alt="Logo" width="300" height="300"></a></div>
+  <div class="p-2"><a href="https://www.facebook.com/CDCTB/photos/drawing-on-his-tb-research-and-public-health-expertise-dr-michael-lauzardo-from-/2766819486911261/" target="_blank"><img src="/public/images/Tuber.png" alt="Logo" width="300" height="300"></a></div>
+  <div class="p-2"><a href=" https://www.ssmhealth.com/diabetes" target="_blank"><img src="/public/images/Diabetes.jpg" alt="Logo" width="300" height="300"></a></div>
 </div>
 
 </div>

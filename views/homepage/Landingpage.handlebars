@@ -1,13 +1,14 @@
 <div class = "nav1">
     <form action="/" method="post" class="search" id ="searchDisease">
-    <label class="search_label" for="searchDisease">Search Disease:</label>
+    <label class="search_label" for="searchInput">Search Disease:</label>
     <div class="disease_search">
     <input type="text" class="form__input" placeholder="Search disease" name="searchDisease" id="searchInput"> 
-    <button type="submit" class="diseaseButton"><i class="fa fa-search"></i></button>
+    <label for="Submitbutton1" class="d-none">Submit Button</label>
+    <button type="submit" class="diseaseButton" id="Submitbutton1"><i class="fa fa-search"></i></button>
     </div>
     <div id="error" class="hidden" ></div>
 </form>
-<div id="Second" class="row">
+<div id="Second1" class="row">
 <div id="resultContainer"  class="hidden" >
 </div>
 </div>
@@ -15,14 +16,15 @@
 
 <div class = "nav2">
     <form action="/" method="post" class="search" id ="searchProfile">
-    <label class="search_label" for="searchProfile">Search User Profile:</label>
+    <label class="search_label" for="profileSearchInput">Search User Profile:</label>
     <div class="disease_search">
     <input type="text" class="form__input" placeholder="Enter Username" name="searchProfile" id="profileSearchInput"> 
-    <button type="submit" class="diseaseButton"><i class="fa fa-search"></i></button>
+    <label for="Submitbutton2" hidden>Submit Button</label>
+    <button type="submit" class="diseaseButton" id="Submitbutton2"><i class="fa fa-search"></i></button>
     </div>
     <div id="error2" class="hidden" ></div>
 </form>
-<div id="Second" class="row">
+<div id="Second2" class="row">
 <div id="profileResultContainer"  class="hidden" >
 </div>
 </div>

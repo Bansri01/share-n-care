@@ -227,7 +227,7 @@ const createDisease = async function createDisease(diseaseName, description, sym
 
 
 const searchDisease = async function searchDisease(searchTerm)
-{
+{   console.log(searchTerm)
     if(searchTerm==null || searchTerm==undefined)
     {
         throw `Search Term must be provided in the function`;
@@ -249,7 +249,7 @@ const searchDisease = async function searchDisease(searchTerm)
     const db = await dbConnection.connectToDb();
 
     const findInfo = await diseasesCollection.find( { "filters": { $all: [searchTerm] } } ).toArray()
-
+    console.log(findInfo)
     disease_names=[]
     for(i=0;i<findInfo.length;i++)
     {

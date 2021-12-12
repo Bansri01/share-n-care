@@ -4,13 +4,33 @@ const diseaseData = data.diseases;
 const mongoCollections = require('../config/mongoCollections')
 const diseaseCollection = mongoCollections.diseases;
 const ObjectID  = require('mongodb').ObjectId;
+const { searchUser } = require('../data/users');
 const router = express.Router();
 
 
 
 
 router.get('/:id', async (req, res) => {
-    serchTerm = req.params.id
+
+    let serchTerm = req.params.id
+    if(serchTerm=='diseaseID'){
+      res.status(403).render('error/error',{ error: 'Page Not Found',title:"Error"});
+      return;
+    }
+    if(!serchTerm)
+    {
+      return res.status(400).json('Search Term cannot be Empty, null or undefined');
+    }
+    if(typeof serchTerm!="string")
+    {
+      return res.status(400).json('Search Term Should be of String Format');
+    }
+    let st=serchTerm.trim()
+    if(st.length==0)
+    {
+      return res.status(400).json('Search Term cannot be Empty, null or undefined');
+    }
+
     try{
     const disease_list = await diseaseData.searchDisease(serchTerm)
     return res.json(disease_list);
@@ -21,15 +41,31 @@ router.get('/:id', async (req, res) => {
 })
 
 router.get('/diseaseID/:id', async (req, res) => {
-    id = req.params.id
+    let id = req.params.id
 
+    if(!id)
+    {
+      res.status(403).render('error/error',{ error:'Page Not Found',title:"Error"});
+      return;
+    }
+    if(typeof id!="string")
+    {
+      res.status(400).render('error/error',{ error:'Id Should be String',title:"Error"});
+      return;
+    }
+    let st=id.trim()
+    if(st.length==0)
+    {
+      res.status(400).render('error/error',{ error:'Search Term cannot be Empty, null or undefined',title:"Error"});
+      return;
+    }
 
     try {
 
         var disease_list = await diseaseData.getDiseaseById(id)
   
       } catch (e) {
-          res.status(e.err || 500).render('error/error',{ error: e.msg || 'Internal Server Error',title:"signUp"});
+          res.status(e.err || 500).render('error/error',{ error: e.msg || 'Internal Server Error',title:"Error"});
         return;
       }
 
