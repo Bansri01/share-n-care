@@ -13,6 +13,13 @@
 - run `npm run seed` to seed the database
 - run npm start
 
+# username and Passwords for User login
+
+- 1 Username: user01 Password: helloo12
+- 2 Username: user03 Password: friends1234
+- 3 Username: user02 Password: true1234
+
+
 # About the website
 
 The purpose of the website is to allow common diseased people to communicate on a public forum and share their experience with people suffering from the same disease. Many people suffering with a disease need someone, who has gone through the disease and its treatment, to communicate and know their experience. That way the patient will have someone to motivate and guide them through the procedure. Usually doctors guide the patients but the way an experienced patient motivates someone and gives strength is different.
