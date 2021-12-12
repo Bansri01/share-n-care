@@ -70,6 +70,10 @@
       event.preventDefault();
 
       st = profileSearchTerm.val();
+      if(st[0]=="#")
+      {
+        st= st.substring(1, st.length);
+      }
       st=st.trim();
       if(/^ *$/.test(st))
     {
@@ -77,7 +81,7 @@
       $('#error').hide()
       return
     }
-    else if(/^[#\s]{1,}$/.test(st))
+    else if(/^[#\s.]{1,}$/.test(st))
     {
       $('#error2').text("Sorry No Match Found.Please try again!").show()
       $('#error').hide()
