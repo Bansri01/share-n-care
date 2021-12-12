@@ -188,7 +188,8 @@ router.get('/profile', async (req, res) => {
             res.render("users/userProfile", {profilePicture: userdata.profilePicture, firstName: userdata.firstName, lastName: userdata.lastName, biography: userdata.biography, gender: userdata.gender, phoneNumber: userdata.phoneNumber, emailAddress: userdata.emailAddress, country: userdata.country, name: req.session.user})
         }
         else{
-            res.render("users/error")
+            res.redirect("/")
+            // res.render("users/error")
         }
     }catch(e){
         res.sendStatus(404)
