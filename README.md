@@ -38,7 +38,7 @@ The Website will allow the user to sign up and create their profile. The User ca
 # 3. Search Disease:
     The user can search for the disease and get the information regarding the disease.
 # 4. Disease Page:
-    The disease page contains disease information such as common medicines, suggestions and symptoms. 
+    The disease page contains disease information such as common medicines, suggestions and symptoms. Users Can go to that disease forum using this page and post or look at other peoples comment.  
 # 5. Profile Page:
     The profile page displays user's information such as user's name, location, gender, contact and their biography.
 # 6. Edit Profile:
@@ -55,7 +55,7 @@ The Website will allow the user to sign up and create their profile. The User ca
 # 1. Search Profile:
     On landing page user can enter other user's username in the search profile box and search for thier profile.
 # 2. Advertisement:
-    The application also diplays advrtisements
+    The application also diplays advrtisements on the disease Page.
 # 3. Search Post:
     In the forum, user can enter search terms in the search posts box on the top-left corner and get the post they are looking for.
 # 4. Like/Dislike of a comment:
