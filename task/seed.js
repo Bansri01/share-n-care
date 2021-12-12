@@ -414,7 +414,7 @@ async function main() {
     "Ivermectin. Ivermectin isn't a drug for treating viruses and the FDA hasn’t approved use of this drug to treat or prevent COVID-19. Taking large doses of this drug can cause serious harm. Don't use medications intended for animals on yourself.",
     "Hydroxychloroquine and chloroquine. These malaria drugs were authorized for emergency use by the FDA during the COVID-19 pandemic. However, the FDA withdrew that authorization when data analysis showed that the drugs are not effective for treating COVID-19. They can also cause serious heart problems.",
     "Drugs to prevent COVID-19. Researchers are studying drugs to prevent COVID-19 before and after exposure to the virus."],
-    ["corona","covid","covid-19","coronavirus","virus","Sars","Sars-covid","omicron","disease"]
+    ["corona","covid","covid-19","coronavirus","virus","Sars","Sars-covid","omicron","disease","covid19"]
 
       );
  

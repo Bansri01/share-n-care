@@ -6,13 +6,13 @@ const diseaseCollection = mongoCollections.diseases;
 const ObjectID  = require('mongodb').ObjectId;
 const { searchUser } = require('../data/users');
 const router = express.Router();
-
+const xss = require('xss');
 
 
 
 router.get('/:id', async (req, res) => {
 
-    let serchTerm = req.params.id
+    let serchTerm = xss(req.params.id)
     if(serchTerm=='diseaseID'){
       res.status(403).render('error/error',{ error: 'Page Not Found',title:"Error"});
       return;
@@ -41,7 +41,7 @@ router.get('/:id', async (req, res) => {
 })
 
 router.get('/diseaseID/:id', async (req, res) => {
-    let id = req.params.id
+    let id = xss(req.params.id)
 
     if(!id)
     {

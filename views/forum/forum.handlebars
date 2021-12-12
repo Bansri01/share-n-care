@@ -14,14 +14,10 @@
 
     <form id="addNewPost" method="POST" action="/forum/{{getDiseaseId}}">
         <label for="postTitle">Post title</label>
-        </br>
         <input class="form-control" type="text" placeholder="The title of the post" id="postTitle" name="postTitle"/>
-        </br>
         <p class="errors" id="postTitleError"></p>
         <label for="postContent">Post content</label>
-        </br>
-        <textarea class="form-control" type="text" placeholder="The content of the post" id="postContent" name="postContent"></textarea>
-        </br>
+        <textarea class="form-control" placeholder="The content of the post" id="postContent" name="postContent"></textarea>
         <p class="errors" id="postContentError"></p>
         <button type="submit" class="btn btn-primary btn-lg btn-block" name="postSubmit">Post</button>
     </form>

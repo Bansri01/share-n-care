@@ -33,6 +33,34 @@ app.use(session({
   saveUninitialized: true
 }))
 
+//XSS
+app.use("*", (req, res, next) => {
+  // console.log(req.method);
+
+  if (req.body) {
+    // console.log(req.body);
+    Object.keys(req.body).map(function (key, index) {
+      if (typeof req.body[key] === "string") {
+        req.body[key] = xss(req.body[key]);
+      }
+    });
+    // console.log(req.body);
+
+    if (req.params) {
+      // console.log(req.params);
+      Object.keys(req.params).map(function (key, index) {
+        if (typeof req.params[key] === "string") {
+          req.params[key] = xss(req.params[key]);
+        }
+      });
+      // console.log(req.params);
+    }
+    next();
+  } else {
+    next();
+  }
+});
+
 const rewriteUnsupportedBrowserMethods = (req, res, next) => {
   // If the user posts to the server with a property called _method, rewrite the request's method
   // To be that method; so if they post _method=PUT you can now allow browsers to POST to a route that gets
