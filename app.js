@@ -31,7 +31,8 @@ app.use(session({
   name: 'AuthCookie',
   secret: 'some secret string!',
   resave: false,
-  saveUninitialized: true
+  saveUninitialized: true,
+  cookie: { maxAge: 6000000 }
 }))
 
 //XSS
