@@ -95,6 +95,12 @@
       $('#error').hide()
       return
     }
+    else if(/[^A-Za-z0-9]/g.test(st))
+    {
+      $('#error2').text("Please enter a valid username!").show()
+      $('#error').hide()
+      return
+    }
     else{
       ProfileresultContainer.empty()
       $('#error2').hide()
@@ -112,11 +118,6 @@
     {
       $('#error2').text("Sorry No Match Found.Please try again!").show()
       $('#error').hide();
-      return;
-    }
-    else if (profile_list[0].username==undefined){
-      $('#error2').text("Sorry No Match Found.Please try again!").show()
-      $('#error').hide()
       return;
     }
     else{
