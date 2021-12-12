@@ -198,6 +198,13 @@ module.exports = {
     if(userId.length !== 12 && userId.length !== 24) throw "The userId provided is not a valid ObjectId.";
     if(userId.length === 24 && !userId.match(/^[A-Fa-f0-9]+$/g)) throw "The userId provided is not a valid ObjectId.";
 
+    if(typeof likeStatus !== 'number') {
+      throw "The likeStatus is not a number.";
+    }
+    if(isNaN(likeStatus)) {
+      throw "The likeStatus is not a number.";
+    }
+
     let parsedId = ObjectId(postId);
     const postCollection = await posts();
     const postById = await postCollection.findOne({ _id: parsedId });
