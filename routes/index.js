@@ -5,10 +5,6 @@ const path = require("path")
 
 const constructorMethod = (app) => {
   app.use('/', userRoutes);
-
-
-  // app.use('/profile',profileRoutes)
-
   app.use('/disease',diseaseRoutes);
   app.use('/forum',forumRoutes);
 

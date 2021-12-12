@@ -34,6 +34,12 @@ module.exports = {
       throw "The content is just empty spaces.";
     }
 
+    if(postId.length !== 12 && postId.length !== 24) throw "The postId provided is not a valid ObjectId.";
+    if(postId.length === 24 && !postId.match(/^[A-Fa-f0-9]+$/g)) throw "The postId provided is not a valid ObjectId.";
+    if(userId.length !== 12 && userId.length !== 24) throw "The userId provided is not a valid ObjectId.";
+    if(userId.length === 24 && !userId.match(/^[A-Fa-f0-9]+$/g)) throw "The userId provided is not a valid ObjectId.";
+
+
     let commentTime = new Date().toLocaleString();
 
     let newComment = {
@@ -162,6 +168,13 @@ module.exports = {
     if(commentId.length === 24 && !commentId.match(/^[A-Fa-f0-9]+$/g)) throw "The commentId provided is not a valid ObjectId.";
     if(userId.length !== 12 && userId.length !== 24) throw "The userId provided is not a valid ObjectId.";
     if(userId.length === 24 && !userId.match(/^[A-Fa-f0-9]+$/g)) throw "The userId provided is not a valid ObjectId.";
+
+    if(typeof likeStatus !== 'number') {
+      throw "The likeStatus is not a number.";
+    }
+    if(isNaN(likeStatus)) {
+      throw "The likeStatus is not a number.";
+    }
 
     let parsedId = ObjectId(commentId);
     const commentCollection = await comments();
