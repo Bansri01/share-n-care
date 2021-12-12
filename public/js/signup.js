@@ -132,7 +132,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (e.target.id === "biography" && !e.target.value )  {
                 setInputError(inputElement, "You must provide profile Biography");
             }
-            if (e.target.id === "genderList" && !e.target.value )  {
+            if (e.target.id === "gender" && !e.target.value )  {
                 setInputError(inputElement, "You must provide Gender");
             }
             if (e.target.id === "userType" && !e.target.value )  {
@@ -166,7 +166,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (e.target.id === "biography" && (/^ *$/.test(e.target.value)))  {
                 setInputError(inputElement, "Biography cannot be empty");
             } 
-            if (e.target.id === "genderList" && (/^ *$/.test(e.target.value)))  {
+            if (e.target.id === "gender" && (/^ *$/.test(e.target.value)))  {
                 setInputError(inputElement, "genderList cannot be empty");
             }
             if (e.target.id === "userType" && (/^ *$/.test(e.target.value)))  {
@@ -200,7 +200,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             let gen = ["Female", "Male", "Other"]
-            if(e.target.id === "genderList" && !gen.includes(e.target.value)){
+            if(e.target.id === "gender" && !gen.includes(e.target.value)){
                 setInputError(inputElement, "Please Enter valid gender");
             }
         

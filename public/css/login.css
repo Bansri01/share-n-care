@@ -1,4 +1,4 @@
-body {
+.form_body {
     --color-primary: #5798f3;
     --color-primary-dark: #1d67c2;
     --color-secondary: #252c6a;
@@ -11,7 +11,7 @@ body {
     align-items: center; 
     justify-content: center;
     font-size: 18px;
-    background: url(../images/chirp_background.png);
+    /* background: url(../images/chirp_background.png); */
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;

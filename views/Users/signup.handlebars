@@ -1,4 +1,5 @@
-<body>
+<div class="form_body">
+
     <div class="login_container_out">
     <div class="login_container">
         <form class="form" id="createAccount" action="/signup" method="post" enctype="multipart/form-data">
@@ -26,7 +27,7 @@
             </div>
             <div class="form__input-group">
                 <label for="emailAddress">EmailAddress</label>
-                <input type="text" id="emailAddress" class="form__input"  placeholder="Email Address" name ="emailAddress" required>
+                <input type="email" id="emailAddress" class="form__input"  placeholder="Email Address" name ="emailAddress" required>
                 <div class="form__input-error-message"></div>
             </div>
             <div class="form__input-group">
@@ -36,7 +37,7 @@
             </div>
             <div class="form__input-group">
                 <label for="phoneNumber">PhoneNumber</label>
-                <input type="text" id = "phoneNumber" class="form__input"  placeholder="Phone Number" name="phoneNumber" required>
+                <input type="tel" id = "phoneNumber" class="form__input"  placeholder="Phone Number" name="phoneNumber" required>
                 <div class="form__input-error-message"></div>
             </div>
              {{!-- <div class="form__input-group">
@@ -46,8 +47,8 @@
             </div> --}}
             <div class="form__input-group">
                 <label for="country">Country</label>
-            <select id="country" class="form__input" placeholder="Country" name="country" required>
-                <option disabled selected hidden>Country</option>
+            <select id="country" class="form__input"  name="country" required>
+                <option value="" disabled selected hidden>Country</option>
                 {{#each countryNames}}
                 <option value="{{this}}">{{this}}</option>
                 {{/each}}
@@ -56,13 +57,13 @@
             </div>
             <div class="form__input-group">
                 <label for="biography">Biography</label>
-                <textarea type="text" id = "biography" class="form__input"  placeholder="Biography" rows="4" cols="50" name="biography" required></textarea>
+                <textarea id = "biography" class="form__input" rows="4" cols="50" name="biography" required></textarea>
                 <div class="form__input-error-message"></div>
             </div>
             <div class="form__input-group">
                 <label for="gender">Gender</label>
-            <select id="genderList" class="form__input" placeholder="Gender" name="gender" class="gen" required>
-                <option disabled selected hidden>Gender</option>
+            <select id="gender" class="form__input" name="gender" required>
+                <option value="" disabled selected hidden>Gender</option>
                 <option value="Female">Female</option>
                 <option value="Male">Male</option>
                 <option value="Other">Other</option>
@@ -74,8 +75,8 @@
 
              <div class="form__input-group">
                  <label for="userType">UserType</label>
-                <select id="userType" class="form__input" placeholder="UserType" name="userType" class="gen" required>
-                <option disabled selected hidden>UserType</option>
+                <select id="userType" class="form__input" name="userType" required>
+                <option value="" disabled selected hidden>UserType</option>
                 <option value="Patient">Patient</option>
                 <option value="Doctor">Doctor</option>
                 </select>
@@ -84,7 +85,7 @@
 
              <div class="form__input-group">
                  <label for="dateOfBirth">DateOfBirth</label>
-                <input type="date" id ="dateOfBirth"class="form__input dateInput" name="dateOfBirth" required>
+                <input type="date" id ="dateOfBirth" class="form__input dateInput" name="dateOfBirth" required>
                 <div class="form__input-error-message"></div>
             </div>
             <div>
@@ -102,4 +103,4 @@
     </div>
     </div>
     <script src="/public/js/signup.js"></script>
-    </body>
+    </div>

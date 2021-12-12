@@ -301,12 +301,17 @@ function validateDate(date) {
 
 //------------get Landing Page--------------------//
 router.get('/',async (req, res) => {
+    try{
     if (req.session.user) {
         res.render('homepage/Landingpage',{title: "Share and Care",name:req.session.user});
       } else {
         res.render('homepage/Landingpage',{title: "Share and Care"});
        
       }
+    }catch(e){
+        res.render("error/error")
+    }
+    
     
   });
 //-----------End of get landing Page---------------//
@@ -315,19 +320,25 @@ router.get('/',async (req, res) => {
 
 //-------------get SignUp Page-------------------//
 router. get('/signup',async (req, res) => { 
+    try{
     if (req.session.user) {
         return res.redirect('/');
       } else {
         const countryCodes = Object.keys(countries.countries);
         const countryNames = countryCodes.map(code => countries.countries[code].name);
         res.render("users/signup",{title: "SIGNUP", countryNames: countryNames});
-      }     
+      } 
+    }
+    catch(e){
+        res.render("error/error")
+    }    
   });
 //------------end of Get SignUp page--------------//
 
 
 //-------------Post Sign Up--------------------//
   router.post('/signup', upload.single('profilePicture'), async (req, res) => {
+      try{
     // if (!req.file)  {
     //     res.status(400).render('users/signup',{ title:"signUp",error: 'You must provide Profile picture'});
     //     return;
@@ -550,6 +561,9 @@ router. get('/signup',async (req, res) => {
     catch(e){
         res.status(e.error || 500).render('users/signup',{title:"signUp",error: e.message ||`Internal Server Error`})
     }
+    }catch(e){
+    res.render("error/error")
+   }
   })
 
 //------------End of Post Signup------------------------//
@@ -559,11 +573,15 @@ router. get('/signup',async (req, res) => {
 //--------------Get Login---------------------//
 
   router.get('/login',async (req, res) => {
+      try{
     if (req.session.user) {
         return res.redirect('/');
       } else {
         res.render("users/login",{title: "LOGIN"});
       }
+    }catch(e){
+        res.render("error/error")
+    }
   });  
   
   //--------------End of Get Login----------------------//
@@ -571,6 +589,7 @@ router. get('/signup',async (req, res) => {
   
   //--------------Post Login---------------------------//
   router.post('/login',async (req, res) => {
+      try{
     if (!req.body.username )  {
         res.status(400).render('users/Login',{ title:"login",error: 'You must provide Username'});
         return;
@@ -624,7 +643,9 @@ router. get('/signup',async (req, res) => {
     catch(e){
         res.status(e.error || 500).render('users/login',{title:"login",error: e.message ||`Internal Server Error`})
     }
-
+    }catch(e){
+        res.render("error/error")
+    }
 
 });
 
@@ -642,9 +663,8 @@ router. get('/signup',async (req, res) => {
 //--------------------Get Logout---------------------//
   router.get('/logout',async (req, res) => {
     req.session.destroy();
-    return res.render("users/logout",{title:"Logout"})
+    return res.redirect("/");
     
-
 });
 
 //--------------------End of Get Logout------------------//
