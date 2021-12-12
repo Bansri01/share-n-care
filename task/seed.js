@@ -600,7 +600,7 @@ async function main() {
       ["cystic fibrosis", "CF", "fibrosis", "Cystic fibrosis of pancreas", "Fibrocystic disease of pancreas", "Mucoviscidosis", "disease of pancreas", "mucoviscidosis of the pancreas", "pancreas fibrocystic disease"]
     )
   
-    let user1 = await user.createUser("user01.jpeg-1639017120258", "Bans", "Patel", "user01", "bpatel@gmail.com", "helloo12", "736-787-8373", "India", "Hello I am Bansri", "Female", "Doctor", "2021-11-27")
+    let user1 = await user.createUser("user01.jpeg-1639017120258", "Tia", "Patel", "user01", "tpatel@gmail.com", "helloo12", "736-787-8373", "India", "Hello I am Bansri", "Female", "Doctor", "2021-11-27")
 
     let user2 = await user.createUser("user02.jpeg-1639017199758", "Krina", "Shah", "user02", "kshah@gmail.com", "true1234", "126-547-8373", "Zimbabwe", "Hello I am Krina. I am from Zimbabwe", "Female", "Patient", "2021-04-27")
 
