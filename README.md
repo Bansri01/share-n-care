@@ -19,6 +19,10 @@
 - 2 Username: user03 Password: friends1234
 - 3 Username: user02 Password: true1234
 
+# information about seeded database
+- we have added 20 users 
+- We have added 20 diseases
+- We have added 
 
 # About the website
 
