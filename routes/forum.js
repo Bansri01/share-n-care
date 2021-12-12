@@ -10,8 +10,8 @@ const xss = require('xss');
 router.get('/:id', async (req, res) => {
   if(req.session.user) {
       try {
-        const postList = await postData.getAllPostsOfForum(req.params.id);
-        const getDisease = await diseaseData.getDiseaseById(req.params.id);
+        const postList = await postData.getAllPostsOfForum(xss(req.params.id));
+        const getDisease = await diseaseData.getDiseaseById(xss(req.params.id));
         res.render('forum/forum', {
           title: getDisease.diseaseName + " Forum",
           name: req.session.user,
@@ -24,8 +24,8 @@ router.get('/:id', async (req, res) => {
       }
   } else{
     try {
-      const postList = await postData.getAllPostsOfForum(req.params.id);
-      const getDisease = await diseaseData.getDiseaseById(req.params.id);
+      const postList = await postData.getAllPostsOfForum(xss(req.params.id));
+      const getDisease = await diseaseData.getDiseaseById(xss(req.params.id));
       res.render('forum/forum', {
         title: getDisease.diseaseName + " Forum",   
         forumName: getDisease.diseaseName + " Forum",
