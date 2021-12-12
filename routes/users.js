@@ -8,6 +8,7 @@ const ObjectID  = require('mongodb').ObjectId;
 const router = express.Router();
 const countries = require("countries-list");
 const { updateUser } = require('../data/users');
+const xss = require('xss');
 
 
 //-------------for Storing Images------------------//
@@ -58,7 +59,7 @@ router.post('/updateProfile', upload.single('profilePicture'), async (req, res) 
             let countryCodes = Object.keys(countries.countries);
             let countryNames = countryCodes.map(code => countries.countries[code].name);
             let genderList = ["Female", "Male", "Other"]
-            if(req.file) userdata.profilePicture = req.file.filename;
+            if(req.file) userdata.profilePicture = xss(req.file.filename);
             userdata.username = req.session.user
             let existingUserData;
             try {
