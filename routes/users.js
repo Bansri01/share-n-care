@@ -40,7 +40,7 @@ router.get('/updateProfile', async (req, res) => {
             genderList.splice(index1, 1);
             }
 
-            res.render("users/updateProfile", {profilePicture: userdata.profilePicture, firstName: userdata.firstName, lastName: userdata.lastName, biography: userdata.biography, phoneNumber: userdata.phoneNumber, emailAddress: userdata.emailAddress, name: req.session.user, countryNames: countryNames, country: userdata.country, genderList: genderList, gender: userdata.gender})  
+            res.render("users/updateProfile", {profilePicture: userdata.profilePicture, firstName: userdata.firstName, lastName: userdata.lastName, biography: userdata.biography, phoneNumber: userdata.phoneNumber, emailAddress: userdata.emailAddress, name: req.session.user, countryNames: countryNames, country: userdata.country, genderList: genderList, gender: userdata.gender, title: "Update User Profile"})  
         }
         else{
             res.redirect("/login")
@@ -80,22 +80,22 @@ router.post('/updateProfile', upload.single('profilePicture'), async (req, res) 
 
             if(!userdata.firstName || !userdata.lastName || !userdata.biography || !userdata.phoneNumber || !userdata.emailAddress || !userdata.country || !userdata.gender){
                 // throw {message: `one of the mendatory field is missing`, status:400}
-                res.status(200).render("users/updateProfile", {profilePicture: existingUserData.profilePicture, firstName:existingUserData.firstName, lastName: existingUserData.lastName, biography: existingUserData.biography, gender:existingUserData.gender, country:existingUserData.country, phoneNumber:existingUserData.phoneNumber, emailAddress:existingUserData.emailAddress ,error: "one of the mendatory field is missing", name: req.session.user, countryNames: countryNames, genderList: genderList})
+                res.status(200).render("users/updateProfile", {profilePicture: existingUserData.profilePicture, firstName:existingUserData.firstName, lastName: existingUserData.lastName, biography: existingUserData.biography, gender:existingUserData.gender, country:existingUserData.country, phoneNumber:existingUserData.phoneNumber, emailAddress:existingUserData.emailAddress ,error: "one of the mendatory field is missing", name: req.session.user, countryNames: countryNames, genderList: genderList, title: "Update User Profile"})
                 return
             }
 
             if((typeof userdata.firstName !== "string") || (/^ *$/.test(userdata.firstName))){
-                res.status(200).render("users/updateProfile", {profilePicture: existingUserData.profilePicture, firstName:existingUserData.firstName, lastName: existingUserData.lastName, biography: existingUserData.biography, gender:existingUserData.gender, country:existingUserData.country, phoneNumber:existingUserData.phoneNumber, emailAddress:existingUserData.emailAddress ,error: "Please Enter valid Firstname", name: req.session.user, countryNames: countryNames, genderList: genderList})
+                res.status(200).render("users/updateProfile", {profilePicture: existingUserData.profilePicture, firstName:existingUserData.firstName, lastName: existingUserData.lastName, biography: existingUserData.biography, gender:existingUserData.gender, country:existingUserData.country, phoneNumber:existingUserData.phoneNumber, emailAddress:existingUserData.emailAddress ,error: "Please Enter valid Firstname", name: req.session.user, countryNames: countryNames, genderList: genderList, title: "Update User Profile"})
                 return
             }
 
             if((typeof userdata.lastName !== "string") || (/^ *$/.test(userdata.lastName))){
-                res.status(200).render("users/updateProfile", {profilePicture: existingUserData.profilePicture, firstName:existingUserData.firstName, lastName: existingUserData.lastName, biography: existingUserData.biography, gender:existingUserData.gender, country:existingUserData.country, phoneNumber:existingUserData.phoneNumber, emailAddress:existingUserData.emailAddress ,error: "Please Enter valid Lastname", name: req.session.user, countryNames: countryNames, genderList: genderList})
+                res.status(200).render("users/updateProfile", {profilePicture: existingUserData.profilePicture, firstName:existingUserData.firstName, lastName: existingUserData.lastName, biography: existingUserData.biography, gender:existingUserData.gender, country:existingUserData.country, phoneNumber:existingUserData.phoneNumber, emailAddress:existingUserData.emailAddress ,error: "Please Enter valid Lastname", name: req.session.user, countryNames: countryNames, genderList: genderList, title: "Update User Profile"})
                 return
             }
 
             if((typeof userdata.biography !== "string") || (/^ *$/.test(userdata.biography))){
-                res.status(200).render("users/updateProfile", {profilePicture: existingUserData.profilePicture, firstName:existingUserData.firstName, lastName: existingUserData.lastName, biography: existingUserData.biography, gender:existingUserData.gender, country:existingUserData.country, phoneNumber:existingUserData.phoneNumber, emailAddress:existingUserData.emailAddress ,error: "Please Enter valid Biography", name: req.session.user, countryNames: countryNames, genderList: genderList})
+                res.status(200).render("users/updateProfile", {profilePicture: existingUserData.profilePicture, firstName:existingUserData.firstName, lastName: existingUserData.lastName, biography: existingUserData.biography, gender:existingUserData.gender, country:existingUserData.country, phoneNumber:existingUserData.phoneNumber, emailAddress:existingUserData.emailAddress ,error: "Please Enter valid Biography", name: req.session.user, countryNames: countryNames, genderList: genderList, title: "Update User Profile"})
                 return
             }
 
@@ -104,31 +104,31 @@ router.post('/updateProfile', upload.single('profilePicture'), async (req, res) 
 
 
             if((typeof userdata.country !== "string") || (/^ *$/.test(userdata.country)) ||  (!countryNames1.includes(userdata.country))){
-                res.status(200).render("users/updateProfile", {profilePicture: existingUserData.profilePicture, firstName:existingUserData.firstName, lastName: existingUserData.lastName, biography: existingUserData.biography, gender:existingUserData.gender, country:existingUserData.country, phoneNumber:existingUserData.phoneNumber, emailAddress:existingUserData.emailAddress ,error: "Please Enter valid country", name: req.session.user, countryNames: countryNames, genderList: genderList})
+                res.status(200).render("users/updateProfile", {profilePicture: existingUserData.profilePicture, firstName:existingUserData.firstName, lastName: existingUserData.lastName, biography: existingUserData.biography, gender:existingUserData.gender, country:existingUserData.country, phoneNumber:existingUserData.phoneNumber, emailAddress:existingUserData.emailAddress ,error: "Please Enter valid country", name: req.session.user, countryNames: countryNames, genderList: genderList, title: "Update User Profile"})
                 return
             }
 
             let gen = ["Female", "Male", "Other"]
             if((typeof userdata.gender !== "string") || (/^ *$/.test(userdata.gender)) ||  (!gen.includes(userdata.gender))){
-                res.status(200).render("users/updateProfile", {profilePicture: existingUserData.profilePicture, firstName:existingUserData.firstName, lastName: existingUserData.lastName, biography: existingUserData.biography, gender:existingUserData.gender, country:existingUserData.country, phoneNumber:existingUserData.phoneNumber, emailAddress:existingUserData.emailAddress ,error: "Please Enter valid country", name: req.session.user, countryNames: countryNames, genderList: genderList})
+                res.status(200).render("users/updateProfile", {profilePicture: existingUserData.profilePicture, firstName:existingUserData.firstName, lastName: existingUserData.lastName, biography: existingUserData.biography, gender:existingUserData.gender, country:existingUserData.country, phoneNumber:existingUserData.phoneNumber, emailAddress:existingUserData.emailAddress ,error: "Please Enter valid country", name: req.session.user, countryNames: countryNames, genderList: genderList, title: "Update User Profile"})
                 return
             }
 
             let phoneRe = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
             if((typeof userdata.phoneNumber !== "string") || (/^ *$/.test(userdata.phoneNumber) || !userdata.phoneNumber.match(phoneRe))){
-                res.status(200).render("users/updateProfile", {profilePicture: existingUserData.profilePicture, firstName:existingUserData.firstName, lastName: existingUserData.lastName, biography: existingUserData.biography, gender:existingUserData.gender, country:existingUserData.country, phoneNumber:existingUserData.phoneNumber, emailAddress:existingUserData.emailAddress ,error: "Please Enter valid phoneNumber", name: req.session.user, countryNames: countryNames, genderList: genderList})
+                res.status(200).render("users/updateProfile", {profilePicture: existingUserData.profilePicture, firstName:existingUserData.firstName, lastName: existingUserData.lastName, biography: existingUserData.biography, gender:existingUserData.gender, country:existingUserData.country, phoneNumber:existingUserData.phoneNumber, emailAddress:existingUserData.emailAddress ,error: "Please Enter valid phoneNumber", name: req.session.user, countryNames: countryNames, genderList: genderList, title: "Update User Profile"})
                 return
             }
 
             if((typeof userdata.emailAddress !== "string") || (/^ *$/.test(userdata.emailAddress) || !validateEmail(userdata.emailAddress))){
-                res.status(200).render("users/updateProfile", {profilePicture: existingUserData.profilePicture, firstName:existingUserData.firstName, lastName: existingUserData.lastName, biography: existingUserData.biography, gender:existingUserData.gender, country:existingUserData.country, phoneNumber:existingUserData.phoneNumber, emailAddress:existingUserData.emailAddress ,error: "Please Enter valid Email", name: req.session.user, countryNames: countryNames, genderList: genderList})
+                res.status(200).render("users/updateProfile", {profilePicture: existingUserData.profilePicture, firstName:existingUserData.firstName, lastName: existingUserData.lastName, biography: existingUserData.biography, gender:existingUserData.gender, country:existingUserData.country, phoneNumber:existingUserData.phoneNumber, emailAddress:existingUserData.emailAddress ,error: "Please Enter valid Email", name: req.session.user, countryNames: countryNames, genderList: genderList, title: "Update User Profile"})
                 return
             }
 
             const userCollection = await userColl();
             const checkEmail = await userCollection.findOne({ emailAddress: userdata.emailAddress.toLowerCase(), username : {$ne: req.session.user}});
             if(checkEmail !== null) {
-                res.status(200).render("users/updateProfile", {profilePicture: existingUserData.profilePicture, firstName:existingUserData.firstName, lastName: existingUserData.lastName, biography: existingUserData.biography, gender:existingUserData.gender, country:existingUserData.country, phoneNumber:existingUserData.phoneNumber, emailAddress:existingUserData.emailAddress ,error: "User with that email address already exists.", name: req.session.user, countryNames: countryNames, genderList: genderList})
+                res.status(200).render("users/updateProfile", {profilePicture: existingUserData.profilePicture, firstName:existingUserData.firstName, lastName: existingUserData.lastName, biography: existingUserData.biography, gender:existingUserData.gender, country:existingUserData.country, phoneNumber:existingUserData.phoneNumber, emailAddress:existingUserData.emailAddress ,error: "User with that email address already exists.", name: req.session.user, countryNames: countryNames, genderList: genderList, title: "Update User Profile"})
                 return
             }
 
@@ -168,7 +168,7 @@ router.post('/updateProfile', upload.single('profilePicture'), async (req, res) 
 
             const userInfo = await usersData.updateUser(updatedUserinfo)
             const user = await usersData.getByUsername(userdata.username)
-            res.render("users/userProfile", {profilePicture: user.profilePicture, firstName: user.firstName, lastName: user.lastName, biography: user.biography, gender: user.gender, phoneNumber: user.phoneNumber, emailAddress: user.emailAddress, country: user.country, name: req.session.user})
+            res.render("users/userProfile", {profilePicture: user.profilePicture, firstName: user.firstName, lastName: user.lastName, biography: user.biography, gender: user.gender, phoneNumber: user.phoneNumber, emailAddress: user.emailAddress, country: user.country, name: req.session.user, title: "User Profile"})
     }
     else{
         res.redirect("/login")
@@ -185,13 +185,14 @@ router.get('/profile', async (req, res) => {
     try{
         if(req.session.user){
             const userdata = await usersData.getByUsername(req.session.user)
-            res.render("users/userProfile", {profilePicture: userdata.profilePicture, firstName: userdata.firstName, lastName: userdata.lastName, biography: userdata.biography, gender: userdata.gender, phoneNumber: userdata.phoneNumber, emailAddress: userdata.emailAddress, country: userdata.country, name: req.session.user})
+            res.render("users/userProfile", {profilePicture: userdata.profilePicture, firstName: userdata.firstName, lastName: userdata.lastName, biography: userdata.biography, gender: userdata.gender, phoneNumber: userdata.phoneNumber, emailAddress: userdata.emailAddress, country: userdata.country, name: req.session.user, title: "User Profile"})
         }
         else{
-            res.render("users/error")
+            res.redirect("/")
+            // res.render("users/error")
         }
     }catch(e){
-        res.sendStatus(404)
+        res.sendStatus(404).render("error/error", {error: e})
     }
 })
 //--------------End of get Profile----------------//
@@ -220,7 +221,7 @@ router.get('/searchProfile/:id', async (req, res) => {
         }
         else{
             const userdata = await usersData.getByUsername(searchTerm)
-            res.render("users/searchProfile", {profilePicture: userdata.profilePicture, firstName: userdata.firstName, lastName: userdata.lastName, biography: userdata.biography, gender: userdata.gender, phoneNumber: userdata.phoneNumber, emailAddress: userdata.emailAddress, country: userdata.country, name: req.session.user} )
+            res.render("users/searchProfile", {profilePicture: userdata.profilePicture, firstName: userdata.firstName, lastName: userdata.lastName, biography: userdata.biography, gender: userdata.gender, phoneNumber: userdata.phoneNumber, emailAddress: userdata.emailAddress, country: userdata.country, name: req.session.user, title: "User Profile"} )
         }
     }
     else{
