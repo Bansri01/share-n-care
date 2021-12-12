@@ -63,21 +63,21 @@ app.use("*", (req, res, next) => {
   }
 });
 
-app.use("/profile", (req, res, next) => {
-  if (!req.session.user) {
-    return res.redirect("/login");
-  } else {
-    next();
-  }
-});
+// app.use("/profile", (req, res, next) => {
+//   if (!req.session.user) {
+//     return res.redirect("/login");
+//   } else {
+//     next();
+//   }
+// });
 
-app.use("/searchProfile/:id", (req, res, next) => {
-  if (!req.session.user) {
-    return res.redirect("/login");
-  } else {
-    next();
-  }
-})
+// app.use("/searchProfile/:id", (req, res, next) => {
+//   if (!req.session.user) {
+//     return res.redirect("/login");
+//   } else {
+//     next();
+//   }
+// })
 
 
 
