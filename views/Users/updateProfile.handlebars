@@ -27,23 +27,26 @@
             <label class="col-sm-2 control-label" for="firstName">Firstname</label>
             <div class="col-sm-10">
                 <input type="text" id="firstName" class="form-control" value={{ firstName }}  name="firstName" required>
+                <div class="form__input-error-message"></div>
             </div>
-            <div class="form__input-error-message"></div>
+  
           </div>
           <div class="form-group">
             <label class="col-sm-2 control-label" for="lastName">Lastname</label>
             <div class="col-sm-10">
               <input type="text" id="lastName" class="form-control" value= {{ lastName }} name="lastName" required>
+              <div class="form__input-error-message"></div>
             </div>
-            <div class="form__input-error-message"></div>
+            
           </div>
 
           <div class="form-group">
             <label class="col-sm-2 control-label" for ="biography">Biography</label>
             <div>
               <textarea rows="3" cols="50" id="biography" class="form-control" name ="biography" required>{{ biography }}</textarea>
+              <div class="form__input-error-message"></div>
             </div>
-            <div class="form__input-error-message"></div>
+            
           </div>
 
           <div class="form-group">
@@ -55,8 +58,9 @@
                 <option value="{{this}}">{{this}}</option>
                 {{/each}}
               </select>
+              <div class="form__input-error-message"></div>
             </div>
-            <div class="form__input-error-message"></div>
+            
           </div>
           
           <div class="form-group">
@@ -68,8 +72,9 @@
                 <option value="{{this}}">{{this}}</option>
                 {{/each}}
               </select>
+              <div class="form__input-error-message"></div>
             </div>
-            <div class="form__input-error-message"></div>
+            
           </div>
         </div>
       </div>
@@ -84,15 +89,17 @@
             <label class="col-sm-2 control-label" for="phoneNumber"> phoneNumber </label>
             <div class="col-sm-10">
               <input type="tel" id="phoneNumber" class="form-control" value= {{ phoneNumber }} name="phoneNumber" required>
+              <div class="form__input-error-message"></div>
             </div>
-            <div class="form__input-error-message"></div>
+            
           </div>
           <div class="form-group">
             <label class="col-sm-2 control-label" for="emailAddress">E-mail address</label>
             <div class="col-sm-10">
               <input type="email" id="emailAddress" class="form-control" value= {{ emailAddress }} name="emailAddress" required>
+             <div class="form__input-error-message"></div>
             </div>
-            <div class="form__input-error-message"></div>
+           
           </div>
           <br/>
           <br/>
