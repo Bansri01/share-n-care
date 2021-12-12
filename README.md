@@ -19,6 +19,10 @@
 - 2 Username: user03 Password: friends1234
 - 3 Username: user02 Password: true1234
 
+# information about seeded database
+- we have added 20 users 
+- We have added 20 diseases
+- We have added 
 
 # About the website
 
@@ -28,7 +32,7 @@ The Website will allow the user to sign up and create their profile. The User ca
 # Core Features
 
 # 1. Landing Page: 
-    The landing page has a search box for disease where user can search for a disease and get the information regarding that disease. It also has a search box for search profile where user can search other user's profile by entering their username. The pae also has links to sign up and login if the user is not logged in. The user can view and edit their profile if they are logged in.
+    The landing page has a search box for disease where user can search for a disease and get the information regarding that disease. It also has a search box for search profile where user can search other user's profile by entering their username. The page also has links to sign up and login if the user is not logged in. The user can view their profile if they are logged in.
 # 2. User Sign Up form: 
     The sign up form collects user's information such as profile picture, their full name, contact information, location, gender and date of birth. User can register themselves using sign up form. 
 # 3. Search Disease:
