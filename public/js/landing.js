@@ -12,17 +12,24 @@
         event.preventDefault();
 
         st = searchTerm.val();
+        if(st[0]=="#")
+        {
+          st= st.substring(1, st.length);
+        }
         st=st.trim();
+
         if(/^ *$/.test(st))
       {
         $('#error').text("The searchTerm cannot be empty spaces or null").show()
         $('#error2').hide()
         return
       }
-      if(/^[#\s]{1,}$/.test(st))
+     
+      if(/^[#\s.]{1,}$/.test(st))
       {
         $('#error').text("Sorry No Match Found.Please try again!").show()
         $('#error2').hide()
+        return
       }
       else{
         resultContainer.empty()
