@@ -826,7 +826,6 @@ async function main() {
 
   console.log("Done seeding the Database")
 
-  await dis.searchDisease("cancer");
   await dbConnection.closeConnection();
 }
 
