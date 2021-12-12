@@ -47,7 +47,7 @@ router.get('/updateProfile', async (req, res) => {
             res.redirect("/login")
         }
     }catch(e){
-        res.render("users/error", {title: "Error"})
+        res.status(e.status || 500).render("users/error", {title: "Error", error: e.message})
     }
 })
 
@@ -65,7 +65,7 @@ router.post('/updateProfile', upload.single('profilePicture'), async (req, res) 
             try {
             existingUserData = await usersData.getByUsername(userdata.username);
             } catch (e) {
-            res.status(404).json({ error: "user not found" });
+            res.status(404).render("error/error", {error: "User not found", title: "error"});
             return;
             }
 
@@ -175,7 +175,7 @@ router.post('/updateProfile', upload.single('profilePicture'), async (req, res) 
         res.redirect("/login")
     }
     } catch(err) {
-      res.sendStatus(400);
+      res.status(err.status || 500).render("error/error", {error: err, title: "error"});
     }
   });
 //-------------End Post Profile----------------------//
@@ -193,7 +193,7 @@ router.get('/profile', async (req, res) => {
             // res.render("users/error")
         }
     }catch(e){
-        res.sendStatus(404).render("error/error", {error: e})
+        res.status(404).render("error/error", {error: e.message, title: "error"})
     }
 })
 //--------------End of get Profile----------------//
@@ -207,7 +207,7 @@ router.get('/profile/:id', async (req, res) => {
     return res.json(profile_list);}
     catch(e)
     {
-       res.render("error/error")
+       res.status(e.status || 500).render("error/error", {error: e.message, title: "Error"})
     }
 
 })
@@ -229,7 +229,7 @@ router.get('/searchProfile/:id', async (req, res) => {
         res.redirect("/login");
     }
     }catch(e){
-        res.render("error/error")
+        res.status(e.status || 500).render("error/error", {error: e.message, title: "Error"})
     }
 
 })
@@ -311,7 +311,7 @@ router.get('/',async (req, res) => {
        
       }
     }catch(e){
-        res.render("error/error")
+        res.render("error/error", {title: "error"})
     }
     
     
@@ -332,7 +332,7 @@ router. get('/signup',async (req, res) => {
       } 
     }
     catch(e){
-        res.render("error/error")
+        res.render("error/error", {title: "error"})
     }    
   });
 //------------end of Get SignUp page--------------//
@@ -561,10 +561,10 @@ router. get('/signup',async (req, res) => {
             
         }
     catch(e){
-        res.status(e.error || 500).render('users/signup',{title:"signUp",error: e.message ||`Internal Server Error`})
+        res.status(e.status || 500).render('users/signup',{title:"signUp",error: e.message ||`Internal Server Error`})
     }
     }catch(e){
-    res.render("error/error")
+    res.status(e.status || 500).render("error/error", {title: "Error", error: e.message})
    }
   })
 
@@ -582,7 +582,7 @@ router. get('/signup',async (req, res) => {
         res.render("users/login",{title: "LOGIN"});
       }
     }catch(e){
-        res.render("error/error")
+        res.render("error/error", {title: "Error"})
     }
   });  
   
@@ -646,7 +646,7 @@ router. get('/signup',async (req, res) => {
         res.status(e.error || 500).render('users/login',{title:"login",error: e.message ||`Internal Server Error`})
     }
     }catch(e){
-        res.render("error/error")
+        res.render("error/error", {error: e, title: "Error"})
     }
 
 });
@@ -654,18 +654,10 @@ router. get('/signup',async (req, res) => {
 //-------------End of Post Login---------------------//
 
 
-//   router.get('/private',async (req, res) => {
-    
-//     if (req.session.user) {
-//         return res.render("users/private",{title:"Private", username: req.session.user})
-//       }
-//     });
-
-
 //--------------------Get Logout---------------------//
   router.get('/logout',async (req, res) => {
     req.session.destroy();
-    return res.redirect("/");
+    return res.status(200).redirect("/");
     
 });
 

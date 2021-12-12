@@ -46,7 +46,7 @@ function validateDate(date) {
         }
 
         if(!leapyear(parsedYear) && parsedMonth === 2 && parsedDay === 29){
-            throw {message: `Only a leap year can have 29 days in month of February`}
+            throw `Only a leap year can have 29 days in month of February`
         }
         
         let d1 = new Date(Date.parse(date));
@@ -63,72 +63,72 @@ function validateDate(date) {
 
 async function createUser(profilePicture, firstName, lastName, username, emailAddress, password, phoneNumber, country, biography, gender, userType, dateOfBirth){
     if(!firstName || !lastName || !username || !emailAddress || !password || !phoneNumber || !country || !biography || !gender || !userType || !dateOfBirth){
-        throw {message: `All fields must be supplied`, error:400}
+        throw {message: `All fields must be supplied`, status:400}
     }
 
-    if(typeof firstName !== "string") throw {message:`firstName must be string`,error:400}
-    if(typeof lastName !== "string" ) throw {message:`lastName must be string`,error:400}
-    if(typeof emailAddress !== "string") throw {message:'emailAddress must be string',error:400}
-    if(typeof password !== "string") throw {message:'password must be string',error:400}
-    if(typeof country !== "string") throw {message:'country must be string',error:400}
-    if(typeof biography !== "string") throw {message:'biography must be string',error:400}
-    if(typeof gender !== "string") throw {message: 'gender must be string',error:400}
-    if(typeof userType !== "string") throw {message:'userType must be string',error:400}
-    if(typeof phoneNumber !== "string") throw {message:'phoneNumber must be string',error:400}
-    if(typeof dateOfBirth !== "string") throw {message:'dateOfBirth must be string',error:400}
-    if(typeof username !== "string") throw {message:`userName must be string`,error:400}
+    if(typeof firstName !== "string") throw {message:`firstName must be string`,status:400}
+    if(typeof lastName !== "string" ) throw {message:`lastName must be string`,status:400}
+    if(typeof emailAddress !== "string") throw {message:'emailAddress must be string',status:400}
+    if(typeof password !== "string") throw {message:'password must be string',status:400}
+    if(typeof country !== "string") throw {message:'country must be string',status:400}
+    if(typeof biography !== "string") throw {message:'biography must be string',status:400}
+    if(typeof gender !== "string") throw {message: 'gender must be string',status:400}
+    if(typeof userType !== "string") throw {message:'userType must be string',status:400}
+    if(typeof phoneNumber !== "string") throw {message:'phoneNumber must be string',status:400}
+    if(typeof dateOfBirth !== "string") throw {message:'dateOfBirth must be string',status:400}
+    if(typeof username !== "string") throw {message:`userName must be string`,status:400}
 
-    if (/^ *$/.test(firstName)) throw {message:`firstName cannot be empty`,error:400}
-    if (/^ *$/.test(lastName)) throw {message:`lastName cannot be empty`,error:400}
-    if (/^ *$/.test(emailAddress)) throw {message:`emailAddress cannot be empty`,error:400}
-    if (/^ *$/.test(password)) throw {message:`password cannot be empty`,error:400}
-    if (/^ *$/.test(country)) throw {message:`country cannot be empty`,error:400}
-    if (/^ *$/.test(biography)) throw {message:`biography cannot be empty`,error:400}
-    if (/^ *$/.test(gender)) throw {message:`gender cannot be empty`,error:400}
-    if (/^ *$/.test(userType)) throw {message:`userType cannot be empty`,error:400}
-    if (/^ *$/.test(phoneNumber)) throw {message:`phoneNumber cannot be empty`,error:400}
-    if (/^ *$/.test(dateOfBirth)) throw {message:`dateOfBirth cannot be empty`,error:400}
-    if (/^ *$/.test(username)) throw {message:`Username cannot be empty`,error:400}
+    if (/^ *$/.test(firstName)) throw {message:`firstName cannot be empty`,status:400}
+    if (/^ *$/.test(lastName)) throw {message:`lastName cannot be empty`,status:400}
+    if (/^ *$/.test(emailAddress)) throw {message:`emailAddress cannot be empty`,status:400}
+    if (/^ *$/.test(password)) throw {message:`password cannot be empty`,status:400}
+    if (/^ *$/.test(country)) throw {message:`country cannot be empty`,status:400}
+    if (/^ *$/.test(biography)) throw {message:`biography cannot be empty`,status:400}
+    if (/^ *$/.test(gender)) throw {message:`gender cannot be empty`,status:400}
+    if (/^ *$/.test(userType)) throw {message:`userType cannot be empty`,status:400}
+    if (/^ *$/.test(phoneNumber)) throw {message:`phoneNumber cannot be empty`,status:400}
+    if (/^ *$/.test(dateOfBirth)) throw {message:`dateOfBirth cannot be empty`,status:400}
+    if (/^ *$/.test(username)) throw {message:`Username cannot be empty`,status:400}
 
     if(/[^A-Za-z0-9]/g.test(username)){
-        throw {message:`Username should only have numbers and alphabets`,error:400}
+        throw {message:`Username should only have numbers and alphabets`,status:400}
     }
 
     if(username.length < 4){
-        throw {message:`Username should have atleast 4 characters`,error:400}
+        throw {message:`Username should have atleast 4 characters`,status:400}
     }
 
-    if(!validateEmail(emailAddress)) throw {message:`Please Enter valid Email Address`,error:400}
+    if(!validateEmail(emailAddress)) throw {message:`Please Enter valid Email Address`,status:400}
 
-    if(/\s/g.test(password)) throw {message: `password cannot have spaces`,error:400}
+    if(/\s/g.test(password)) throw {message: `password cannot have spaces`,status:400}
     if(password.length < 8){
-        throw {message:`Password should be atleast 8 characters long`,error:400};
+        throw {message:`Password should be atleast 8 characters long`,status:400};
     }
 
     const hashedPwd = await bcrypt.hash(password, saltRounds);
     
     let phoneRe = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4}$/im;
-    if(!phoneNumber.match(phoneRe)) throw {message:`Phone number must be in correct format and all numbers`, error: 400};
+    if(!phoneNumber.match(phoneRe)) throw {message:`Phone number must be in correct format and all numbers`, status: 400};
   
     const countryCodes = Object.keys(countries.countries);
     const countryNames = countryCodes.map(code => countries.countries[code].name);
     
-    if (!countryNames.includes(country)) throw {message:`Please enter a valid country`, error: 400};
+    if (!countryNames.includes(country)) throw {message:`Please enter a valid country`, status: 400};
 
 
     let gen = ["Female", "Male", "Other"]
 
     // if (gender !== "Female" || gender !== "Male" || gender !== "other") throw `Gender must be Male or Female or other`
     
-    if(!gen.includes(gender)) throw {message:`Please enter valid gender`, error: 400};
+    if(!gen.includes(gender)) throw {message:`Please enter valid gender`, status: 400};
     
-    if (userType !== "Patient" && userType !== "Doctor") throw {message:`Usertype must be a patient or a doctor`, error: 400};
+    if (userType !== "Patient" && userType !== "Doctor") throw {message:`Usertype must be a patient or a doctor`, status: 400};
     try{
     if (!validateDate(dateOfBirth)) throw {
-        message:`Please Enter valid date of birth`, error: 400};
+        message:`Please Enter valid date of birth`, status: 400};
     }
     catch(e){
-        throw {message:e, error: 400};
+        throw {message:e, status: 400};
     }
 
     const userCollection = await users()
@@ -136,12 +136,12 @@ async function createUser(profilePicture, firstName, lastName, username, emailAd
     const lowerUser = emailAddress.toLowerCase()
     const userexists = await userCollection.findOne({ emailAddress: lowerUser})
    
-    if(userexists) throw  {message:`User with that email address already exists`, error: 400};
+    if(userexists) throw  {message:`User with that email address already exists`, status: 400};
 
     const lowerUsername = username.toLocaleLowerCase()
     const usertaken = await userCollection.findOne({ username: lowerUsername})
     
-    if(usertaken) throw {message:`Username already taken`, error: 400};
+    if(usertaken) throw {message:`Username already taken`, status: 400};
 
 
     let newUser = {
@@ -160,7 +160,7 @@ async function createUser(profilePicture, firstName, lastName, username, emailAd
     }
 
     const insertInfo = await userCollection.insertOne(newUser)
-    if (insertInfo.insertCount == 0) throw {message:`Could not add user`,error:400}
+    if (insertInfo.insertCount == 0) throw {message:`Could not add user`,status:400}
 
     const newId = insertInfo.insertedId.toString();
     const user = await get(newId);
@@ -169,9 +169,9 @@ async function createUser(profilePicture, firstName, lastName, username, emailAd
 }
 
 async function get(id){
-    if(!id) throw `You must provide a proper id`
-    if(typeof id != 'string') throw `${id} is not string`
-    if(/^ *$/.test(id)) throw `id with just empty spaces is not valid`
+    if(!id) throw {message: `You must provide a proper id`, status:400}
+    if(typeof id != 'string') throw {message: `${id} is not string`, status: 400}
+    if(/^ *$/.test(id)) throw {message: `id with just empty spaces is not valid`, status: 400}
 
     const userCollection = await users()
     let getId
@@ -180,35 +180,35 @@ async function get(id){
         getId = ObjectID(id);
     }
     catch(e){
-        throw `Id is invalid because of ${e}`
+        throw {message: `Id is invalid because of ${e}`, status: 400}
     }
 
     const user = await userCollection.findOne({ _id: getId})
 
-    if(user === null) throw `No user exists with that id`;
+    if(user === null) throw {message: `No user exists with that id`, status: 400};
 
     return JSON.parse(JSON.stringify(user));
 
 }
 
 async function getByUsername(username){
-    if(!username) throw {message: `You must provide a proper Username`, error:400}
-    if(typeof username != 'string') throw {message: `${username} is not string`, error:400}
-    if(/^ *$/.test(username)) throw {message: `username with just empty spaces is not valid`, error:400}
+    if(!username) throw {message: `You must provide a proper Username`, status:400}
+    if(typeof username != 'string') throw {message: `${username} is not string`, status:400}
+    if(/^ *$/.test(username)) throw {message: `username with just empty spaces is not valid`, status:400}
 
     if(/[^A-Za-z0-9]/g.test(username)){
-        throw {message: `Username should only have numbers and alphabets`, error:400}
+        throw {message: `Username should only have numbers and alphabets`, status:400}
     }
 
     if(username.length < 4){
-        throw {message: `Username should have atleast 4 characters`, error:400}
+        throw {message: `Username should have atleast 4 characters`, status:400}
     }
 
     const userCollection = await users()
     
     const user = await userCollection.findOne({ username: username.toLowerCase()})
 
-    if(user === null) throw {message: `No user exists with that username`, error:400};
+    if(user === null) throw {message: `No user exists with that username`, status:400};
 
     return JSON.parse(JSON.stringify(user));
 
@@ -229,15 +229,15 @@ async function updateUser(updatedData){
         if(updatedData.emailAddress){
             if(typeof updatedData.emailAddress !== "string") throw {message:'emailAddress must be string', status:400}
             if (/^ *$/.test(updatedData.emailAddress)) throw {message: `emailAddress cannot be empty`, status:400}
-            if(!validateEmail(updatedData.emailAddress)) throw {message:`Please Enter valid Email Address`,error:400}
+            if(!validateEmail(updatedData.emailAddress)) throw {message:`Please Enter valid Email Address`,status:400}
         }
 
         if(updatedData.country){
-            if(typeof updatedData.country !== "string") throw {message:'country must be string', error:400}
-            if (/^ *$/.test(updatedData.country)) throw {message: `country cannot be empty`, error:400}
+            if(typeof updatedData.country !== "string") throw {message:'country must be string', status:400}
+            if (/^ *$/.test(updatedData.country)) throw {message: `country cannot be empty`,status:400}
             const countryCodes = Object.keys(countries.countries);
             const countryNames = countryCodes.map(code => countries.countries[code].name);
-            if (!countryNames.includes(updatedData.country)) throw {message: `Please enter a valid country`, error:400}
+            if (!countryNames.includes(updatedData.country)) throw {message: `Please enter a valid country`, status:400}
         }
 
         if(updatedData.biography){
@@ -246,17 +246,17 @@ async function updateUser(updatedData){
         }
 
         if(updatedData.gender){
-            if(typeof updatedData.gender !== "string") throw {message: 'gender must be string', error:400}
-            if (/^ *$/.test(updatedData.gender)) throw {message: `gender cannot be empty`, error:400}
+            if(typeof updatedData.gender !== "string") throw {message: 'gender must be string', status:400}
+            if (/^ *$/.test(updatedData.gender)) throw {message: `gender cannot be empty`, status:400}
             let gen = ["Female", "Male", "Other"]
-            if(!gen.includes(updatedData.gender)) throw {message:`Please enter valid gender`, error: 400};
+            if(!gen.includes(updatedData.gender)) throw {message:`Please enter valid gender`, status: 400};
         }
 
         if(updatedData.phoneNumber){
             if(typeof updatedData.phoneNumber !== "string") throw {message: 'phoneNumber must be string', status:400}
             if (/^ *$/.test(updatedData.phoneNumber)) throw {message: `phoneNumber cannot be empty`, status:400}
             let phoneRe = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
-            if(!updatedData.phoneNumber.match(phoneRe)) throw {message: `Phone number must be all numbers and correct format`, error:400}
+            if(!updatedData.phoneNumber.match(phoneRe)) throw {message: `Phone number must be all numbers and correct format`, status:400}
     
         }
        
@@ -275,7 +275,7 @@ async function updateUser(updatedData){
         if(updatedData.emailAddress){
             const lowerUser = updatedData.emailAddress.toLowerCase()
             const userexists = await userCollection.findOne({ emailAddress: lowerUser})
-            if(userexists) throw {message: `User with that email address already exists`, error:400}
+            if(userexists) throw {message: `User with that email address already exists`, status:400}
         }
         // let updateId
     
@@ -387,33 +387,33 @@ async function updateUser(updatedData){
 
 async function checkUser(username, password){
     if(!username || !password){
-        throw {message:`All fields need to have valid values`,error:400};
+        throw {message:`All fields need to have valid values`,status:400};
     }
 
     if(typeof username !== 'string' || /^ *$/.test(username)){
-        throw {message:`Please enter a valid string`,error:400};
+        throw {message:`Please enter a valid string`,status:400};
     }
 
     if(/[^A-Za-z0-9]/g.test(username)){
-        throw {message: `Username should only have numbers and alphabets`,error:400};
+        throw {message: `Username should only have numbers and alphabets`,status:400};
     }
 
     if(username.length < 4){
-        throw {message: `Username should have atleast 4 characters`,error:400};
+        throw {message: `Username should have atleast 4 characters`,status:400};
     }
 
-    if(/^ *$/.test(password)) throw {message: `password cannot be empty`,error:400};
+    if(/^ *$/.test(password)) throw {message: `password cannot be empty`,status:400};
 
-    if(/\s/g.test(password)) throw {message:`password cannot have spaces`,error:400};
+    if(/\s/g.test(password)) throw {message:`password cannot have spaces`,status:400};
 
     if(password.length < 8){
-        throw {message:`Password should be atleast 8 characters long`,error:400};
+        throw {message:`Password should be atleast 8 characters long`,status:400};
     }
 
     const userCollection = await users()
     const user = await userCollection.findOne({ username: username.toLowerCase()})
 
-    if(user === null) throw {message:`Either the username or password is invalid`,error:400};
+    if(user === null) throw {message:`Either the username or password is invalid`,status:400};
 
     let compareToMatch = false;
 
@@ -426,7 +426,7 @@ async function checkUser(username, password){
     if (compareToMatch) {
         return {authenticated: true}
     } else {
-        throw {message:`Either the username or password is invalid`,error:400};
+        throw {message:`Either the username or password is invalid`,status:400};
     }
 
 }
@@ -442,7 +442,7 @@ async function searchUser(searchTerm){
     }
 
     if(/^ *$/.test(searchTerm)){
-        throw {message: `Enter Something to search`}
+        throw {message: `Enter Something to search`, status:400}
     }
 
     const userCollection = await users()
