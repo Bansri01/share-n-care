@@ -22,7 +22,7 @@
 # information about seeded database
 - we have added 20 users 
 - We have added 20 diseases
-- We have added 
+- We have added 20 posts, 42 comments, several thumbs-up and thumbs-down for the first four forums.
 
 # About the website
 
@@ -60,6 +60,9 @@ The Website will allow the user to sign up and create their profile. The User ca
     In the forum, user can enter search terms in the search posts box on the top-left corner and get the post they are looking for.
 # 4. Like/Dislike of a comment:
     User's can like and dislike other user's comments on a post in forum.
+
+# GitHub Link
+- https://github.com/Bansri01/share-n-care
 
 
 
