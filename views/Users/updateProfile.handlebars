@@ -65,7 +65,7 @@
           <div class="form-group">
             <label class="col-sm-2 control-label" for="country">Country</label>
             <div class="col-sm-10">
-              <select class="form-control" placeholder="Country" name="country" id="country">
+              <select class="form-control" name="country" id="country">
                 <option selected>{{country}}</option>
                 {{#each countryNames}}
                 <option value="{{this}}">{{this}}</option>
@@ -105,7 +105,7 @@
           <div class="form-group">
             <div class="col-sm-10 col-sm-offset-2">
               <button type="submit" class="btn btn-primary">Submit</button>
-              <a type="reset" class="btn btn-default" href="/profile" title="Click to return to Profile">Cancel</a>
+              <a class="btn btn-default" href="/profile" title="Click to return to Profile">Cancel</a>
             </div>
           </div>
         </div>
