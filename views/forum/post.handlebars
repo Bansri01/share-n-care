@@ -1,7 +1,4 @@
-<link rel="stylesheet" href= "/public/css/forum.css">
-
 <main>
-    <a class="return-to-forum" href="/forum/{{getPost.diseaseId}}">Return to forum</a>
     <div id="postInfo">
         <h1 class="postTitle">{{getPost.title}}</h1>
         <p class="content">{{getPost.content}}</p>
@@ -103,11 +100,15 @@
     {{/if}}
 
     <form id="addNewComment" method="POST" action="/forum/post/{{getPost._id}}">
-        <label for="commen-content">Comment content</label>
-        <textarea class="form-control" type="text" id="commen-content" name="commentContent"></textarea>
+        <label for="commentContent"></label>
+        <textarea class="form-control" type="text" placeholder="The content of the comment" id="commentContent" name="commentContent"></textarea>
+        <p class="errors" id="commentContentError"></p>
         <button type="submit" class="btn btn-primary btn-lg btn-block" name="comment-submit">Add a Comment</button>
     </form>
     {{#if hasError}}
         <p class="errors">{{error}}</p>
     {{/if}}
 </main>
+
+<link rel="stylesheet" href= "/public/css/forum.css">
+<script src="/public/js/forum.js"></script>

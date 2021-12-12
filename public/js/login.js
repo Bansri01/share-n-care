@@ -48,20 +48,20 @@ document.addEventListener("DOMContentLoaded", () => {
         inputElement.addEventListener("blur", e => {
             
             
-            if (e.target.id === "signupUsername" && !e.target.value )  {
+            if (e.target.id === "username" && !e.target.value )  {
                 setInputError(inputElement, "You must provide profile Username");
             }
             
             if (e.target.id === "password" && !e.target.value )  {
                 setInputError(inputElement, "You must provide profile Password");
             }   
-            if (e.target.id === "signupUsername" && (/^ *$/.test(e.target.value)))  {
+            if (e.target.id === "username" && (/^ *$/.test(e.target.value)))  {
                 setInputError(inputElement, "signupUsername cannot be empty");
             }
-            if (e.target.id === "signupUsername" && (/[^A-Za-z0-9]/g.test(e.target.value)))  {
+            if (e.target.id === "username" && (/[^A-Za-z0-9]/g.test(e.target.value)))  {
                 setInputError(inputElement, "Username should only have numbers and alphabets");
             }
-            if(e.target.id === "signupUsername" && e.target.value.length < 4){
+            if(e.target.id === "username" && e.target.value.length < 4){
                 setInputError(inputElement, "Username should have atleast 4 characters");
                 
             }
