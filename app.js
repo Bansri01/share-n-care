@@ -4,6 +4,7 @@ const session = require('express-session');
 const static = express.static(__dirname +'/public');
 const configRoutes = require('./routes');
 const exphbs = require('express-handlebars');
+const xss = require('xss');
 
 const handlebarsInstance = exphbs.create({
   defaultLayout: 'main',
