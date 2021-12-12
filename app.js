@@ -46,6 +46,8 @@ const rewriteUnsupportedBrowserMethods = (req, res, next) => {
   next();
 };
 
+
+
 configRoutes(app);
 
 app.listen(3000, () => {

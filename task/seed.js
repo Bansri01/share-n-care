@@ -1,7 +1,9 @@
 const dbConnection = require("../config/mongoConnection");
-const data = require("../data/");
+const data = require("../data");
 const dis = data.diseases;
 const user = data.users;
+const post = data.posts;
+const comment = data.comments;
 const ObjectId  = require('mongodb').ObjectId;
 
 
@@ -10,7 +12,7 @@ async function main() {
   await db.dropDatabase();
 
   try {
-    let newDisease = await dis.createDisease(
+    let newDisease1 = await dis.createDisease(
       "Tuberculosis",
       "Tuberculosis (TB) is a potentially serious infectious disease that mainly affects the lungs. The bacteria that cause tuberculosis are spread from person to person through tiny droplets released into the air via coughs and sneezes. Once rare in developed countries, tuberculosis infections began increasing in 1985, partly because of the emergence of HIV, the virus that causes AIDS. HIV weakens a person's immune system, so it can't fight the TB germs. In the United States, because of stronger control programs, tuberculosis began to decrease again in 1993. But it remains a concern. Many tuberculosis strains resist the drugs most used to treat the disease. People with active tuberculosis must take many types of medications for months to get rid of the infection and prevent antibiotic resistance.",
       ["Bad cough that lasts 3 weeks or longer","Coughing up blood or sputum (mucus from deep inside the lungs)","Chest pain","Fever","Fatigue","Loss of appetite","Unintended weight loss","Chills","Night sweats"],
@@ -30,12 +32,7 @@ async function main() {
     ["TB","Tuberculosis","Tuber","Active TB Disease","Miliary TB","Latent TB Infection","Phthisis"," scrofula","Active Tuberculosis","struma","pulmonary","Miliary Tuberculosis","Latent Tuberculosis","cough","disease"]
 
       );
-  } catch (e) {
-    console.log(e);
-  }
-
-  try {
-    let newDisease = await dis.createDisease(
+    let newDisease2 = await dis.createDisease(
       "Diabetes",
       "Diabetes is a chronic disease that occurs either when the pancreas does not produce enough insulin or when the body cannot effectively use the insulin it produces. Insulin is a hormone that regulates blood sugar. Hyperglycaemia, or raised blood sugar, is a common effect of uncontrolled diabetes and over time leads to serious damage to many of the body's systems, especially the nerves and blood vessels. In 2014, 8.5% of adults aged 18 years and older had diabetes. In 2019, diabetes was the direct cause of 1.5 million deaths and 48% of all deaths due to diabetes occurred before the age of 70 years. Between 2000 and 2016, there was a 5% increase in premature mortality rates (i.e. before the age of 70) from diabetes. In high-income countries the premature mortality rate due to diabetes decreased from 2000 to 2010 but then increased in 2010-2016. In lower-middle-income countries, the premature mortality rate due to diabetes increased across both periods. By contrast, the probability of dying from any one of the four main noncommunicable diseases (cardiovascular diseases, cancer, chronic respiratory diseases or diabetes) between the ages of 30 and 70 decreased by 18% globally between 2000 and 2016.",
       ["Extreme hunger.",
@@ -79,14 +76,7 @@ async function main() {
 "insulin dependent","disease"]
 
       );
-  } catch (e) {
-    console.log(e);
-  }
-  
-
-  
-  try {
-    let newDisease = await dis.createDisease(
+    let newDisease3 = await dis.createDisease(
       "Epilepsy",
       "Epilepsy is a disorder of the brain. People who have epilepsy have electrical activity in the brain that is not normal, causing seizures. There are different types of seizures. In some cases, a seizure may cause jerking, uncontrolled movements, and loss of consciousness. In other cases, seizures cause only a period of confusion, a staring spell, or muscle spasms. Epilepsy is also called a “seizure disorder.” Epilepsy is not a mental illness, and it is not a sign of low intelligence. It is also not contagious. Seizures do not normally cause brain damage. Between seizures, a person with epilepsy is no different from anyone else.",
        ["Generalized tonic-clonic (grand mal) seizures",
@@ -120,13 +110,7 @@ async function main() {
     ["Epilepsy","seizures","Convulsive seizures","convolutions","convolution","seizure","convulsion","stroke","attack","fit","collapse","paroxysm","tremor","contortion","stress","mental","brain","nervous system","disease"]
 
       );
-  } catch (e) {
-    console.log(e);
-  }
-
-  
-  try {
-    let newDisease = await dis.createDisease(
+    let newDisease4 = await dis.createDisease(
       "Skin Cancer",
       "Skin cancer is the most common form of cancer in the United States. Almost all skin cancers are the result of too much exposure to ultraviolet light. This is found in sunlight, tanning booths, and sunlamps. Skin cancer is usually one of the most curable types of cancer. Basal cell carcinoma and squamous cell carcinoma are two of the most common forms of skin cancer. They are very curable. These cancers occur in the basal and squamous cell layers at the top of the skin. They are almost always slow-growing. If found early, they are easy to treat and do not spread.Melanoma is a less common but aggressive form of skin cancer. It occurs in skin cells that make a skin color pigment called melanin. If it is not found early, it will likely spread to other tissues. It can spread through the whole body and may cause death. Only 2% of skin cancer cases are melanoma. But it causes the most deaths from skin cancer.",
        ["A for asymmetry – Mole is not symmetrical. This means it’s not the same on both sides. If it was folded in half, the two halves wouldn’t match.",
@@ -158,13 +142,7 @@ async function main() {
     "skin rashes","rashes","dark spots","spots","itching","disease"]
 
       );
-  } catch (e) {
-    console.log(e);
-  }
-
-
-  try {
-    let newDisease = await dis.createDisease(
+    let newDisease5 = await dis.createDisease(
       "ACL Injury",
       "ACL refers to the anterior cruciate ligament. It is 1 of 4 ligaments in your knee. The other knee ligaments are PCL (posterior cruciate ligament), MCL (medial collateral ligament), and LCL (lateral collateral ligament). The ACL is located behind the kneecap (patella). It stabilizes the knee when it rotates. The ACL and PCL connect your thigh bone (femur) to your shin bone (tibia). An ACL injury is the overstretching or tearing of the ACL ligament. A torn ACL is a common knee injury. On average, women are 2 to 8 times more at risk of ACL injuries than men. Teenagers also are getting ACL injuries at an increased rate, probably because more kids are involved in organized sports. The increase in ACL injuries is also due to more awareness and advanced testing.",
        ["The primary sign of an ACL injury is a popping noise. This is often combined with pain and swelling",
@@ -194,12 +172,7 @@ async function main() {
     ["arthroscope","ACL","anterior cruciate ligament","Ligament","ligament Tear","tear","Tissue Tear","Knee Pain","Knees","bones","Tenderness","tendon","reconstruct","ACL Reconstruction"]
 
       );
-  } catch (e) {
-    console.log(e);
-  }
-
-   try {
-    let newDisease = await dis.createDisease(
+    let newDisease6 = await dis.createDisease(
       "Hypertension",
       "High blood pressure (hypertension) is a common condition in which the long-term force of the blood against your artery walls is high enough that it may eventually cause health problems, such as heart disease.",
        ["Most people with high blood pressure have no signs or symptoms, even if blood pressure readings reach dangerously high levels.",
@@ -222,13 +195,8 @@ async function main() {
     ["hypertension","high blood pressure","stress","pressure","tension","Hyper","blood Pressure","sleep","no sleep","disease"]
 
       );
-  } catch (e) {
-    console.log(e);
-  }
 
-
-  try {
-    let newDisease = await dis.createDisease(
+    let newDisease7 = await dis.createDisease(
       "Heart Disease",
       "The term “heart disease” refers to several types of heart conditions. The most common type of heart disease in the United States is coronary artery disease (CAD), which affects the blood flow to the heart. Decreased blood flow can cause a heart attack. ",
        ["Chest pain","chest tightness","chest pressure","and chest discomfort (angina)","Shortness of breath","Pain, numbness, weakness or coldness in your legs or arms if the blood vessels in those parts of your body are narrowed","Pain in the neck, jaw, throat, upper abdomen or back"],
@@ -256,13 +224,8 @@ async function main() {
     ["heart disease","heart attack","arrhythmia","heart failure","attack","heart","fainted","cardiovascular disease","arrest","cardiac arrest","chest pains","coronary","coronary infarction","stroke","disease"]
 
       );
-  } catch (e) {
-    console.log(e);
-  }
 
-  
-  try {
-    let newDisease = await dis.createDisease(
+    let newDisease8 = await dis.createDisease(
       "Asthma",
       "Asthma is a chronic (long-term) disease of the lungs. It inflames and narrows the airways, making it harder to breathe. These are tubes that carry air into and out of your lungs. It most often starts in childhood but can affect people of all ages.The airways of people who have asthma are extra sensitive to the things they’re allergic to (allergens). They are also sensitive to certain substances that can be inhaled through the air.Asthma symptoms start when irritants cause the lining of the airways to become inflamed (swollen) and narrow. The muscles around the airways can then spasm (contract rapidly). This causes the airways to narrow even more. When the lining of the airways is inflamed, it produces more mucus. The mucus clogs the airways and further blocks the flow of air. When these symptoms are severe and not easily controlled, it’s called an 'asthma attack.'",      
        ["Airway blockage: When you breathe as usual, the bands of muscle around your airways are relaxed, and air moves freely. But when you have asthma, the muscles tighten. It’s harder for air to pass through.",
@@ -288,13 +251,8 @@ async function main() {
     ["Asthma","asthma attack","bronchial asthma","attack","bronchospasm","respiratory disease","respiratory disorder","respiratory illness","status asthmaticus","choking","exhausted"]
 
       );
-  } catch (e) {
-    console.log(e);
-  }
 
-  
-  try {
-    let newDisease = await dis.createDisease(
+    let newDisease9 = await dis.createDisease(
       "Gout",
       "Gout is a common and complex form of arthritis that can affect anyone. It's characterized by sudden, severe attacks of pain, swelling, redness and tenderness in one or more joints, most often in the big toe.An attack of gout can occur suddenly, often waking you up in the middle of the night with the sensation that your big toe is on fire. The affected joint is hot, swollen and so tender that even the weight of the bedsheet on it may seem intolerable.",
        ["Intense joint pain. Gout usually affects the big toe, but it can occur in any joint. Other commonly affected joints include the ankles, knees, elbows, wrists and fingers. The pain is likely to be most severe within the first four to 12 hours after it begins.",
@@ -321,15 +279,8 @@ async function main() {
     ["gout","gouty arthritis","crystalline arthritis","urarthritis","arthritis","gustation"]
 
       );
-  } catch (e) {
-    console.log(e);
-  }
-
-
-
-  
-  try {
-    let newDisease = await dis.createDisease(
+ 
+    let newDisease10 = await dis.createDisease(
       "Hyperlipidemia",
       "Hyperlipidemia (high cholesterol) means your blood has too many lipids (fats) in it. These can add up and lead to blockages in your blood vessels. This is why high cholesterol can put you at risk for a stroke or heart attack. But you can make lifestyle changes like eating healthier and exercising to lower your cholesterol. Medicine can help, too.",
        ["Most people don’t have symptoms when their cholesterol is high",
@@ -352,17 +303,8 @@ async function main() {
     ["hyperlipidemia","high cholesterol","hypercholesterolemia","lipemia","hyperlipaemia"]
 
       );
-  } catch (e) {
-    console.log(e);
-  }
-
-
-
-
   
-
-  try {
-    let newDisease = await dis.createDisease(
+    let newDisease11 = await dis.createDisease(
       "Malaria",
       "Malaria is a disease caused by a parasite. The parasite is spread to humans through the bites of infected mosquitoes. People who have malaria usually feel very sick with a high fever and shaking chills. While the disease is uncommon in temperate climates, malaria is still common in tropical and subtropical countries. Each year nearly 290 million people are infected with malaria, and more than 400,000 people die of the disease. To reduce malaria infections, world health programs distribute preventive drugs and insecticide-treated bed nets to protect people from mosquito bites. The World Health Organization has recommended a malaria vaccine for use in children who live in countries with high numbers of malaria cases. Protective clothing, bed nets and insecticides can protect you while traveling. You also can take preventive medicine before, during and after a trip to a high-risk area. Many malaria parasites have developed resistance to common drugs used to treat the disease. Some people who have malaria experience cycles of malaria 'attacks.' An attack usually starts with shivering and chills, followed by a high fever, followed by sweating and a return to normal temperature. Malaria signs and symptoms typically begin within a few weeks after being bitten by an infected mosquito. However, some types of malaria parasites can lie dormant in your body for up to a year.",
        ["Fever",
@@ -392,13 +334,8 @@ async function main() {
     ["Malaria","ague","jungle fever","marsh or swamp fever","paludism","Plasmodium falciparum","falciparum","Plasmodium malariae","Plasmodium"]
 
       );
-  } catch (e) {
-    console.log(e);
-  }
-
-  
-  try {
-    let newDisease = await dis.createDisease(
+ 
+    let newDisease12 = await dis.createDisease(
       "Chicken Pox",
       "Chickenpox is an infection caused by the varicella-zoster virus. It causes an itchy rash with small, fluid-filled blisters. Chickenpox is highly contagious to people who haven't had the disease or been vaccinated against it. Chickenpox infection is caused by the varicella-zoster virus. It can spread through direct contact with the rash. It can also spread when a person with the chickenpox coughs or sneezes and you inhale the air droplets. Chickenpox is normally a mild disease. But it can be serious and can lead to complications including: Bacterial infections of the skin, soft tissues, bones, joints or bloodstream (sepsis) Dehydration, Pneumonia, Inflammation of the brain (encephalitis), Toxic shock syndrome, Reye's syndrome in children and teenagers who take aspirin during chickenpox, Death. Today, a vaccine is available that protects children against chickenpox. Routine vaccination is recommended by the U.S. Centers for Disease Control and Prevention (CDC). The chickenpox vaccine is a safe, effective way to prevent chickenpox and its possible complications.",
        ["The itchy blister rash caused by chickenpox infection appears 10 to 21 days after exposure to the virus and usually lasts about five to 10 days",
@@ -424,13 +361,8 @@ async function main() {
     ["Chicken","Chicken Pox","Pox","Skin","Dots","Varicella","Zoster","Shingles","Varicella-Zoster"]
 
       );
-  } catch (e) {
-    console.log(e);
-  }
-
-
-  try {
-    let newDisease = await dis.createDisease(
+ 
+    let newDisease13 = await dis.createDisease(
       "COVID-19",
       "A new virus called severe acute respiratory syndrome coronavirus 2 (SARS-CoV-2) was identified as the cause of a disease outbreak that began in China in 2019. The disease is called coronavirus disease 2019 (COVID-19).In March 2020, the World Health Organization (WHO) declared COVID-19 a pandemic. Public health groups, including the U.S. Centers for Disease Control and Prevention (CDC) and WHO, are monitoring the pandemic and posting updates on their websites. These groups have also issued recommendations for preventing the spread of the virus that causes COVID-19.How does the coronavirus spread? Data has shown that the COVID-19 virus mainly spreads from person to person among those in close contact (within about 6 feet, or 2 meters). The virus spreads by respiratory droplets released when someone infected with the virus coughs, sneezes, breathes, sings or talks. These droplets can be inhaled or land in the mouth, nose or eyes of a person nearby. Sometimes the COVID-19 virus can spread when a person is exposed to small droplets or aerosols that stay in the air for several minutes or hours — called airborne transmission. The virus can also spread if you touch a surface with the virus on it and then touch your mouth, nose or eyes. But the risk is low. The COVID-19 virus can spread from someone who is infected but has no symptoms. This is called asymptomatic transmission. The COVID-19 virus can also spread from someone who is infected but hasn't developed symptoms yet. This is called presymptomatic transmission. It's possible to get COVID-19 twice or more, but this is uncommon.",
        ["Fever or chills",
@@ -485,14 +417,8 @@ async function main() {
     ["corona","covid","covid-19","coronavirus","virus","Sars","Sars-covid","omicron","disease"]
 
       );
-  } catch (e) {
-    console.log(e);
-  }
-
-
-  
-  try {
-    let newDisease = await dis.createDisease(
+ 
+    let newDisease14 = await dis.createDisease(
       "Small Pox",
       "Smallpox is a contagious, disfiguring and often deadly disease that has affected humans for thousands of years. Naturally occurring smallpox was wiped out worldwide by 1980 — the result of an unprecedented global immunization campaign. Samples of smallpox virus have been kept for research purposes. And advances in synthetic biology have made it possible to create smallpox from published amino acid sequences. This has led to concerns that smallpox could someday be used as a biological warfare agent. No cure or treatment for smallpox exists. A vaccine can prevent smallpox, but the risk of the vaccine's side effects is too high to justify routine vaccination for people at low risk of exposure to the smallpox virus. Smallpox is caused by infection with the variola virus. The virus can be transmitted:Directly from person to person. Indirectly from an infected person. 	Via contaminated items.",
        ["The first symptoms of smallpox usually appear 10 to 14 days after you're infected. During the incubation period of seven to 17 days, you look and feel healthy and can't infect others.Following the incubation period, a sudden onset of flu-like signs and symptoms occurs",
@@ -516,13 +442,8 @@ async function main() {
     ["small pox","small","pox","disease"]
 
       );
-  } catch (e) {
-    console.log(e);
-  }
 
-
-  try {
-    let newDisease = await dis.createDisease(
+    let newDisease15 = await dis.createDisease(
       "Alzheimer's",
       "Alzheimer's disease is a progressive neurologic disorder that causes the brain to shrink (atrophy) and brain cells to die. Alzheimer's disease is the most common cause of dementia — a continuous decline in thinking, behavioural and social skills that affects a person's ability to function independently. Approximately 5.8 million people in the United States age 65 and older live with Alzheimer's disease. Of those, 80% are 75 years old and older. Out of the approximately 50 million people worldwide with dementia, between 60% and 70% are estimated to have Alzheimer's disease. The early signs of the disease include forgetting recent events or conversations. As the disease progresses, a person with Alzheimer's disease will develop severe memory impairment and lose the ability to carry out everyday tasks. Medications may temporarily improve or slow progression of symptoms. These treatments can sometimes help people with Alzheimer's disease maximize function and maintain independence for a time. Different programs and services can help support people with Alzheimer's disease and their caregivers. There is no treatment that cures Alzheimer's disease or alters the disease process in the brain. In advanced stages of the disease, complications from severe loss of brain function — such as dehydration, malnutrition or infection — result in death.",
        ["Memory loss that affects daily life",
@@ -554,12 +475,8 @@ async function main() {
     ["Alzheimer's","Alzheimer","presenile dementia","senile psychosis","psychosis","psych","mental","brain","disease"]
 
       );
-  } catch (e) {
-    console.log(e);
-  }
 
-  try{
-    let newDisease = await dis.createDisease(
+    let newDisease16 = await dis.createDisease(
       "Lung Cancer",
       "Lung cancer is a type of cancer that begins in the lungs. Your lungs are two spongy organs in your chest that take in oxygen when you inhale and release carbon dioxide when you exhale. People who smoke have the greatest risk of lung cancer, though lung cancer can also occur in people who have never smoked. The risk of lung cancer increases with the length of time and number of cigarettes you've smoked. If you quit smoking, even after smoking for many years, you can significantly reduce your chances of developing lung cancer.",
       ["A new cough that doesn't go away", 
@@ -581,12 +498,8 @@ async function main() {
       ["Methotrexate", "Docetaxel-Gemciabine regimen", "Bevacizumab", "Erlotinib", "Atezolizumab", "Nivolumab"],
       ["cancer", "lung cancer", "lung diseases", "carcinoid", "lung", "SCLC", "NSCLC", "carcinoma", "lymphoma", "malignancy", "melanoma","disease"]
     )
-  }catch(e){
-    console.log(e);
-  }
 
-  try{
-    let newDisease = await dis.createDisease(
+    let newDisease17 = await dis.createDisease(
       "Cirrhosis",
       "Cirrhosis is a late stage of scarring (fibrosis) of the liver caused by many forms of liver diseases and conditions, such as hepatitis and chronic alcoholism. Each time your liver is injured — whether by disease, excessive alcohol consumption or another cause — it tries to repair itself. In the process, scar tissue forms. As cirrhosis progresses, more and more scar tissue forms, making it difficult for the liver to function (decompensated cirrhosis). Advanced cirrhosis is life-threatening.The liver damage done by cirrhosis generally can't be undone. But if liver cirrhosis is diagnosed early and the cause is treated, further damage can be limited and, rarely, reversed.",
       ["Fatigue", 
@@ -611,12 +524,8 @@ async function main() {
       ["Diuretic: Bumetanide, Spironolactone", "Ammonia Reducer: Lactulose", "Betablocker: Nadolol and Propranolol", "Antiviral drug: Lamivudine"],
       ["cirrhosis", "liver disease", "fibrosis", "hepatitis", "fatty liver disease", "liver failure", "liver problems","disease"]
     ) 
-  }catch(e){
-    console.log(e);
-  }
 
-  try{
-    let newDisease = await dis.createDisease(
+    let newDisease18 = await dis.createDisease(
       "Polio",
       "Polio is a contagious viral illness that in its most severe form causes nerve injury leading to paralysis, difficulty breathing and sometimes death. In the U.S., the last case of naturally occurring polio was in 1979. Today, despite a worldwide effort to wipe out polio, poliovirus continues to affect children and adults in parts of Asia and Africa. The Centers for Disease Control and Prevention (CDC) advises taking precautions to protect yourself from polio if you're traveling anywhere there's a risk of polio. Adults who have been vaccinated who plan to travel to an area where polio is occurring should receive a booster dose of inactivated poliovirus vaccine (IPV). Immunity after a booster lasts a lifetime.",
       ["Fever", 
@@ -640,12 +549,8 @@ async function main() {
       ["Nonsteroidal anti-inflammatory drug: Ibuprofen, Aspirin", "Analgesic: Acetaminophen"],
       ["polio", "Poliomyelitis", "WPV", "viral disease", "contagious disease", "poliovirus", "infantile paralysis", "Heine-Medin disease"]
     )
-  }catch(e){
-    console.log(e);
-  }
 
-  try{
-    let newDisease = await dis.createDisease(
+    let newDisease19 = await dis.createDisease(
       "Chronic Kidney Disease ",
       "Chronic kidney disease, also called chronic kidney failure, involves a gradual loss of kidney function. Your kidneys filter wastes and excess fluids from your blood, which are then removed in your urine. Advanced chronic kidney disease can cause dangerous levels of fluid, electrolytes and wastes to build up in your body. In the early stages of chronic kidney disease, you might have few signs or symptoms. You might not realize that you have kidney disease until the condition is advanced. Treatment for chronic kidney disease focuses on slowing the progression of kidney damage, usually by controlling the cause. But, even controlling the cause might not keep kidney damage from progressing. Chronic kidney disease can progress to end-stage kidney failure, which is fatal without artificial filtering (dialysis) or a kidney transplant.",
       ["Nausea", 
@@ -670,12 +575,8 @@ async function main() {
       ["Vitamin: Calcitriol, Paricalcitol, Ergocalciferol", "Calcium Reducer: Cinacalcet", "Bone Marrow stimulant: Erythropoietin treatment, Darbepoetin alfa", "Diuretic: Bumetanide, Furosemide", "Dietary Supplements"],
       ["CKD", "chronic kidney disease", "Chronic kidney failure", "Lupus nephritis", "Polycystic kidney disease", "kidney disease", "kidney failure", "kidney", "kidney infections"]
     )
-  }catch(e){
-    console.log(e);
-  }
 
-  try{
-    let newDisease = await dis.createDisease(
+    let newDisease20 = await dis.createDisease(
       "Cystic Fibrosis",
       "Cystic fibrosis (CF) is an inherited disorder that causes severe damage to the lungs, digestive system and other organs in the body. Cystic fibrosis affects the cells that produce mucus, sweat and digestive juices. These secreted fluids are normally thin and slippery. But in people with CF, a defective gene causes the secretions to become sticky and thick. Instead of acting as lubricants, the secretions plug up tubes, ducts and passageways, especially in the lungs and pancreas. Although cystic fibrosis is progressive and requires daily care, people with CF are usually able to attend school and work. They often have a better quality of life than people with CF had in previous decades. Improvements in screening and treatments mean that people with CF now may live into their mid- to late 30s or 40s, and some are living into their 50s.",
       ["Respiratory signs and symptoms", 
@@ -698,134 +599,118 @@ async function main() {
       ["Dietary Supplement: Medium-chain triglyceride", "Antibiotics: Tobramycin, Azithromycin, Meropenem", "Penicillin: Piperacillin / Tazobactam", "Cough Medicine: Dornase alfa, Acetylcysteine"],
       ["cystic fibrosis", "CF", "fibrosis", "Cystic fibrosis of pancreas", "Fibrocystic disease of pancreas", "Mucoviscidosis", "disease of pancreas", "mucoviscidosis of the pancreas", "pancreas fibrocystic disease"]
     )
-  }catch(e){
+  
+    let user1 = await user.createUser("user01.jpeg-1639017120258", "Bans", "Patel", "user01", "bpatel@gmail.com", "helloo12", "736-787-8373", "India", "Hello I am Bansri", "Female", "Doctor", "2021-11-27")
+
+    let user2 = await user.createUser("user02.jpeg-1639017199758", "Krina", "Shah", "user02", "kshah@gmail.com", "true1234", "126-547-8373", "Zimbabwe", "Hello I am Krina. I am from Zimbabwe", "Female", "Patient", "2021-04-27")
+
+    let user3 = await user.createUser("RossGeller.jpeg-1639017318602", "Ross", "Geller", "user03", "rg123@gmail.com", "friends1234", "336-237-4673", "United States", "Hello I am Ross. I am from US", "Male", "Patient", "2021-12-04")
+ 
+    let user4 = await user.createUser("monica.jpeg-1639017441746", "Moneka", "Bing", "user04", "moneka03@gmail.com", "friends09", "543-217-4863", "China", "Hello I am Moneka. I am from China", "Female", "Doctor", "1971-04-09")
+
+    let user5 = await user.createUser("Lee-Min-ho.jpeg-1639017543030", "Lee", "Min Ho", "user05", "dhfjf@gmail.com", "flowers74", "436-256-4653", "South Korea", "Hello I am Lee. I am from SK", "Male", "Patient", "2021-12-03")
+
+    let user6 = await user.createUser("user06.jpeg-1639017613794", "Terry", "Smith", "user06", "terry8989@yahoo.com", "terryuser06", "4785468989", "South Africa", "Hello I am Terry. I like to skate. I want to go on a trip", "Male", "Doctor", "1990-03-11")
+
+    let user7 = await user.createUser("user07.jpeg-1639017688867", "Lyle", "Autin", "user07", "lyle09@rocket.co", "lyleuser@07", "(551)-789-5678", "Belgium", "Hello I am Lyle. I work at a construction company.", "Other", "Patient", "1986-11-27")
+
+    let user8 = await user.createUser("user08.jpeg-1639017757304", "Laura", "Langstass", "user08", "langstass67@mail.com", "laurauser@87", "(656)-989-2318", "Iceland", "Hello I am Laura. I like to workout and remain healthy. I am very health consious", "Female", "Patient", "1989-12-12")
+
+    let user9 = await user.createUser("JohnWick.png-1639017869801", "John", "Wick", "user09", "wick8989@mail.com", "wickuser@09", "7679090454", "Brazil", "Hello I am John. I am an actor. I like dogs", "Male", "Doctor", "1980-11-23")
+ 
+    let user10 = await user.createUser("user10.jpeg-1639017948313", "Kate", "Williams", "user10", "katew43@mail.com", "kateuser@10", "3468768989", "Kenya", "Hello I am Kate. I like travelling", "Female", "Patient", "1991-08-12")
+
+    let user11 = await user.createUser("user11.jpeg-1639018018451", "Maria", "Hernandez", "user11", "mher9090@hotspot.edu", "heruser@11", "323-987-5678", "Japan", "Hello I am Maria. I like to socialize", "Female", "Patient", "1991-09-15")
+
+    let user12 = await user.createUser("user12.jpeg-1639018099237", "Allie", "Parker", "user12", "alliep12@bits.edu", "alluser@12", "(898)-763-9092", "Argentina", "Hello I am Allie. I like to play volleyball. Also, I want to explore the world as much as I can", "Female", "Doctor", "1986-06-19")
+
+    let user13 = await user.createUser("user13.jpeg-1639018187974", "Shang", "Lee", "user13", "leeshang12@shanghaiu.edu", "shanguser@13", "8978908333", "China", "Hello I am Shang. I want to explore the world as much as I can. I like to read books", "Female", "Patient", "1975-04-12")
+
+    let user14 = await user.createUser("user14.jpeg-1639018255955", "Maya", "Moore", "user14", "mmoore43@gmail.com", "muser@14", "989-767-3456", "Jamaica", "Hello I am Maya. I love adventurous sports. I like to read books too", "Female", "Patient", "1972-02-11")
+  
+    let user15 = await user.createUser("user15.jpeg-1639018337826", "Sarah", "Kyler", "user15", "sarahk@yahoo.com", "sarahuser@15", "5467894343", "Spain", "Hello I am Sarah. I am a college student. I like computers", "Female", "Patient", "1997-07-17")
+
+    let user16 = await user.createUser("user16.jpeg-1639018451856", "Eseed", "Badan", "user16", "Ebada96@pocket.in", "badanuser@16", "9085673343", "Turkey", "Hello I am Eseed Badan. I am a Software Developer at Microgadgets", "Male", "Patient", "1985-04-21")
+
+    let user17 = await user.createUser("ben.jpeg-1639018539470", "Ben", "Aflick", "user17", "benaf12@flock.com", "batmenuser@17", "6785673456", "Guatemala", "Hello I am Ben Aflick. I am the new Batmen", "Male", "Doctor", "1980-06-16")
+
+    let user18 = await user.createUser("user18.png-1639018644018", "Ken", "Goodson", "user18", "keng09@rocketmail.co.in", "gooduser@18", "9876789089", "Indonesia", "Hello I am Ken Goodson. I am a cardiologist", "Male", "Doctor", "1971-09-11")
+
+    let user19 = await user.createUser("user19.jpeg-1639018723574", "Charles", "Barkley", "user19", "charlesB90@yahoo.com", "charlesuser@19", "2346578776", "Australia", "Hello I am Charles. I like traveling. I aspire to be a doctor. I want to cure people from diseases", "Other", "Patient", "1995-05-29")
+
+    let user20 = await user.createUser("user20.jpeg-1639018797247", "Shawn", "Rodgers", "user20", "rodgers879@gmail.com", "rodgersuser@20", "8379086789", "Canada", "Hello I am Shawn. I like music. Music heals people", "Male", "Doctor", "1989-03-21")
+
+
+    let post11 = await post.createPost(newDisease1._id.toString(), user11._id, user11.username, "Cover your mouth and nose", "Cover your mouth and nose with a tissue any time you cough, sneeze, or laugh.")
+    let post12 = await post.createPost(newDisease1._id.toString(), user12._id, user12.username, "Medicines names", "Can someone provide some available medicines names?")
+  
+    let comment11 = await comment.createComment(post11._id, user1._id, user1.username, "Yes, we need to pay attention.")
+    let comment12 = await comment.createComment(post11._id, user2._id, user2.username, "I agree with you.")
+    let comment13 = await comment.createComment(post11._id, user3._id, user3.username, "We also need to avoid close contact with other people.")
+    let comment14 = await comment.createComment(post12._id, user13._id, user13.username, "Isoniazid can help.")
+    let comment15 = await comment.createComment(post12._id, user14._id, user14.username, "Recommend rifampin.")
+
+    await post.updateIsLike(post11._id, user1._id, 1)
+    await post.updateIsLike(post11._id, user2._id, 1)
+    await post.updateIsLike(post11._id, user3._id, 1)
+    await post.updateIsLike(post11._id, user4._id, 1)
+    await post.updateIsLike(post12._id, user15._id, 1)
+    await post.updateIsLike(post12._id, user16._id, 1)
+
+    await post.updateIsLike(post11._id, user5._id, 0)
+    await post.updateIsLike(post11._id, user6._id, 0)
+    await post.updateIsLike(post11._id, user7._id, 0)
+
+    await comment.updateIsLike(comment11._id, user1._id, 1)
+    await comment.updateIsLike(comment11._id, user2._id, 1)
+    await comment.updateIsLike(comment11._id, user3._id, 1)
+    await comment.updateIsLike(comment14._id, user11._id, 1)
+    
+    await comment.updateIsLike(comment11._id, user4._id, 0)
+    await comment.updateIsLike(comment11._id, user5._id, 0)
+    await comment.updateIsLike(comment11._id, user6._id, 0)
+    await comment.updateIsLike(comment11._id, user7._id, 0)
+    await comment.updateIsLike(comment15._id, user12._id, 0)
+
+
+    let post21 = await post.createPost(newDisease2._id.toString(), user5._id, user5.username, "Diabetes Symptom", "Can someone talk about the symptoms of diabetes?")
+    let post22 = await post.createPost(newDisease2._id.toString(), user6._id, user6.username, "Please provide some suggestions", "How can I reduce the risk of diabetes?")
+  
+    let comment21 = await comment.createComment(post21._id, user7._id, user7.username, "You may feel extremely hungry and thirsty.")
+    let comment22 = await comment.createComment(post21._id, user8._id, user8.username, "You may lose weight for no reason.")
+    let comment23 = await comment.createComment(post22._id, user9._id, user9.username, "Exercising and maintaining a healthy weight can reduce your risk of diabetes.")
+    let comment24 = await comment.createComment(post22._id, user10._id, user10.username, "Your diet should include lots of complex carbohydrates (such as whole grains), fruits, and vegetables.")
+    let comment25 = await comment.createComment(post22._id, user11._id, user11.username, "Exercising helps your body use insulin and lower your blood sugar level.")
+
+    await post.updateIsLike(post21._id, user1._id, 1)
+    await post.updateIsLike(post21._id, user2._id, 1)
+    await post.updateIsLike(post21._id, user3._id, 1)
+    await post.updateIsLike(post21._id, user4._id, 1)
+    await post.updateIsLike(post22._id, user15._id, 1)
+    await post.updateIsLike(post22._id, user16._id, 1)
+
+    await post.updateIsLike(post21._id, user5._id, 0)
+    await post.updateIsLike(post21._id, user6._id, 0)
+    await post.updateIsLike(post21._id, user7._id, 0)
+
+    await comment.updateIsLike(comment21._id, user1._id, 1)
+    await comment.updateIsLike(comment21._id, user2._id, 1)
+    await comment.updateIsLike(comment21._id, user3._id, 1)
+    await comment.updateIsLike(comment24._id, user11._id, 1)
+    
+    await comment.updateIsLike(comment21._id, user4._id, 0)
+    await comment.updateIsLike(comment21._id, user5._id, 0)
+    await comment.updateIsLike(comment21._id, user6._id, 0)
+    await comment.updateIsLike(comment21._id, user7._id, 0)
+    await comment.updateIsLike(comment25._id, user12._id, 0)
+
+} catch(e){
     console.log(e);
-  }
-
-  console.log("Done seeding disease data")
-
-    try{
-      user1 = await user.createUser("user01.jpeg-1639017120258", "Bans", "Patel", "user01", "bpatel@gmail.com", "helloo12", "736-787-8373", "India", "Hello I am Bansri", "Female", "Doctor", "2021-11-27")
-  }catch(e){
-      console.log(e);
-  }
-
-  try{
-      user2 = await user.createUser("user02.jpeg-1639017199758", "Krina", "Shah", "user02", "kshah@gmail.com", "true1234", "126-547-8373", "Zimbabwe", "Hello I am Krina. I am from Zimbabwe", "Female", "Patient", "2021-04-27")
-  }catch(e){
-      console.log(e);
-  }
-
-  try{
-      user3 = await user.createUser("RossGeller.jpeg-1639017318602", "Ross", "Geller", "user03", "rg123@gmail.com", "friends1234", "336-237-4673", "United States", "Hello I am Ross. I am from US", "Male", "Patient", "2021-12-04")
-  }catch(e){
-      console.log(e);
-  }
-
-  try{
-      user4 = await user.createUser("monica.jpeg-1639017441746", "Moneka", "Bing", "user04", "moneka03@gmail.com", "friends09", "543-217-4863", "China", "Hello I am Moneka. I am from China", "Female", "Doctor", "1971-04-09")
-  }catch(e){
-      console.log(e);
-  }
-
-  try{
-      user5 = await user.createUser("Lee-Min-ho.jpeg-1639017543030", "Lee", "Min Ho", "user05", "dhfjf@gmail.com", "flowers74", "436-256-4653", "South Korea", "Hello I am Lee. I am from SK", "Male", "Patient", "2021-12-03")
-  }catch(e){
-      console.log(e);
-  }
-
-  try{
-      user6 = await user.createUser("user06.jpeg-1639017613794", "Terry", "Smith", "user06", "terry8989@yahoo.com", "terryuser06", "4785468989", "South Africa", "Hello I am Terry. I like to skate. I want to go on a trip", "Male", "Doctor", "1990-03-11")
-  }catch(e){
-      console.log(e);
-  }
-
-  try{
-      user7 = await user.createUser("user07.jpeg-1639017688867", "Lyle", "Autin", "user07", "lyle09@rocket.co", "lyleuser@07", "(551)-789-5678", "Belgium", "Hello I am Lyle. I work at a construction company.", "Other", "Patient", "1986-11-27")
-  }catch(e){
-      console.log(e);
-  }
-
-  try{
-      user8 = await user.createUser("user08.jpeg-1639017757304", "Laura", "Langstass", "user08", "langstass67@mail.com", "laurauser@87", "(656)-989-2318", "Iceland", "Hello I am Laura. I like to workout and remain healthy. I am very health consious", "Female", "Patient", "1989-12-12")
-  }catch(e){
-      console.log(e);
-  }
-
-  try{
-      user9 = await user.createUser("JohnWick.png-1639017869801", "John", "Wick", "user09", "wick8989@mail.com", "wickuser@09", "7679090454", "Brazil", "Hello I am John. I am an actor. I like dogs", "Male", "Doctor", "1980-11-23")
-  }catch(e){
-      console.log(e);
-  }
-
-  try{
-      user10 = await user.createUser("user10.jpeg-1639017948313", "Kate", "Williams", "user10", "katew43@mail.com", "kateuser@10", "3468768989", "Kenya", "Hello I am Kate. I like travelling", "Female", "Patient", "1991-08-12")
-  }catch(e){
-      console.log(e);
-  }
-
-  try{
-      user11 = await user.createUser("user11.jpeg-1639018018451", "Maria", "Hernandez", "user11", "mher9090@hotspot.edu", "heruser@11", "323-987-5678", "Japan", "Hello I am Maria. I like to socialize", "Female", "Patient", "1991-09-15")
-  }catch(e){
-      console.log(e);
-  }
-
-  try{
-      user12 = await user.createUser("user12.jpeg-1639018099237", "Allie", "Parker", "user12", "alliep12@bits.edu", "alluser@12", "(898)-763-9092", "Argentina", "Hello I am Allie. I like to play volleyball. Also, I want to explore the world as much as I can", "Female", "Doctor", "1986-06-19")
-  }catch(e){
-      console.log(e);
-  }
-
-  try{
-      user13 = await user.createUser("user13.jpeg-1639018187974", "Shang", "Lee", "user13", "leeshang12@shanghaiu.edu", "shanguser@13", "8978908333", "China", "Hello I am Shang. I want to explore the world as much as I can. I like to read books", "Female", "Patient", "1975-04-12")
-  }catch(e){
-      console.log(e);
-  }
-
-  try{
-      user14 = await user.createUser("user14.jpeg-1639018255955", "Maya", "Moore", "user14", "mmoore43@gmail.com", "muser@14", "989-767-3456", "Jamaica", "Hello I am Maya. I love adventurous sports. I like to read books too", "Female", "Patient", "1972-02-11")
-  }catch(e){
-      console.log(e);
-  }
-
-  try{
-      user15 = await user.createUser("user15.jpeg-1639018337826", "Sarah", "Kyler", "user15", "sarahk@yahoo.com", "sarahuser@15", "5467894343", "Spain", "Hello I am Sarah. I am a college student. I like computers", "Female", "Patient", "1997-07-17")
-  }catch(e){
-      console.log(e);
-  }
-
-  try{
-      user16 = await user.createUser("user16.jpeg-1639018451856", "Eseed", "Badan", "user16", "Ebada96@pocket.in", "badanuser@16", "9085673343", "Turkey", "Hello I am Eseed Badan. I am a Software Developer at Microgadgets", "Male", "Patient", "1985-04-21")
-  }catch(e){
-      console.log(e);
-  }
-
-  try{
-      user17 = await user.createUser("ben.jpeg-1639018539470", "Ben", "Aflick", "user17", "benaf12@flock.com", "batmenuser@17", "6785673456", "Guatemala", "Hello I am Ben Aflick. I am the new Batmen", "Male", "Doctor", "1980-06-16")
-  }catch(e){
-      console.log(e);
-  }
-
-  try{
-      user18 = await user.createUser("user18.png-1639018644018", "Ken", "Goodson", "user18", "keng09@rocketmail.co.in", "gooduser@18", "9876789089", "Indonesia", "Hello I am Ken Goodson. I am a cardiologist", "Male", "Doctor", "1971-09-11")
-  }catch(e){
-      console.log(e);
-  }
-
-  try{
-      user19 = await user.createUser("user19.jpeg-1639018723574", "Charles", "Barkley", "user19", "charlesB90@yahoo.com", "charlesuser@19", "2346578776", "Australia", "Hello I am Charles. I like traveling. I aspire to be a doctor. I want to cure people from diseases", "Other", "Patient", "1995-05-29")
-  }catch(e){
-      console.log(e);
-  }
-
-  try{
-      user20 = await user.createUser("user20.jpeg-1639018797247", "Shawn", "Rodgers", "user20", "rodgers879@gmail.com", "rodgersuser@20", "8379086789", "Canada", "Hello I am Shawn. I like music. Music heals people", "Male", "Doctor", "1989-03-21")
-  }catch(e){
-      console.log(e);
-  }
+}
 
   console.log("Done seeding the Database")
 
+  await dis.searchDisease("cancer");
   await dbConnection.closeConnection();
 }
 
