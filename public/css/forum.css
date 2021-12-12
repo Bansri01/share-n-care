@@ -33,10 +33,8 @@ a {
     color: #0d95e4;
 }
 
-label {
-    font-weight: bold;
-    font-size: 25px;
-	color: #00a800;
+.btn-outline-success {
+    color: #00844f
 }
 
 h1.postTitle {
@@ -61,7 +59,7 @@ p.username {
 p.time {
     font-size: 15px;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-	color: grey;
+	color: #707070;
 }
 
 ul.searchPosts{
@@ -103,3 +101,15 @@ a:focus {
     font-size: 18px;
     color: red;
  }
+
+.likes {
+    color:#0068f2
+}
+
+.dislikes {
+    color:#0068f2
+}
+
+.btn-link {
+    color:#0068f2
+}
