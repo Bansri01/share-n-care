@@ -15,9 +15,9 @@
 
 # username and Passwords for User login
 
-# 1 Username: user01 Password: helloo12
-# 2 Username: user03 Password: friends1234
-# 3 Username: user02 Password: true1234
+- 1 Username: user01 Password: helloo12
+- 2 Username: user03 Password: friends1234
+- 3 Username: user02 Password: true1234
 
 
 # About the website
