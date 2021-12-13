@@ -169,7 +169,7 @@ router.post('/updateProfile', upload.single('profilePicture'), async (req, res) 
 
             const userInfo = await usersData.updateUser(updatedUserinfo)
             const user = await usersData.getByUsername(userdata.username)
-            res.render("users/userProfile", {profilePicture: user.profilePicture, firstName: user.firstName, lastName: user.lastName, biography: user.biography, gender: user.gender, phoneNumber: user.phoneNumber, emailAddress: user.emailAddress, country: user.country, name: req.session.user, title: "User Profile"})
+            res.render("users/userProfile", {profilePicture: user.profilePicture, firstName: user.firstName, lastName: user.lastName, biography: user.biography, gender: user.gender, phoneNumber: user.phoneNumber, emailAddress: user.emailAddress.toLowerCase(), country: user.country, name: req.session.user, title: "User Profile"})
     }
     else{
         res.redirect("/login")
