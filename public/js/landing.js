@@ -44,10 +44,18 @@
       console.log(responseMessage)
       disease_list=responseMessage
 
+     
+
       if(responseMessage.length==0)
       {
         $('#error').text("Sorry No Match Found.Please try again!").show()
         $('#error2').hide()
+        return
+      }
+      else if (disease_list[0].diseaseName==undefined){
+        $('#error').text("Sorry No Match Found.Please try again!").show()
+        $('#error2').hide()
+        return
       }
       else{
       let html=`<ul>`
@@ -81,10 +89,17 @@
       $('#error').hide()
       return
     }
-    else if(/^[#\s.]{1,}$/.test(st))
+    else if(/^[#\s\.]{1,}$/.test(st))
     {
       $('#error2').text("Sorry No Match Found.Please try again!").show()
       $('#error').hide()
+      return
+    }
+    else if(/[^A-Za-z0-9]/g.test(st))
+    {
+      $('#error2').text("Please enter a valid username!").show()
+      $('#error').hide()
+      return
     }
     else{
       ProfileresultContainer.empty()
@@ -99,10 +114,11 @@
     console.log(responseMessage)
     profile_list=responseMessage
 
-    if(responseMessage==null)
+    if(responseMessage==null || responseMessage==undefined)
     {
       $('#error2').text("Sorry No Match Found.Please try again!").show()
-      $('#error').hide()
+      $('#error').hide();
+      return;
     }
     else{
     let html=`<ul>`

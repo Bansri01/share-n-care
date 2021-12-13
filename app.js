@@ -31,7 +31,8 @@ app.use(session({
   name: 'AuthCookie',
   secret: 'some secret string!',
   resave: false,
-  saveUninitialized: true
+  saveUninitialized: true,
+  cookie: { maxAge: 6000000 }
 }))
 
 //XSS
@@ -62,21 +63,21 @@ app.use("*", (req, res, next) => {
   }
 });
 
-app.use("/profile", (req, res, next) => {
-  if (!req.session.user) {
-    return res.redirect("/login");
-  } else {
-    next();
-  }
-});
+// app.use("/profile", (req, res, next) => {
+//   if (!req.session.user) {
+//     return res.redirect("/login");
+//   } else {
+//     next();
+//   }
+// });
 
-app.use("/searchProfile/:id", (req, res, next) => {
-  if (!req.session.user) {
-    return res.redirect("/login");
-  } else {
-    next();
-  }
-})
+// app.use("/searchProfile/:id", (req, res, next) => {
+//   if (!req.session.user) {
+//     return res.redirect("/login");
+//   } else {
+//     next();
+//   }
+// })
 
 
 

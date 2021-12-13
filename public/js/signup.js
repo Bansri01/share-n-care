@@ -50,7 +50,7 @@ function validateDate(date) {
         else if(monthArr2.includes(parsedMonth) && parsedDay > 30){
             throw `The month does not have more than 30 days`
         }
-        else if(parsedMonth === 2 && parsedDay > 28 ){
+        else if(parsedMonth === 2 && parsedDay > 29 ){
             throw `The month february does not have more than 28 days`
         }
 
@@ -134,7 +134,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (e.target.id === "country" && !e.target.value )  {
                 setInputError(inputElement, "You must provide profile Country");
             } 
-            if (e.target.id === "Biography" && !e.target.value )  {
+            if (e.target.id === "biography" && !e.target.value )  {
                 setInputError(inputElement, "You must provide profile Biography");
             }
             if (e.target.id === "gender" && !e.target.value )  {
@@ -168,7 +168,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (e.target.id === "country" && (/^ *$/.test(e.target.value)))  {
                 setInputError(inputElement, "country cannot be empty");
             }
-            if (e.target.id === "Biography" && (/^ *$/.test(e.target.value)))  {
+            if (e.target.id === "biography" && (/^ *$/.test(e.target.value)))  {
                 setInputError(inputElement, "Biography cannot be empty");
             } 
             if (e.target.id === "gender" && (/^ *$/.test(e.target.value)))  {

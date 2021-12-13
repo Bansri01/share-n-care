@@ -19,6 +19,12 @@
 - 2 Username: user03 Password: friends1234
 - 3 Username: user02 Password: true1234
 
+# information about seeded database
+- we have added 20 users 
+- We have added 20 diseases
+- Disease names in the seeded file are Tuberculosis, Diabetes, Epilepsy, Skin Cancer, ACL Injury, Hypertension, Heart Disease, Asthma, Gout, Hyperlipidemia, Malaria, Chicken pox, Covid 19, Alzheimer's, Small Pox, Lung Cancer, Cirrhosis, Polio, Chronic Kidney Disease, Cystic Fibrosis
+- We have added 20 posts, 42 comments, several thumbs-up and thumbs-down for the first four forums.
+- The disease names of the forums with seeded posts and comments are Tuberculosis, Diabetes, Epilepsy, Skin Cancer.
 
 # About the website
 
@@ -28,13 +34,13 @@ The Website will allow the user to sign up and create their profile. The User ca
 # Core Features
 
 # 1. Landing Page: 
-    The landing page has a search box for disease where user can search for a disease and get the information regarding that disease. It also has a search box for search profile where user can search other user's profile by entering their username. The pae also has links to sign up and login if the user is not logged in. The user can view and edit their profile if they are logged in.
+    The landing page has a search box for disease where user can search for a disease and get the information regarding that disease. It also has a search box for search profile where user can search other user's profile by entering their username. The page also has links to sign up and login if the user is not logged in. The user can view their profile if they are logged in.
 # 2. User Sign Up form: 
     The sign up form collects user's information such as profile picture, their full name, contact information, location, gender and date of birth. User can register themselves using sign up form. 
 # 3. Search Disease:
     The user can search for the disease and get the information regarding the disease.
 # 4. Disease Page:
-    The disease page contains disease information such as common medicines, suggestions and symptoms. 
+    The disease page contains disease information such as common medicines, suggestions and symptoms. Users Can go to that disease forum using this page and post or look at other peoples comment.  
 # 5. Profile Page:
     The profile page displays user's information such as user's name, location, gender, contact and their biography.
 # 6. Edit Profile:
@@ -51,11 +57,14 @@ The Website will allow the user to sign up and create their profile. The User ca
 # 1. Search Profile:
     On landing page user can enter other user's username in the search profile box and search for thier profile.
 # 2. Advertisement:
-    The application also diplays advrtisements
+    The application also diplays advrtisements on the disease Page.
 # 3. Search Post:
     In the forum, user can enter search terms in the search posts box on the top-left corner and get the post they are looking for.
 # 4. Like/Dislike of a comment:
     User's can like and dislike other user's comments on a post in forum.
+
+# GitHub Link
+- https://github.com/Bansri01/share-n-care
 
 
 

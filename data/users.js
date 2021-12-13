@@ -274,7 +274,7 @@ async function updateUser(updatedData){
 
         if(updatedData.emailAddress){
             const lowerUser = updatedData.emailAddress.toLowerCase()
-            const userexists = await userCollection.findOne({ emailAddress: lowerUser})
+            const userexists = await userCollection.findOne({ emailAddress: lowerUser, username: {$ne: updatedData.username}})
             if(userexists) throw {message: `User with that email address already exists`, status:400}
         }
         // let updateId
@@ -334,7 +334,7 @@ async function updateUser(updatedData){
 
         if(updatedData.emailAddress){
             if(updatedData.emailAddress.trim() !== ""){
-                updatedUser.emailAddress = updatedData.emailAddress
+                updatedUser.emailAddress = updatedData.emailAddress.toLowerCase()
             }
             else{
                 updatedUser.emailAddress = exisistingUser.emailAddress

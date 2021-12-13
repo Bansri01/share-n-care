@@ -73,5 +73,9 @@ body{
   }
 
   .updateError{
-    color: #FF0000
+    color: #CC3333
+  }
+
+  .form__input-error-message{
+    color: #CC3333
   }

@@ -169,7 +169,7 @@ router.post('/updateProfile', upload.single('profilePicture'), async (req, res) 
 
             const userInfo = await usersData.updateUser(updatedUserinfo)
             const user = await usersData.getByUsername(userdata.username)
-            res.render("users/userProfile", {profilePicture: user.profilePicture, firstName: user.firstName, lastName: user.lastName, biography: user.biography, gender: user.gender, phoneNumber: user.phoneNumber, emailAddress: user.emailAddress, country: user.country, name: req.session.user, title: "User Profile"})
+            res.render("users/userProfile", {profilePicture: user.profilePicture, firstName: user.firstName, lastName: user.lastName, biography: user.biography, gender: user.gender, phoneNumber: user.phoneNumber, emailAddress: user.emailAddress.toLowerCase(), country: user.country, name: req.session.user, title: "User Profile"})
     }
     else{
         res.redirect("/login")
@@ -271,7 +271,7 @@ function validateDate(date) {
             else if(monthArr2.includes(parsedMonth) && parsedDay > 30){
                 throw `The month does not have more than 30 days`
             }
-            else if(parsedMonth === 2 && parsedDay > 28 ){
+            else if(parsedMonth === 2 && parsedDay > 29 ){
                 throw `The month february does not have more than 28 days`
             }
 
@@ -637,7 +637,7 @@ router. get('/signup',async (req, res) => {
     try{
         const postLogIn = await usersData.checkUser(req.body.username,req.body.password);
       if(postLogIn.authenticated){
-          req.session.user = req.body.username;
+          req.session.user = req.body.username.toLowerCase();
           return res.redirect("/");
           
       }
@@ -654,13 +654,12 @@ router. get('/signup',async (req, res) => {
 //-------------End of Post Login---------------------//
 
 
-//--------------------Get Logout---------------------//
+//--------------------Get Logout---------------------/
   router.get('/logout',async (req, res) => {
     req.session.destroy();
     return res.status(200).redirect("/");
     
 });
-
 //--------------------End of Get Logout------------------//
 
 
