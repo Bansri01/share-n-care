@@ -637,7 +637,7 @@ router. get('/signup',async (req, res) => {
     try{
         const postLogIn = await usersData.checkUser(req.body.username,req.body.password);
       if(postLogIn.authenticated){
-          req.session.user = req.body.username;
+          req.session.user = req.body.username.toLowerCase();
           return res.redirect("/");
           
       }
