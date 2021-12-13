@@ -50,7 +50,7 @@ function validateDate(date) {
         else if(monthArr2.includes(parsedMonth) && parsedDay > 30){
             throw `The month does not have more than 30 days`
         }
-        else if(parsedMonth === 2 && parsedDay > 28 ){
+        else if(parsedMonth === 2 && parsedDay > 29 ){
             throw `The month february does not have more than 28 days`
         }
 
